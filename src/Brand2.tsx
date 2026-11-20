@@ -43,13 +43,13 @@ export const Banner: React.FC<{v?: 'A' | 'B' | 'C'}> = ({v = 'A'}) => (
       {v === 'A' && (<>
         <path d="M-100 1000 L400 560 L800 900 L1250 520 L1700 920 L2150 580 L2700 1000 Z" fill="#8FB0D6" stroke={INK} strokeWidth={10} strokeLinejoin="round" />
         <path d="M-100 1050 Q900 960 1800 1050 T2700 1030 L2700 1500 L-100 1500 Z" fill="#fff" stroke={INK} strokeWidth={10} />
-        <Kaartspeld pose="wave" x={700} y={420} scale={2.2} />
+        <Kaartspeld pose="wave" x={560} y={525} scale={1.2} />
         <Sneeuwval n={90} />
       </>)}
       {v === 'B' && (<>
-        <Globe cx={2150} cy={720} r={520} fill="#2F6FB5" />
-        <Globe cx={250} cy={720} r={380} fill="#2F6FB5" />
-        <Kaartspeld pose="walk" stap={4} x={700} y={480} scale={2} />
+        <Globe cx={2380} cy={760} r={470} fill="#2F6FB5" />
+        <Globe cx={140} cy={760} r={380} fill="#2F6FB5" />
+        <Kaartspeld pose="walk" stap={4} x={560} y={525} scale={1.2} />
       </>)}
       {v === 'C' && (<>
         <g transform="translate(0 90)"><path d="M200 1100 C 700 900, 900 1250, 1400 1000 S 2100 900, 2380 1150" fill="none" stroke={INK} strokeWidth={10} strokeDasharray="6 30" strokeLinecap="round" />
@@ -59,10 +59,10 @@ export const Banner: React.FC<{v?: 'A' | 'B' | 'C'}> = ({v = 'A'}) => (
             <circle cx={0} cy={-75} r={14} fill="#fff" />
           </g>
         ))}</g>
-        <Kaartspeld pose="point" x={650} y={420} scale={2.1} />
+        <Kaartspeld pose="point" x={560} y={525} scale={1.2} />
       </>)}
     </svg>
-    <div style={{position: 'absolute', left: v === 'A' ? 1020 : 1000, top: v === 'A' ? 600 : 590, ...tekst('#fff', 200)}}>TINY GLOBE</div>
-    <div style={{position: 'absolute', left: v === 'A' ? 1030 : 1010, top: v === 'A' ? 800 : 790, ...tekst(v === 'C' ? C.orange : C.sand, 70)}}>THE WORLD, EXPLAINED SIMPLY</div>
+    <div style={{position: 'absolute', left: 850, top: 575, ...tekst('#fff', 200)}}>TINY GLOBE</div>
+    <div style={{position: 'absolute', left: 860, top: 780, ...tekst(v === 'C' ? C.orange : C.sand, 70)}}>THE WORLD, EXPLAINED SIMPLY</div>
   </AbsoluteFill>
 );
