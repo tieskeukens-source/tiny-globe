@@ -48,7 +48,9 @@ jobs:
           path: out/
       - name: Video op aparte branch zetten
         run: |
-          mkdir /tmp/renders && cp out/*.mp4 out/*.png /tmp/renders/ 2>/dev/null || true
+          mkdir /tmp/renders
+          for f in out/*.mp4; do [ -f "$f" ] && split -b 90M -d "$f" "/tmp/renders/$(basename $f).part"; done
+          cp out/*.png /tmp/renders/ 2>/dev/null || true
           cp public/audio/${{ inputs.slug }}/timings.json /tmp/renders/ 2>/dev/null || true
           cd /tmp/renders && git init -q -b renders && git config user.name github-actions && git config user.email actions@github.com
           git add -A && git commit -q -m "render ${{ inputs.composition }} ${{ inputs.slug }}"
