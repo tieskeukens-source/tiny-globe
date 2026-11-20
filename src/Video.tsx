@@ -1,15 +1,16 @@
 import React from 'react';
-import {AbsoluteFill, Audio, Sequence, staticFile} from 'remotion';
+import {AbsoluteFill, Audio, Sequence, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import {Pop, PopDef, woordTijd} from './components/Pop';
 import {Kaart} from './components/Kaart';
 import {Kaartspeld, Pose} from './components/Kaartspeld';
 import {TitelScene, CijferScene, VergelijkScene, FeitScene, KarakterScene} from './components/Scenes';
 import {C, W, H} from './brand';
 import script from '../videos/oymyakon.json';
 import voorbeeld from '../videos/voorbeeld.json';
-import {ReisScene, DorpScene, SchoolScene} from './components/Werelden';
+import {ReisScene, DorpScene, SchoolScene, CloseupScene} from './components/Werelden';
 
 export type Timings = {scenes: {dur: number; words: [string, number, number][]}[]};
-export const PAD = 0.5;
+export const PAD = 0.15;
 const FPS_ = 30;
 
 const SCRIPTS: Record<string, any> = {oymyakon: script, voorbeeld};
@@ -17,7 +18,7 @@ export const getScript = (slug: string) => SCRIPTS[slug];
 
 // Zonder audio (lokale preview): schat de duur op basis van het aantal woorden
 export const estimate = (slug: string): Timings => ({
-  scenes: getScript(slug).scenes.map((s: any) => ({dur: s.text.split(' ').length / 2.5, words: []})),
+  scenes: getScript(slug).scenes.map((s: any) => ({dur: s.text.split(' ').length / 2.7, words: []})),
 });
 
 export const frames = (t: Timings) => t.scenes.map((s) => Math.ceil((s.dur + PAD) * FPS_));
@@ -28,6 +29,7 @@ const Scene: React.FC<{s: any; dur: number}> = ({s, dur}) => {
     case 'reis': return <ReisScene {...p} dur={dur} />;
     case 'dorp': return <DorpScene {...p} dur={dur} />;
     case 'school': return <SchoolScene {...p} dur={dur} />;
+    case 'closeup': return <CloseupScene {...p} />;
     case 'titel': return <TitelScene {...p} />;
     case 'cijfer': return <CijferScene {...p} />;
     case 'vergelijk': return <VergelijkScene {...p} />;
@@ -44,6 +46,15 @@ const Scene: React.FC<{s: any; dur: number}> = ({s, dur}) => {
   }
 };
 
+const Camera: React.FC<{cam?: {x: number; y: number; z: number}; dur: number; children: React.ReactNode}> = ({cam, dur, children}) => {
+  const f = useCurrentFrame();
+  const c = cam || {x: 960, y: 540, z: 1};
+  const z = c.z * interpolate(f, [0, dur], [1, 1.07], {extrapolateRight: 'clamp'});
+  return (
+    <AbsoluteFill style={{transformOrigin: `${c.x}px ${c.y}px`, transform: `translate(${960 - c.x}px, ${540 - c.y}px) scale(${z})`}}>{children}</AbsoluteFill>
+  );
+};
+
 export const Video: React.FC<{slug: string; timings: Timings; hasAudio: boolean}> = ({slug, timings, hasAudio}) => {
   const sc = getScript(slug).scenes;
   const fr = frames(timings);
@@ -54,7 +65,12 @@ export const Video: React.FC<{slug: string; timings: Timings; hasAudio: boolean}
         const start = from; from += fr[i];
         return (
           <Sequence key={i} from={start} durationInFrames={fr[i]}>
-            <Scene s={s} dur={fr[i]} />
+            <Camera cam={s.cam} dur={fr[i]}>
+              <Sequence from={-Math.round((s.offset || 0) * 30)} layout="none"><Scene s={s} dur={fr[i]} /></Sequence>
+            </Camera>
+            {(s.pops || []).map((pd: PopDef, k: number) => (
+              <Pop key={k} {...pd} at={Math.round(woordTijd(timings.scenes[i]?.words || [], pd.woord) * 30)} />
+            ))}
             {hasAudio && <Audio src={staticFile(`audio/${slug}/${String(i).padStart(2, '0')}.mp3`)} />}
           </Sequence>
         );

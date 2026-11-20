@@ -96,7 +96,8 @@ const Badge: React.FC<{x: number; y: number; tekst: string; delay: number; kleur
 };
 
 // ---------- scène 1: reis over de kaart ----------
-export const ReisScene: React.FC<{van: [number, number]; naar: [number, number]; vanNaam: string; naarNaam: string; badge?: string; dur: number}> = ({van, naar, vanNaam, naarNaam, badge, dur}) => {
+export const ReisScene: React.FC<{van: [number, number]; naar: [number, number]; vanNaam: string; naarNaam: string; badge?: string; dur: number; fase?: 'start' | 'reis' | 'aankomst'}> = ({van, naar, vanNaam, naarNaam, badge, dur: d0, fase = 'reis'}) => {
+  const dur = d0;
   const f = useCurrentFrame();
   const {fps} = useVideoConfig();
   const {paths, route, a, b} = useMemo(() => {
@@ -110,8 +111,9 @@ export const ReisScene: React.FC<{van: [number, number]; naar: [number, number];
       route, a: proj(van) as [number, number], b: proj(naar) as [number, number],
     };
   }, [van[0], van[1], naar[0], naar[1]]);
-  const t0 = Math.round(dur * 0.12), t1 = Math.round(dur * 0.72);
-  const prog = interpolate(f, [t0, t1], [0, 1], ease);
+  const t0 = fase === 'start' ? 1e6 : fase === 'aankomst' ? -100 : Math.round(dur * 0.08);
+  const t1 = fase === 'start' ? 2e6 : fase === 'aankomst' ? -60 : Math.round(dur * 0.85);
+  const prog = fase === 'start' ? 0 : interpolate(f, [t0, t1], [0, 1], ease);
   const idx = prog * 80;
   const i0 = Math.floor(idx), fr = idx - i0;
   const p0 = route[Math.min(i0, 80)], p1 = route[Math.min(i0 + 1, 80)];
@@ -143,8 +145,9 @@ export const ReisScene: React.FC<{van: [number, number]; naar: [number, number];
 };
 
 // ---------- scène 2: het dorp in de kou ----------
-export const DorpScene: React.FC<{badge?: string; dur: number}> = ({badge = '-50°C', dur}) => {
-  const f = useCurrentFrame();
+export const DorpScene: React.FC<{badge?: string; dur: number; len?: number; stilstaan?: boolean}> = ({badge, dur: d0, len, stilstaan}) => {
+  const dur = len ? len * 30 : d0;
+  const f = useCurrentFrame() + (stilstaan ? 10000 : 0);
   const pan = interpolate(f, [0, dur], [0, -140], clamp);
   const stop = Math.round(dur * 0.55);
   const cx = interpolate(f, [0, stop], [-80, 560], {...clamp, easing: Easing.out(Easing.quad)});
@@ -180,14 +183,15 @@ export const DorpScene: React.FC<{badge?: string; dur: number}> = ({badge = '-50
       </g>
       <Kaartspeld pose={f < stop ? 'walk' : 'cold'} stap={f} x={cx} y={g - 345} scale={1.25} />
       <Sneeuwval />
-      <Badge x={W / 2 + 40} y={160} tekst={badge} delay={stop} />
+      {badge && <Badge x={W / 2 + 40} y={160} tekst={badge} delay={stop} />}
     </svg>
   );
 };
 
 // ---------- scène 3: in het donker naar school ----------
-export const SchoolScene: React.FC<{badge?: string; dur: number}> = ({badge, dur}) => {
-  const f = useCurrentFrame();
+export const SchoolScene: React.FC<{badge?: string; dur: number; len?: number; aangekomen?: boolean}> = ({badge, dur: d0, len, aangekomen}) => {
+  const dur = len ? len * 30 : d0;
+  const f = useCurrentFrame() + (aangekomen ? 10000 : 0);
   const g = 830;
   const stop = Math.round(dur * 0.7);
   const x = interpolate(f, [0, stop], [-200, 420], {...clamp, easing: Easing.out(Easing.quad)});
@@ -245,6 +249,30 @@ export const SchoolScene: React.FC<{badge?: string; dur: number}> = ({badge, dur
       <Kaartspeld pose={walking ? 'walk' : 'wave'} stap={f + 14} x={x + 320} y={g - 245} scale={0.8} kleur={C.green} />
       <Sneeuwval n={50} />
       {badge && <Badge x={W / 2} y={150} tekst={badge} delay={stop} kleur={C.blue} />}
+    </svg>
+  );
+};
+
+// ---------- close-up: rillend gezicht met adem ----------
+export const CloseupScene: React.FC<{pose?: 'cold' | 'think' | 'shrug' | 'point'; nacht?: boolean}> = ({pose = 'cold', nacht}) => {
+  const f = useCurrentFrame();
+  const ph = (f % 45) / 45;
+  return (
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
+      <defs>
+        <linearGradient id="cl" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor={nacht ? '#0E1A33' : '#9DB9D6'} />
+          <stop offset="1" stopColor={nacht ? '#2A4466' : '#F4DCC4'} />
+        </linearGradient>
+      </defs>
+      <rect width={W} height={H} fill="url(#cl)" />
+      <path d={`M-100 900 Q960 840 2100 900 L2100 ${H} L-100 ${H} Z`} fill={nacht ? '#C9D6E3' : SNOW} stroke={INK} strokeWidth={6} />
+      <Kaartspeld pose={pose} stap={f} x={80} y={60} scale={3.4} />
+      {pose === 'cold' && [0, 1, 2].map((k) => {
+        const q = ((f + k * 15) % 45) / 45;
+        return <circle key={k} cx={530 + q * 220} cy={300 - q * 60} r={18 + q * 50} fill="#fff" opacity={(1 - q) * 0.7} />;
+      })}
+      <Sneeuwval n={70} />
     </svg>
   );
 };

@@ -1,13 +1,232 @@
 {
-  "title": "Voorbeeld – nieuwe stijl",
-  "voice": "en-US-AndrewNeural",
-  "rate": "-5%",
-  "scenes": [
-    {"type": "reis", "props": {"van": [37.62, 55.75], "naar": [142.79, 63.46], "vanNaam": "Moscow", "naarNaam": "Oymyakon", "badge": "5,300 km"},
-     "text": "This is Russia, the biggest country in the world. Let's start in Moscow and travel east. Far, far east. More than five thousand kilometres later, we reach a tiny village. Its name is Oymyakon."},
-    {"type": "dorp", "props": {"badge": "-50°C"},
-     "text": "About five hundred people live here. And in winter, it gets really cold. We're talking minus fifty degrees. That's why people often leave their cars running all day. In this cold, a car that stops might not start again."},
-    {"type": "school", "props": {"badge": "-52°C"},
-     "text": "Winter days here are very short. So kids often walk to school in the dark. And the school stays open until it gets colder than about minus fifty-two."}
-  ]
+ "title": "Voorbeeld – nieuwe stijl v2",
+ "voice": "en-US-AndrewNeural",
+ "rate": "+0%",
+ "scenes": [
+  {
+   "type": "reis",
+   "props": {
+    "van": [
+     37.62,
+     55.75
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Moscow",
+    "naarNaam": "Oymyakon",
+    "fase": "start"
+   },
+   "text": "This is Russia, the biggest country in the world.",
+   "pops": [
+    {
+     "woord": "biggest",
+     "tekst": "#1 biggest country",
+     "y": 960
+    }
+   ]
+  },
+  {
+   "type": "reis",
+   "props": {
+    "van": [
+     37.62,
+     55.75
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Moscow",
+    "naarNaam": "Oymyakon",
+    "fase": "reis"
+   },
+   "text": "Let's start in Moscow and travel east. Far, far east. More than five thousand kilometres.",
+   "pops": [
+    {
+     "woord": "far, far",
+     "tekst": "→ EAST",
+     "x": 1500,
+     "y": 960,
+     "kleur": "#2F6FB5"
+    },
+    {
+     "woord": "five thousand",
+     "tekst": "5,300 km",
+     "y": 960
+    }
+   ]
+  },
+  {
+   "type": "reis",
+   "cam": {
+    "x": 1560,
+    "y": 330,
+    "z": 2.2
+   },
+   "props": {
+    "van": [
+     37.62,
+     55.75
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Moscow",
+    "naarNaam": "Oymyakon",
+    "fase": "aankomst"
+   },
+   "text": "Until we reach a tiny village called Oymyakon.",
+   "pops": [
+    {
+     "woord": "tiny",
+     "tekst": "tiny village",
+     "x": 960,
+     "y": 900,
+     "kleur": "#4E9A6B"
+    }
+   ]
+  },
+  {
+   "type": "dorp",
+   "props": {
+    "len": 9
+   },
+   "text": "About five hundred people live here.",
+   "pops": [
+    {
+     "woord": "five hundred",
+     "tekst": "~500 people",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "props": {
+    "pose": "cold"
+   },
+   "text": "And in winter, it gets really cold. We're talking minus fifty degrees.",
+   "pops": [
+    {
+     "woord": "really cold",
+     "tekst": "brrr",
+     "x": 1350,
+     "y": 300,
+     "kleur": "#2F6FB5"
+    },
+    {
+     "woord": "minus",
+     "tekst": "-50°C",
+     "stijl": "groot",
+     "x": 1320,
+     "y": 620,
+     "kleur": "#2F6FB5"
+    }
+   ]
+  },
+  {
+   "type": "dorp",
+   "offset": 9,
+   "cam": {
+    "x": 1100,
+    "y": 760,
+    "z": 1.9
+   },
+   "props": {
+    "len": 9,
+    "stilstaan": true
+   },
+   "text": "That's why people often leave their cars running all day.",
+   "pops": [
+    {
+     "woord": "running",
+     "tekst": "engine ON all day",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "dorp",
+   "cam": {
+    "x": 1250,
+    "y": 790,
+    "z": 3
+   },
+   "props": {
+    "len": 9,
+    "stilstaan": true
+   },
+   "text": "In this cold, a car that stops might not start again.",
+   "pops": [
+    {
+     "woord": "might not",
+     "tekst": "✗ won't start",
+     "y": 150,
+     "kleur": "#C0392B"
+    }
+   ]
+  },
+  {
+   "type": "school",
+   "cam": {
+    "x": 960,
+    "y": 300,
+    "z": 1.3
+   },
+   "props": {
+    "len": 8
+   },
+   "text": "Winter days here are very short.",
+   "pops": [
+    {
+     "woord": "short",
+     "tekst": "short days",
+     "y": 900,
+     "kleur": "#4E9A6B"
+    }
+   ]
+  },
+  {
+   "type": "school",
+   "offset": 2,
+   "props": {
+    "len": 7
+   },
+   "text": "So kids often walk to school in the dark.",
+   "pops": [
+    {
+     "woord": "dark",
+     "tekst": "🌙 in the dark",
+     "x": 560,
+     "y": 150,
+     "kleur": "#2F6FB5"
+    }
+   ]
+  },
+  {
+   "type": "school",
+   "cam": {
+    "x": 1460,
+    "y": 560,
+    "z": 1.7
+   },
+   "props": {
+    "len": 7,
+    "aangekomen": true
+   },
+   "text": "And the school only closes when it gets colder than about minus fifty-two.",
+   "pops": [
+    {
+     "woord": "minus",
+     "tekst": "-52°C",
+     "stijl": "groot",
+     "y": 170,
+     "kleur": "#2F6FB5"
+    }
+   ]
+  }
+ ]
 }

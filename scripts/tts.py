@@ -7,7 +7,7 @@ cfg = json.load(open(f'videos/{slug}.json'))
 out = pathlib.Path(f'public/audio/{slug}'); out.mkdir(parents=True, exist_ok=True)
 
 async def one(i, text):
-    for attempt in range(5):
+    for attempt in range(8):
         try:
             return await one_try(i, text)
         except Exception as e:
@@ -18,7 +18,7 @@ async def one(i, text):
 async def one_try(i, text):
     f = out / f'{i:02d}.mp3'
     words = []
-    com = edge_tts.Communicate(text, cfg['voice'], rate=cfg.get('rate', '+0%'))
+    com = edge_tts.Communicate(text, cfg['voice'], rate=cfg.get('rate', '+0%'), boundary='WordBoundary')
     with open(f, 'wb') as fh:
         async for ch in com.stream():
             if ch['type'] == 'audio': fh.write(ch['data'])
