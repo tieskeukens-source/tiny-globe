@@ -41,6 +41,7 @@ jobs:
           else
             npx remotion render src/index.ts ${{ inputs.composition }} out/${{ inputs.composition }}.mp4
           fi
+          cp public/audio/${{ inputs.slug }}/timings.json out/timings.json 2>/dev/null || true
           echo "Rendertijd: $(( $(date +%s) - T0 )) sec" >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
