@@ -9,11 +9,11 @@ out = pathlib.Path(f'public/audio/{slug}'); out.mkdir(parents=True, exist_ok=Tru
 async def one(i, text):
     f = out / f'{i:02d}.mp3'
     words = []
-    com = edge_tts.Communicate(text, cfg['voice'], rate=cfg.get('rate', '+0%'), boundary='WordBoundary')
+    com = edge_tts.Communicate(text, cfg['voice'], rate=cfg.get('rate', '+0%'))
     with open(f, 'wb') as fh:
         async for ch in com.stream():
             if ch['type'] == 'audio': fh.write(ch['data'])
-            elif ch['type'] == 'WordBoundary':
+            elif ch['type'] in ('WordBoundary', 'SentenceBoundary'):
                 words.append([ch['text'], ch['offset'] / 1e7, (ch['offset'] + ch['duration']) / 1e7])
     d = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(f)]))
     return {'dur': d, 'words': words}
