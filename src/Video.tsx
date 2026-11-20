@@ -5,24 +5,29 @@ import {Kaartspeld, Pose} from './components/Kaartspeld';
 import {TitelScene, CijferScene, VergelijkScene, FeitScene, KarakterScene} from './components/Scenes';
 import {C, W, H} from './brand';
 import script from '../videos/oymyakon.json';
+import voorbeeld from '../videos/voorbeeld.json';
+import {ReisScene, DorpScene, SchoolScene} from './components/Werelden';
 
 export type Timings = {scenes: {dur: number; words: [string, number, number][]}[]};
 export const PAD = 0.5;
 const FPS_ = 30;
 
-const SCRIPTS: Record<string, any> = {oymyakon: script};
+const SCRIPTS: Record<string, any> = {oymyakon: script, voorbeeld};
 export const getScript = (slug: string) => SCRIPTS[slug];
 
 // Zonder audio (lokale preview): schat de duur op basis van het aantal woorden
 export const estimate = (slug: string): Timings => ({
-  scenes: getScript(slug).scenes.map((s: any) => ({dur: s.text.split(' ').length / 2.6, words: []})),
+  scenes: getScript(slug).scenes.map((s: any) => ({dur: s.text.split(' ').length / 2.5, words: []})),
 });
 
 export const frames = (t: Timings) => t.scenes.map((s) => Math.ceil((s.dur + PAD) * FPS_));
 
-const Scene: React.FC<{s: any}> = ({s}) => {
+const Scene: React.FC<{s: any; dur: number}> = ({s, dur}) => {
   const p = s.props;
   switch (s.type) {
+    case 'reis': return <ReisScene {...p} dur={dur} />;
+    case 'dorp': return <DorpScene {...p} dur={dur} />;
+    case 'school': return <SchoolScene {...p} dur={dur} />;
     case 'titel': return <TitelScene {...p} />;
     case 'cijfer': return <CijferScene {...p} />;
     case 'vergelijk': return <VergelijkScene {...p} />;
@@ -49,7 +54,7 @@ export const Video: React.FC<{slug: string; timings: Timings; hasAudio: boolean}
         const start = from; from += fr[i];
         return (
           <Sequence key={i} from={start} durationInFrames={fr[i]}>
-            <Scene s={s} />
+            <Scene s={s} dur={fr[i]} />
             {hasAudio && <Audio src={staticFile(`audio/${slug}/${String(i).padStart(2, '0')}.mp3`)} />}
           </Sequence>
         );

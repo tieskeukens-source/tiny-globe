@@ -47,18 +47,26 @@ const Gezicht: React.FC<{pose: Pose; look: number}> = ({pose, look}) => {
   );
 };
 
-export const Kaartspeld: React.FC<{pose?: Pose; x?: number; y?: number; scale?: number; look?: number}> = ({
-  pose = 'stand', x = 0, y = 0, scale = 1, look = 0,
+export const Kaartspeld: React.FC<{pose?: Pose; x?: number; y?: number; scale?: number; look?: number; stap?: number; kleur?: string; spiegel?: boolean}> = ({
+  pose = 'stand', x = 0, y = 0, scale = 1, look = 0, stap, kleur = C.orange, spiegel = false,
 }) => {
-  const p = POSES[pose];
+  let p = POSES[pose];
+  let bob = 0;
+  if (pose === 'walk' && stap !== undefined) {
+    const w = Math.sin(stap * 0.32);
+    p = {armL: [100,145,100 - 26 * w,188], armR: [100,145,100 + 26 * w,188], legL: [100,200,100 + 28 * w,283], legR: [100,200,100 - 28 * w,283]};
+    bob = -Math.abs(w) * 6;
+  }
+  if (pose === 'cold' && stap !== undefined) bob = 0;
+  const shiver = pose === 'cold' && stap !== undefined ? Math.sin(stap * 1.7) * 2.5 : 0;
   const line = (a: number[]) => <line x1={a[0]} y1={a[1]} x2={a[2]} y2={a[3]} />;
   return (
-    <g transform={`translate(${x} ${y}) scale(${scale})`}>
+    <g transform={`translate(${x + shiver} ${y + bob * scale}) scale(${scale})${spiegel ? ' translate(200 0) scale(-1 1)' : ''}`}>
       <g stroke={C.ink} strokeWidth={6} strokeLinecap="round" fill="none">
         <line x1={100} y1={120} x2={100} y2={200} />
         {line(p.armL)}{line(p.armR)}{line(p.legL)}{line(p.legR)}
       </g>
-      <path d="M100 18 C66 18 56 50 68 72 L100 120 L132 72 C144 50 134 18 100 18 Z" fill={C.orange} stroke={C.ink} strokeWidth={6} strokeLinejoin="round" />
+      <path d="M100 18 C66 18 56 50 68 72 L100 120 L132 72 C144 50 134 18 100 18 Z" fill={kleur} stroke={C.ink} strokeWidth={6} strokeLinejoin="round" />
       <circle cx={100} cy={54} r={30} fill="#fff" stroke={C.ink} strokeWidth={4} />
       <g transform="translate(100 54) scale(1.25) translate(-100 -56)"><Gezicht pose={pose} look={look} /></g>
     </g>

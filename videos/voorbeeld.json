@@ -1,0 +1,13 @@
+{
+  "title": "Voorbeeld – nieuwe stijl",
+  "voice": "en-US-AndrewNeural",
+  "rate": "-5%",
+  "scenes": [
+    {"type": "reis", "props": {"van": [37.62, 55.75], "naar": [142.79, 63.46], "vanNaam": "Moscow", "naarNaam": "Oymyakon", "badge": "5,300 km"},
+     "text": "This is Russia, the biggest country in the world. Let's start in Moscow and travel east. Far, far east. More than five thousand kilometres later, we reach a tiny village. Its name is Oymyakon."},
+    {"type": "dorp", "props": {"badge": "-50°C"},
+     "text": "About five hundred people live here. And in winter, it gets really cold. We're talking minus fifty degrees. That's why people often leave their cars running all day. In this cold, a car that stops might not start again."},
+    {"type": "school", "props": {"badge": "-52°C"},
+     "text": "Winter days here are very short. So kids often walk to school in the dark. And the school stays open until it gets colder than about minus fifty-two."}
+  ]
+}
