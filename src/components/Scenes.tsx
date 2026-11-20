@@ -76,3 +76,17 @@ export const Ondertitel: React.FC<{tekst: string}> = ({tekst}) => (
     <span style={{background: 'rgba(27,27,31,0.82)', padding: '10px 28px', borderRadius: 16}}>{tekst}</span>
   </div>
 );
+
+import {Kaartspeld, Pose} from './Kaartspeld';
+export const KarakterScene: React.FC<{pose: Pose; tekst: string}> = ({pose, tekst}) => {
+  const p = usePop();
+  return (
+    <AbsoluteFill style={{background: C.sand}}>
+      <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: 220, background: C.paper}} />
+      <svg width={W} height={H} style={{position: 'absolute'}}>
+        <g opacity={p}><Kaartspeld pose={pose} x={560} y={300} scale={2.4} /></g>
+      </svg>
+      <div style={{position: 'absolute', left: 0, right: 0, top: 110, textAlign: 'center', fontFamily: lilita, fontSize: 96, color: C.ink, opacity: p}}>{tekst}</div>
+    </AbsoluteFill>
+  );
+};

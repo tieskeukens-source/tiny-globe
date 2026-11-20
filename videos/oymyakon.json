@@ -1,0 +1,29 @@
+{
+  "title": "What Do People in the Coldest Village on Earth Actually Do All Day?",
+  "voice": "en-US-AndrewNeural",
+  "rate": "-5%",
+  "scenes": [
+    {"type": "titel", "props": {"titel": "What do people in the coldest village on Earth actually do all day?", "sub": "Tiny Globe"},
+     "text": "What do people in the coldest village on Earth actually do all day? Meet Oymyakon."},
+    {"type": "kaart", "props": {"lon": 142.79, "lat": 63.46, "label": "Oymyakon", "highlight": "Russia"},
+     "text": "Oymyakon sits in the Sakha Republic, in the far northeast of Russia, thousands of kilometres from Moscow. Around five hundred people live here."},
+    {"type": "cijfer", "props": {"cijfer": "-67.7°C", "label": "lowest recorded, 6 February 1933", "kleur": "#2F6FB5"},
+     "text": "On the sixth of February, nineteen thirty-three, a thermometer here showed minus sixty-seven point seven degrees Celsius. That makes Oymyakon the coldest permanently inhabited place on Earth."},
+    {"type": "vergelijk", "props": {"a": {"naam": "Record low", "waarde": -67.7, "tekst": "-67.7°"}, "b": {"naam": "Record high (2010)", "waarde": 34.6, "tekst": "+34.6°"}},
+     "text": "But summers can be warm. In July twenty ten, it reached thirty-four point six. The village has seen a swing of more than a hundred degrees."},
+    {"type": "feit", "props": {"tekst": "Cars are often left running all day"},
+     "text": "In winter, the average is around minus fifty. So cars are often left running all day, because a stopped engine can mean a dead battery."},
+    {"type": "karakter", "props": {"pose": "cold", "tekst": "Eyelashes freeze"},
+     "text": "People wear thick layers of fur and wool. Eyelashes freeze. Even a short walk outside can be dangerous without the right clothes."},
+    {"type": "feit", "props": {"tekst": "Reindeer meat and frozen raw fish"},
+     "text": "Crops cannot grow here, so the winter diet is mostly meat and fish. Reindeer meat, and a dish of thin frozen raw fish called stroganina."},
+    {"type": "karakter", "props": {"pose": "walk", "tekst": "School stays open"},
+     "text": "And school? Reports say the village school only closes when it drops below about minus fifty-two. Children walk there in the dark."},
+    {"type": "cijfer", "props": {"cijfer": "21 h", "label": "of darkness a day in midwinter", "kleur": "#E8622C"},
+     "text": "In midwinter, it is dark for around twenty-one hours a day."},
+    {"type": "karakter", "props": {"pose": "think", "tekst": "So why live here?"},
+     "text": "So why does anyone live here? The place began as a stop for reindeer herders, who watered their animals at a spring that never froze."},
+    {"type": "titel", "props": {"titel": "Hard, but life goes on", "sub": "Follow Tiny Globe for the next place"},
+     "text": "Life here is hard, but it goes on. Follow Tiny Globe for the next place on the map."}
+  ]
+}
