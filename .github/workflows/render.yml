@@ -1,0 +1,30 @@
+name: Render
+on:
+  workflow_dispatch:
+    inputs:
+      composition:
+        description: 'Composition id (Test, Poses)'
+        default: 'Test'
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Render
+        run: |
+          START=$(date +%s)
+          if [ "${{ inputs.composition }}" = "Poses" ]; then
+            npx remotion still src/index.ts Poses out/poses.png
+          else
+            npx remotion render src/index.ts ${{ inputs.composition }} out/${{ inputs.composition }}.mp4
+          fi
+          echo "Rendertijd: $(( $(date +%s) - START )) sec" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: render
+          path: out/
