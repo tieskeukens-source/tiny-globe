@@ -2,6 +2,7 @@ import React from 'react';
 import {Composition} from 'remotion';
 import {Poses} from './Poses';
 import {Test} from './Test';
+import {Thumb} from './Thumb';
 import {Oymyakon} from './Oymyakon';
 import {Video, estimate, frames, Timings} from './Video';
 import {staticFile} from 'remotion';
@@ -9,6 +10,8 @@ import {W, H, FPS} from './brand';
 
 export const Root: React.FC = () => (
   <>
+    <Composition id="ThumbA" component={Thumb} durationInFrames={1} fps={FPS} width={W} height={H} defaultProps={{variant: 'A'}} />
+    <Composition id="ThumbB" component={Thumb} durationInFrames={1} fps={FPS} width={W} height={H} defaultProps={{variant: 'B'}} />
     <Composition id="Poses" component={Poses} durationInFrames={1} fps={FPS} width={W} height={H} />
     <Composition id="Test" component={Test} durationInFrames={150} fps={FPS} width={W} height={H} />
     <Composition id="Oymyakon" component={Oymyakon} durationInFrames={540} fps={FPS} width={W} height={H} />
