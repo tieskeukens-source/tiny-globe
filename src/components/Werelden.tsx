@@ -17,7 +17,7 @@ const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 const ease = {easing: Easing.inOut(Easing.cubic), ...clamp};
 
 // ---------- kleine bouwstenen ----------
-const Sneeuwval: React.FC<{n?: number; kleur?: string}> = ({n = 90, kleur = SNOW}) => {
+export const Sneeuwval: React.FC<{n?: number; kleur?: string}> = ({n = 90, kleur = SNOW}) => {
   const f = useCurrentFrame();
   return (
     <g>
@@ -33,7 +33,7 @@ const Sneeuwval: React.FC<{n?: number; kleur?: string}> = ({n = 90, kleur = SNOW
   );
 };
 
-const Rook: React.FC<{x: number; y: number; richting?: number; schaal?: number; kleur?: string}> = ({x, y, richting = 0, schaal = 1, kleur = '#EAE6E0'}) => {
+export const Rook: React.FC<{x: number; y: number; richting?: number; schaal?: number; kleur?: string}> = ({x, y, richting = 0, schaal = 1, kleur = '#EAE6E0'}) => {
   const f = useCurrentFrame();
   return (
     <g>
@@ -47,20 +47,20 @@ const Rook: React.FC<{x: number; y: number; richting?: number; schaal?: number; 
   );
 };
 
-const Huis: React.FC<{x: number; y: number; s?: number; rook?: boolean}> = ({x, y, s = 1, rook = true}) => (
+export const Huis: React.FC<{x: number; y: number; s?: number; rook?: boolean; dak?: string}> = ({x, y, s = 1, rook = true, dak = SNOW}) => (
   <g transform={`translate(${x} ${y}) scale(${s})`}>
     {rook && <Rook x={205} y={-30} />}
     <rect x={190} y={-40} width={34} height={90} fill={WOOD_D} stroke={INK} strokeWidth={5} />
     <rect x={0} y={60} width={300} height={190} fill={WOOD} stroke={INK} strokeWidth={6} />
     {[90, 130, 170, 210].map((yy) => <line key={yy} x1={0} y1={yy} x2={300} y2={yy} stroke={WOOD_D} strokeWidth={4} />)}
-    <path d="M-30 70 L150 -20 L330 70 Z" fill={SNOW} stroke={INK} strokeWidth={6} strokeLinejoin="round" />
+    <path d="M-30 70 L150 -20 L330 70 Z" fill={dak} stroke={INK} strokeWidth={6} strokeLinejoin="round" />
     <rect x={40} y={110} width={70} height={60} fill={LIGHT} stroke={INK} strokeWidth={5} />
     <line x1={75} y1={110} x2={75} y2={170} stroke={INK} strokeWidth={4} />
     <rect x={180} y={150} width={70} height={100} fill={WOOD_D} stroke={INK} strokeWidth={5} />
   </g>
 );
 
-const Auto: React.FC<{x: number; y: number}> = ({x, y}) => {
+export const Auto: React.FC<{x: number; y: number}> = ({x, y}) => {
   const f = useCurrentFrame();
   const tril = Math.sin(f * 2.2) * 1.2;
   return (
@@ -131,13 +131,13 @@ export const ReisScene: React.FC<{van: [number, number]; naar: [number, number];
         ))}
         <polyline points={trail.map((q) => q.join(',')).join(' ')} fill="none" stroke={INK} strokeWidth={6} strokeDasharray="4 16" strokeLinecap="round" />
         <circle cx={a[0]} cy={a[1]} r={12} fill={INK} />
-        <text x={a[0]} y={a[1] + 52} textAnchor="middle" fontFamily="Inter" fontWeight={800} fontSize={36} fill={INK} stroke={C.paper} strokeWidth={8} paintOrder="stroke">{vanNaam}</text>
+        <text x={a[0] - 18} y={a[1] + 44} textAnchor="end" fontFamily="Inter" fontWeight={800} fontSize={36} fill={INK} stroke={C.paper} strokeWidth={8} paintOrder="stroke">{vanNaam}</text>
         <g transform={`translate(${b[0]} ${b[1]}) scale(${pin})`}>
           <path d="M0 -70 C-26 -70 -34 -44 -24 -28 L0 0 L24 -28 C34 -44 26 -70 0 -70 Z" fill={C.orange} stroke={INK} strokeWidth={5} />
           <circle cx={0} cy={-46} r={9} fill={C.paper} stroke={INK} strokeWidth={3} />
-          <text x={0} y={52} textAnchor="middle" fontFamily="Lilita One" fontSize={54} fill={INK} stroke={C.paper} strokeWidth={10} paintOrder="stroke">{naarNaam}</text>
+          <text x={30} y={70} textAnchor="start" fontFamily="Lilita One" fontSize={54} fill={INK} stroke={C.paper} strokeWidth={10} paintOrder="stroke">{naarNaam}</text>
         </g>
-        <Kaartspeld pose={walking ? 'walk' : f >= t1 ? 'point' : 'wave'} stap={f} x={cx - 100 - (f >= t1 ? 60 : 0)} y={cy - 283} scale={1} />
+        <Kaartspeld pose={walking ? 'walk' : f >= t1 ? 'point' : 'wave'} stap={f} x={cx - 100 - (f >= t1 ? 110 : 0)} y={cy - 283} scale={1} />
       </g>
       {badge && <Badge x={W / 2} y={150} tekst={badge} delay={t1 + 10} kleur={C.orange} />}
     </svg>
@@ -254,7 +254,7 @@ export const SchoolScene: React.FC<{badge?: string; dur: number; len?: number; a
 };
 
 // ---------- close-up: rillend gezicht met adem ----------
-export const CloseupScene: React.FC<{pose?: 'cold' | 'think' | 'shrug' | 'point'; nacht?: boolean}> = ({pose = 'cold', nacht}) => {
+export const CloseupScene: React.FC<{pose?: 'cold' | 'think' | 'shrug' | 'point' | 'wave' | 'stand'; nacht?: boolean; item?: 'frost' | 'bril' | 'neus'}> = ({pose = 'cold', nacht, item}) => {
   const f = useCurrentFrame();
   const ph = (f % 45) / 45;
   return (
@@ -272,6 +272,28 @@ export const CloseupScene: React.FC<{pose?: 'cold' | 'think' | 'shrug' | 'point'
         const q = ((f + k * 15) % 45) / 45;
         return <circle key={k} cx={530 + q * 220} cy={300 - q * 60} r={18 + q * 50} fill="#fff" opacity={(1 - q) * 0.7} />;
       })}
+      {item && (
+        <g transform="translate(80 60) scale(3.4)">
+          {item === 'frost' && [[82,40],[92,38],[108,38],[118,40],[86,44],[114,44]].map(([a, b], k) => (
+            <g key={k} opacity={Math.min(1, f / 20)} stroke="#BFE3FF" strokeWidth={1.6} strokeLinecap="round">
+              <line x1={a - 3} y1={b} x2={a + 3} y2={b} /><line x1={a} y1={b - 3} x2={a} y2={b + 3} />
+            </g>
+          ))}
+          {item === 'bril' && (
+            <g stroke={INK} strokeWidth={2.5}>
+              <circle cx={89} cy={52} r={9} fill="#E6F2FB" fillOpacity={Math.min(0.9, f / 25)} />
+              <circle cx={111} cy={52} r={9} fill="#E6F2FB" fillOpacity={Math.min(0.9, f / 25)} />
+              <line x1={98} y1={52} x2={102} y2={52} />
+            </g>
+          )}
+          {item === 'neus' && (
+            <g>
+              <ellipse cx={86} cy={62} rx={9} ry={6} fill="#F2C9A8" stroke={INK} strokeWidth={2} />
+              <ellipse cx={114} cy={62} rx={9} ry={6} fill="#F2C9A8" stroke={INK} strokeWidth={2} />
+            </g>
+          )}
+        </g>
+      )}
       <Sneeuwval n={70} />
     </svg>
   );
