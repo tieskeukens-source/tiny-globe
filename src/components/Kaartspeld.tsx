@@ -59,8 +59,8 @@ export const Kaartspeld: React.FC<{pose?: Pose; x?: number; y?: number; scale?: 
         {line(p.armL)}{line(p.armR)}{line(p.legL)}{line(p.legR)}
       </g>
       <path d="M100 18 C66 18 56 50 68 72 L100 120 L132 72 C144 50 134 18 100 18 Z" fill={C.orange} stroke={C.ink} strokeWidth={6} strokeLinejoin="round" />
-      <circle cx={100} cy={56} r={24} fill="#fff" stroke={C.ink} strokeWidth={4} />
-      <Gezicht pose={pose} look={look} />
+      <circle cx={100} cy={54} r={30} fill="#fff" stroke={C.ink} strokeWidth={4} />
+      <g transform="translate(100 54) scale(1.25) translate(-100 -56)"><Gezicht pose={pose} look={look} /></g>
     </g>
   );
 };

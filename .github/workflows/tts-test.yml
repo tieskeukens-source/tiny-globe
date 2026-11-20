@@ -12,11 +12,18 @@ jobs:
         with:
           python-version: '3.11'
       - run: sudo apt-get update && sudo apt-get install -y espeak-ng ffmpeg
-      - run: pip install kokoro soundfile
-      - run: python tts/maak.py
+      - run: pip install kokoro soundfile edge-tts
+      - run: python tts/maak2.py
+      - name: Edge neural voices
+        continue-on-error: true
+        run: |
+          T="$(cat tts/proef.txt)"
+          for V in en-US-AndrewNeural en-US-BrianNeural en-GB-RyanNeural; do
+            edge-tts --voice $V --rate=-5% --text "$T" --write-media tts/v2_edge_$V.mp3
+          done
       - run: |
-          for f in tts/kokoro_*.wav; do ffmpeg -y -i "$f" -b:a 128k "${f%.wav}.mp3"; rm "$f"; done
+          for f in tts/v2_kokoro_*.wav; do ffmpeg -y -i "$f" -b:a 128k "${f%.wav}.mp3"; rm "$f"; done
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add tts/*.mp3 tts/*.json
-          git commit -m "TTS-proef (Kokoro)" && git push
+          git add tts/v2_*
+          git commit -m "TTS-proef v2" && git push
