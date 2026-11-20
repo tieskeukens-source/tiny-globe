@@ -4,15 +4,16 @@ import {C} from '../brand';
 export type Pose = 'stand' | 'walk' | 'point' | 'wave' | 'think' | 'shrug' | 'cold' | 'carry';
 
 // Armen/benen als [x1,y1,x2,y2] lijnen in een 200x300 vak (hoofd = kaartspeld)
+// v2: kleiner lijf, kortere benen, groter hoofd -> schouders/heupen omhoog
 const POSES: Record<Pose, {armL: number[]; armR: number[]; legL: number[]; legR: number[]}> = {
-  stand: {armL: [100,145,70,190], armR: [100,145,130,190], legL: [100,200,80,285], legR: [100,200,120,285]},
-  walk:  {armL: [100,145,75,185], armR: [100,145,130,180], legL: [100,200,72,280], legR: [100,200,135,275]},
-  point: {armL: [100,145,70,190], armR: [100,145,185,120], legL: [100,200,80,285], legR: [100,200,120,285]},
-  wave:  {armL: [100,145,70,190], armR: [100,145,170,85], legL: [100,200,80,285], legR: [100,200,120,285]},
-  think: {armL: [100,145,70,190], armR: [100,145,140,110], legL: [100,200,80,285], legR: [100,200,120,285]},
-  shrug: {armL: [100,145,55,150], armR: [100,145,145,150], legL: [100,200,80,285], legR: [100,200,120,285]},
-  cold:  {armL: [100,140,115,175], armR: [100,140,85,175], legL: [100,200,88,285], legR: [100,200,112,285]},
-  carry: {armL: [100,145,75,170], armR: [100,145,125,170], legL: [100,200,80,285], legR: [100,200,120,285]},
+  stand: {armL: [100,128,74,162], armR: [100,128,126,162], legL: [100,168,84,230], legR: [100,168,116,230]},
+  walk:  {armL: [100,128,78,159], armR: [100,128,126,154], legL: [100,168,78,226], legR: [100,168,130,223]},
+  point: {armL: [100,128,74,162], armR: [100,128,178,108], legL: [100,168,84,230], legR: [100,168,116,230]},
+  wave:  {armL: [100,128,74,162], armR: [100,128,163,78], legL: [100,168,84,230], legR: [100,168,116,230]},
+  think: {armL: [100,128,74,162], armR: [100,128,136,100], legL: [100,168,84,230], legR: [100,168,116,230]},
+  shrug: {armL: [100,128,62,132], armR: [100,128,140,132], legL: [100,168,84,230], legR: [100,168,116,230]},
+  cold:  {armL: [100,124,113,152], armR: [100,124,87,152], legL: [100,168,90,230], legR: [100,168,110,230]},
+  carry: {armL: [100,128,78,150], armR: [100,128,122,150], legL: [100,168,84,230], legR: [100,168,116,230]},
 };
 
 type Mood = {browL: number; browR: number; mouth: 'smile' | 'flat' | 'open' | 'wobble' | 'smirk'};
@@ -54,7 +55,7 @@ export const Kaartspeld: React.FC<{pose?: Pose; x?: number; y?: number; scale?: 
   let bob = 0;
   if (pose === 'walk' && stap !== undefined) {
     const w = Math.sin(stap * 0.32);
-    p = {armL: [100,145,100 - 26 * w,188], armR: [100,145,100 + 26 * w,188], legL: [100,200,100 + 28 * w,283], legR: [100,200,100 - 28 * w,283]};
+    p = {armL: [100,128,100 - 24 * w,160], armR: [100,128,100 + 24 * w,160], legL: [100,168,100 + 26 * w,228], legR: [100,168,100 - 26 * w,228]};
     bob = -Math.abs(w) * 6;
   }
   if (pose === 'cold' && stap !== undefined) bob = 0;
@@ -63,12 +64,12 @@ export const Kaartspeld: React.FC<{pose?: Pose; x?: number; y?: number; scale?: 
   return (
     <g transform={`translate(${x + shiver} ${y + bob * scale}) scale(${scale})${spiegel ? ' translate(200 0) scale(-1 1)' : ''}`}>
       <g stroke={C.ink} strokeWidth={6} strokeLinecap="round" fill="none">
-        <line x1={100} y1={120} x2={100} y2={200} />
+        <line x1={100} y1={108} x2={100} y2={168} />
         {line(p.armL)}{line(p.armR)}{line(p.legL)}{line(p.legR)}
       </g>
-      <path d="M100 18 C66 18 56 50 68 72 L100 120 L132 72 C144 50 134 18 100 18 Z" fill={kleur} stroke={C.ink} strokeWidth={6} strokeLinejoin="round" />
-      <circle cx={100} cy={54} r={30} fill="#fff" stroke={C.ink} strokeWidth={4} />
-      <g transform="translate(100 54) scale(1.25) translate(-100 -56)"><Gezicht pose={pose} look={look} /></g>
+      <path d="M100 0 C58 0 46 38 60 64 L100 108 L140 64 C154 38 142 0 100 0 Z" fill={kleur} stroke={C.ink} strokeWidth={6} strokeLinejoin="round" />
+      <circle cx={100} cy={40} r={38} fill="#fff" stroke={C.ink} strokeWidth={4} />
+      <g transform="translate(100 40) scale(1.55) translate(-100 -56)"><Gezicht pose={pose} look={look} /></g>
     </g>
   );
 };
