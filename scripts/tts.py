@@ -7,6 +7,15 @@ cfg = json.load(open(f'videos/{slug}.json'))
 out = pathlib.Path(f'public/audio/{slug}'); out.mkdir(parents=True, exist_ok=True)
 
 async def one(i, text):
+    for attempt in range(5):
+        try:
+            return await one_try(i, text)
+        except Exception as e:
+            print('poging', attempt + 1, 'mislukt:', type(e).__name__, e, flush=True)
+            await asyncio.sleep(3 * (attempt + 1))
+    raise SystemExit('stem mislukt')
+
+async def one_try(i, text):
     f = out / f'{i:02d}.mp3'
     words = []
     com = edge_tts.Communicate(text, cfg['voice'], rate=cfg.get('rate', '+0%'))
