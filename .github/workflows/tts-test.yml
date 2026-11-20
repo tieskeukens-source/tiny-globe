@@ -1,0 +1,22 @@
+name: TTS test
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  tts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: sudo apt-get update && sudo apt-get install -y espeak-ng ffmpeg
+      - run: pip install kokoro soundfile
+      - run: python tts/maak.py
+      - run: |
+          for f in tts/kokoro_*.wav; do ffmpeg -y -i "$f" -b:a 128k "${f%.wav}.mp3"; rm "$f"; done
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add tts/*.mp3 tts/*.json
+          git commit -m "TTS-proef (Kokoro)" && git push
