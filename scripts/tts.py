@@ -24,7 +24,8 @@ async def one_try(i, text):
             if ch['type'] == 'audio': fh.write(ch['data'])
             elif ch['type'] in ('WordBoundary', 'SentenceBoundary'):
                 words.append([ch['text'], ch['offset'] / 1e7, (ch['offset'] + ch['duration']) / 1e7])
-    d = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(f)]))
+    from mutagen.mp3 import MP3
+    d = float(MP3(str(f)).info.length)
     return {'dur': d, 'words': words}
 
 async def main():

@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: '3.11'
       - run: npm ci
-      - run: pip install edge-tts
+      - run: pip install edge-tts mutagen
       - name: Stem
         if: inputs.composition == 'Video'
         run: |
