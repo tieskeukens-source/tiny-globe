@@ -11,7 +11,7 @@ const tekstStijl = (kleur: string, size: number): React.CSSProperties => ({
   WebkitTextStroke: `16px ${INK}`, paintOrder: 'stroke fill', textShadow: `10px 10px 0 ${INK}`,
 });
 
-export const Thumb: React.FC<{variant?: 'A' | 'B'}> = ({variant = 'A'}) => (
+export const Thumb: React.FC<{variant?: 'A' | 'B' | 'C'}> = ({variant = 'A'}) => (
   <AbsoluteFill style={{background: 'linear-gradient(#5F8FC4, #CFE3F3)'}}>
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute'}}>
       <path d="M-100 760 L260 430 L560 680 L900 380 L1250 700 L1600 440 L2100 760 Z" fill="#8FB0D6" stroke={INK} strokeWidth={8} strokeLinejoin="round" />
@@ -20,20 +20,27 @@ export const Thumb: React.FC<{variant?: 'A' | 'B'}> = ({variant = 'A'}) => (
       <Huis x={1330} y={500} s={1.05} />
       <Huis x={1640} y={560} s={0.6} rook={false} />
       <g transform="translate(40 0)">
-        <Kaartspeld pose="cold" stap={7} x={40} y={80} scale={3.6} />
+        <Kaartspeld pose={variant === 'C' ? 'shrug' : 'cold'} stap={7} x={40} y={80} scale={3.6} />
         {[[110, 170], [160, 150], [215, 150], [265, 170]].map(([a, b], k) => null)}
       </g>
       <Sneeuwval n={60} />
     </svg>
-    {variant === 'A' ? (
+    {variant === 'A' && (
       <>
         <div style={{position: 'absolute', left: 760, top: 80, ...tekstStijl('#fff', 250)}}>-67.7°C</div>
         <div style={{position: 'absolute', left: 800, top: 390, ...tekstStijl(C.orange, 170)}}>LIVE<br />HERE?</div>
       </>
-    ) : (
+    )}
+    {variant === 'B' && (
       <>
         <div style={{position: 'absolute', left: 800, top: 80, ...tekstStijl('#fff', 210)}}>COLDEST</div>
         <div style={{position: 'absolute', left: 800, top: 300, ...tekstStijl(C.orange, 210)}}>VILLAGE</div>
+      </>
+    )}
+    {variant === 'C' && (
+      <>
+        <div style={{position: 'absolute', left: 790, top: 80, ...tekstStijl('#fff', 190)}}>ALL DAY</div>
+        <div style={{position: 'absolute', left: 790, top: 290, ...tekstStijl(C.orange, 190)}}>AT -67°C?</div>
       </>
     )}
   </AbsoluteFill>

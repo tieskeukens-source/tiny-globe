@@ -19,6 +19,7 @@ export const Root: React.FC = () => (
     <Composition id="ProfielC" component={Profiel} durationInFrames={1} fps={FPS} width={1000} height={1000} defaultProps={{v: 'C'}} />
     <Composition id="BannerC" component={Banner} durationInFrames={1} fps={FPS} width={2560} height={1440} defaultProps={{v: 'C'}} />
     <Composition id="ThumbB" component={Thumb} durationInFrames={1} fps={FPS} width={W} height={H} defaultProps={{variant: 'B'}} />
+    <Composition id="ThumbC" component={Thumb} durationInFrames={1} fps={FPS} width={W} height={H} defaultProps={{variant: 'C'}} />
     <Composition id="Poses" component={Poses} durationInFrames={1} fps={FPS} width={W} height={H} />
     <Composition id="Test" component={Test} durationInFrames={150} fps={FPS} width={W} height={H} />
     <Composition id="Oymyakon" component={Oymyakon} durationInFrames={540} fps={FPS} width={W} height={H} />
