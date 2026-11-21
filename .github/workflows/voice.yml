@@ -1,0 +1,21 @@
+name: voice
+on:
+  workflow_dispatch:
+    inputs:
+      script: {description: "path to tts script", default: "voices/baarle/tts2.py"}
+      out: {description: "output dir", default: "voices/baarle/voice"}
+jobs:
+  tts:
+    runs-on: ubuntu-latest
+    permissions: {contents: write}
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install edge-tts mutagen
+      - run: mkdir -p ${{ inputs.out }} && python ${{ inputs.script }}
+      - run: |
+          git config user.name tts-bot; git config user.email tts@bot
+          git fetch origin voices || true
+          mkdir /tmp/v && cp -r ${{ inputs.out }} /tmp/v/
+          git checkout --orphan voicesnew && git rm -rq --cached . && git clean -fdq -e /tmp
+          mkdir -p ${{ inputs.out }} && cp -r /tmp/v/*/* ${{ inputs.out }}/
+          git add ${{ inputs.out }} && git commit -qm "voice" && git push -f origin voicesnew:voices
