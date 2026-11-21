@@ -129,10 +129,10 @@ const S3a = (f: number) => zoom([34, G + 40, ZB + 46], [-4, G, ZB - 18], 40, pus
 const S3b = (f: number) => zoom([22, G + 30, ZB + 22], [-6, G, ZB - 26], 42, pushK(f, F(W.twentyTwo), 0.0015));
 export const DOOR_X = -6;
 const S4a = (f: number) => dolly([0.8, G + 1.75, ZB + 5.4], [-4.3, G + 1.45, ZB + 0.2], pushK(f, F(W.so), 0.0022), { fov: 34 });
-const S5a = (f: number) => dolly([-1.6, G + 1.65, ZB + 3.3], [-5.0, G + 1.6, ZB + 0.9], pushK(f, F(W.depends), 0.0025), { fov: 30, roll: 0.03 });
-const S5b = (f: number) => dolly([-2.0, G + 1.4, ZB + 2.6], [-5.4, G + 1.35, ZB + 0.2], pushK(f, F(W.where), 0.0025, 0.006, 30), { fov: 30, roll: -0.03 });
+const S5a = (f: number) => dolly([-1.6, G + 1.65, ZB + 4.1], [-5.0, G + 1.6, ZB + 1.7], pushK(f, F(W.depends), 0.0025), { fov: 30, roll: 0.03 });
+const S5b = (f: number) => dolly([-2.2, G + 1.4, ZB + 3.0], [-5.4, G + 1.3, ZB + 0.7], pushK(f, F(W.where), 0.0025, 0.006, 30), { fov: 30, roll: -0.03 });
 const S6a = (f: number) => dolly([-1.4, G + 1.75, ZB - 1.6], [-3.0, G + 1.75, ZB + 0.6], pushK(f, F(W.your), 0.004, 0.008, 25), { fov: 30, roll: 0.06 });
-const S7a = (f: number) => dolly([-3.0, G + 0.9, ZB + 2.0], [-5.3, G + 1.0, ZB], pushK(f, F(W.theDoor), 0.003), { fov: 34, roll: -0.04 });
+const S7a = (f: number) => dolly([-1.0, G + 1.15, ZB - 0.9], [-5.9, G + 0.95, ZB + 0.15], pushK(f, F(W.theDoor), 0.003), { fov: 34, roll: -0.04 });
 const S7b = (f: number) => dolly([0.4, G + 1.8, ZB + 6.4], [-4.8, G + 1.2, ZB - 0.2], pushK(f, F(W.some), 0.0022), { fov: 36 });
 const S8a = (f: number) => dolly([-1.5, G + 1.75, ZB - 1.4], [-3.0, G + 1.75, ZB + 0.6], pushK(f, F(W.youCan), 0.003, 0.01, 40), { fov: 30, roll: -0.05 });
 

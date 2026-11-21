@@ -526,18 +526,18 @@ const baarle = (id: number, t: number, cam: CamInfo, out: Stage) => {
     return;
   }
   // at the local's door: local beside the door, host in the street
-  const lx = DOOR_X + 0.75, lz = ZB + 0.9, hx = -3.0, hz = ZB + 0.45;
+  const lx = DOOR_X + 0.75, lz = ZB + 1.7, hx = -3.0, hz = ZB + 0.6;
   const hostExpr: Expr = id === 6 ? flap("host", t, "nervous", "shock") : id === 8 ? flap("host", t, t > W.withA - LEAD ? "shock" : "nervous", "shock")
     : id === 7 && t > W.moved - LEAD ? "shock" : flap("host", t, "smile", "grin");
   const locExpr: Expr = flap("local", t, id === 7 && t > W.some ? "smile" : "neutral", "grin");
-  out.places.push(person(cam, HOSTW, hx, D0, hz, { side: false, mirror: false }, { mode: "stand", expr: hostExpr, blink: lidAt(t, 1), facing: face(cam, hx, hz, lx, lz), look: face(cam, hx, hz, lx, lz) }, {}));
-  blob(out, hx, D0, hz);
+  if (!(id === 7 && t < W.some - LEAD)) out.places.push(person(cam, HOSTW, hx, D0, hz, { side: false, mirror: false }, { mode: "stand", expr: hostExpr, blink: lidAt(t, 1), facing: face(cam, hx, hz, lx, lz), look: face(cam, hx, hz, lx, lz) }, {}));
+  if (!(id === 7 && t < W.some - LEAD)) blob(out, hx, D0, hz);
   out.places.push(person(cam, LOCW, lx, D0, lz, { side: false, mirror: false }, { mode: "stand", expr: locExpr, blink: lidAt(t, 2), facing: face(cam, lx, lz, hx, hz), look: face(cam, lx, lz, hx, hz),
     wave: id === 5 && t > W.where - LEAD ? 0.2 : undefined }, {}));
   blob(out, lx, D0, lz);
   if (id === 7 && t > W.moved - 0.6) {
     // a neighbour carries his front door across the border
-    const u = clamp01((t - (W.moved - 0.6)) / 2.6), z = ZB + 2.6 - 5.2 * u, x = -1.0;
+    const u = clamp01((t - (W.moved - 0.6)) / 2.6), z = ZB + 2.2 - 4.4 * u, x = -1.9;
     const phase = q((t * 1.6) % 1, 120);
     out.places.push(person(cam, { i: 30, o: LOCAL3, okey: "nb" }, x, D0, z, { side: false, mirror: false }, { mode: "stroll", phase, expr: "grin", blink: lidAt(t, 30) }, {}));
     blob(out, x, D0, z);
