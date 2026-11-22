@@ -1,0 +1,20 @@
+{
+ "aino": {
+  "ref_en": "Good afternoon. You were driving much too fast on this road. Please show me your licence, and stay in the car.",
+  "ref_native": "Hyvää iltapäivää. Ajoitte aivan liian kovaa tällä tiellä. Näyttäkää ajokorttinne ja pysykää autossa.",
+  "edge": "fi-FI-NooraNeural",
+  "design": "A Finnish female police officer, about 35, speaking English with a clear Finnish accent: flat even intonation, stress on the first syllable, short crisp vowels, lightly rolled R. Calm, dry, very matter-of-fact, almost deadpan.",
+  "test": ["Thirty over the limit. That's a hundred and twenty-one thousand euros."],
+  "native_lang": "Finnish",
+  "design_native": "Rauhallinen, asiallinen suomalainen naispoliisi, noin 35-vuotias. Tasainen, kuiva ja selkeä ääni."
+ },
+ "rich": {
+  "ref_en": "Excuse me, officer, there must be a mistake. I was only driving a little bit fast, and I have a very important meeting.",
+  "ref_native": "Anteeksi, konstaapeli, tässä täytyy olla jokin virhe. Ajoin vain vähän liian lujaa, ja minulla on tärkeä kokous.",
+  "edge": "fi-FI-HarriNeural",
+  "design": "A rich Finnish businessman, about 60, speaking English with a Finnish accent, shocked and outraged, voice cracking upward in disbelief. Slightly nasal, posh.",
+  "test": ["For one ticket?!"],
+  "native_lang": "Finnish",
+  "design_native": "Varakas suomalainen liikemies, noin 60-vuotias, järkyttynyt ja närkästynyt, ääni nousee epäuskosta."
+ }
+}
