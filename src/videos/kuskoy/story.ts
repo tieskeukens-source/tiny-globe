@@ -53,25 +53,28 @@ const frame = (id: number, f: number): Shot => {
   const sx0 = Math.sin(p.az), sx = sx0, sz = (Math.cos(p.az) < 0 ? -1 : 1) * Math.sqrt(1 - sx * sx), rx = sz, rz = -sx, side = p.seed % 2 ? 1 : -1;
   const lim = set.clampX ?? 4.3;
   const u = glide(clamp01((f - p.a) / Math.max(1, p.b - p.a))), mv = p.kind === "single" ? 3 : p.seed % 3;
-  let pos: V3, look: V3, fov = 36, roll = -0.025 * side, k = pushK(f, p.a, 0.0035);
+  const pr = (tot: number) => Math.exp(-tot * glide(clamp01((f - p.a) / Math.max(1, p.b - p.a))));
+  let pos: V3, look: V3, fov = 36, roll = -0.025 * side, k = pr(0.16);
   if (p.kind === "single") {
-    look = [S[0] + rx * 0.25 * side, 1.2, S[2] + rz * 0.25 * side];
-    pos = [look[0] + sx * 3.5, 1.35, look[2] + sz * 3.5]; roll = 0.03 * side; k = pushK(f, p.a, 0.0045);
+    look = [S[0] + rx * 0.25 * side, 1.3, S[2] + rz * 0.25 * side];
+    pos = [look[0] + sx * 3.3, 1.05, look[2] + sz * 3.3]; roll = 0.03 * side; k = pr(0.12);
   } else if (p.kind === "two") {
-    look = [(S[0] + O[0]) / 2, 1.15, (S[2] + O[2]) / 2];
-    const lat = Math.abs((S[0] - O[0]) * rx + (S[2] - O[2]) * rz), d = Math.max(6.5, (lat + 2.8) / 0.34);
-    pos = [look[0] + sx * d, 1.5, look[2] + sz * d];
+    look = [(S[0] + O[0]) / 2, 1.3, (S[2] + O[2]) / 2];
+    const lat = Math.abs((S[0] - O[0]) * rx + (S[2] - O[2]) * rz), d = Math.max(5.0, (lat + 1.5) / 0.36);
+    pos = [look[0] + sx * d, 0.95, look[2] + sz * d];
   } else {
     look = [set.c[0] + rx * 0.6 * side, 1.4, set.c[1] + rz * 0.6 * side];
-    pos = [look[0] + sx * 16, 2.3, look[2] + sz * 16]; fov = 42; k = pushK(f, p.a, 0.002);
+    pos = [look[0] + sx * 13, 1.3, look[2] + sz * 13]; fov = 42; k = pr(0.18);
   }
   // continuous camera move through the shot (crane down over the roofs / orbit / lateral track)
   const big = p.kind === "wide" ? 1 : p.kind === "two" ? 0.5 : 0.3;
   if (mv === 0) { const H = 5 * big; pos = [pos[0], pos[1] + (1 - u) * H, pos[2]]; look = [look[0], look[1] + (1 - u) * H * 0.25, look[2]]; }
   else if (mv === 1) { const an = (u - 0.5) * 0.7 * big * side, dx = pos[0] - look[0], dz = pos[2] - look[2]; pos = [look[0] + dx * Math.cos(an) - dz * Math.sin(an), pos[1], look[2] + dx * Math.sin(an) + dz * Math.cos(an)]; }
   else if (mv === 2) { const sh = (u - 0.5) * 3 * big * side; pos = [pos[0] + rx * sh, pos[1], pos[2] + rz * sh]; look = [look[0] + rx * sh * 0.6, look[1], look[2] + rz * sh * 0.6]; }
-  const hi = pos[1] > 6.5, L = hi ? 16 : lim;
-  pos = [Math.max(-L, Math.min(L, pos[0])), pos[1], pos[2]];
+  if (Math.abs(Math.sin(set.az)) > 0.5) {   // across the valley: stay inside the cleared corridor on the camera side
+    const side = Math.sign(Math.sin(set.az));
+    pos = [side * Math.max(1.5, Math.min(23, side * pos[0])), pos[1], Math.max(set.c[1] - 6.5, Math.min(set.c[1] + 6.5, pos[2]))];
+  } else { const L = pos[1] > 6.5 ? 16 : lim; pos = [Math.max(-L, Math.min(L, pos[0])), pos[1], pos[2]]; }
   return dolly(pos, look, k, { fov, roll });
 };
 export const camAt = (id: number, f: number): Cam => {

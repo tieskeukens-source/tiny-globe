@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { Batch, boxGeo, V, lam, quad, house } from "./build";
 import { rng, earthHD, signHD, grassHD } from "./paint";
 import { D0 } from "./story";
-import { GATE_Z, MARKET_Z, FEST_Z } from "./plan";
+import { GATE_Z, MARKET_Z, FEST_Z, SETS } from "./plan";
 export { GATE_Z, MARKET_Z, FEST_Z };
 
 const mat = (k: string, c: string) => lam(k + c, () => ({ color: c }));
@@ -84,7 +84,7 @@ export const buildTown = (root: THREE.Object3D) => {
   const b = new Batch(), r = rng(21);
   const pick = <T,>(a: T[]) => a[Math.floor(r() * a.length) % a.length];
   const grass = lam("kgrass", () => ({ map: grassHD(), color: "#9ad45a" }));
-  const lane = lam("klane", () => ({ color: "#6d6354" }));
+  const lane = lam("klane", () => ({ color: "#86745a" }));
   const flat = (x0: number, x1: number, z0: number, z1: number, u: number, v: number, dy: number) => {
     const y = D0 + dy, g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.Float32BufferAttribute([x0, y, z1, x1, y, z1, x1, y, z0, x0, y, z1, x1, y, z0, x0, y, z0], 3));
@@ -94,16 +94,17 @@ export const buildTown = (root: THREE.Object3D) => {
   };
   b.add(flat(-900, 900, -900, 900, 450, 450, -0.06), grass);
   // steep terraced hillsides on both sides (stone risers, grass tops), climbing like the real hazelnut slopes
-  const stone = mat("riser", "#8f8a78");
+  const stone = mat("riser", "#5e9c3c");
   for (const sx of [-1, 1]) for (let i = 0; i < 10; i++) {
     const xa = X0 + i * SW, y = (i + 1) * SH;
-    b.add(boxGeo(V(Math.min(sx * xa, sx * 140), D0 - 0.5, -260), V(Math.max(sx * xa, sx * 140), D0 + y, 260), 0), i % 2 ? mat("tg1", "#7fc24a") : mat("tg2", "#6fb442"));
+    b.add(boxGeo(V(Math.min(sx * xa, sx * 140), D0 - 0.5, -260), V(Math.max(sx * xa, sx * 140), D0 + y, 260), 0), i % 2 ? mat("tg1", "#86c94e") : mat("tg2", "#74ba45"));
     b.add(boxGeo(V(sx * xa - 0.12, D0, -260), V(sx * xa + 0.12, D0 + y, 260), 0), stone);
   }
   b.add(flat(-4.5, 4.5, -170, 170, 2.5, 85, 0.0), lane);                               // the village lane
   b.add(flat(-14, 14, MARKET_Z - 10, MARKET_Z + 10, 7, 6, 0.004), lane);             // small square
   b.add(flat(-18, 18, FEST_Z - 20, FEST_Z + 12, 9, 8, 0.004), lane);                 // festival ground
-  const clear = (x: number, z: number) => (Math.abs(z - MARKET_Z) < 11 && Math.abs(x) < 16) || (z > FEST_Z - 22 && z < FEST_Z + 14 && Math.abs(x) < 20) || (Math.abs(z - GATE_Z) < 3);
+  const corridor = (x: number, z: number) => Object.values(SETS).some((S) => Math.abs(Math.sin(S.az)) > 0.5 && Math.abs(z - S.c[1]) < 8.5 && x * Math.sign(Math.sin(S.az)) > 4.2 && Math.abs(x) < 25);
+  const clear = (x: number, z: number) => corridor(x, z) || (Math.abs(z - MARKET_Z) < 11 && Math.abs(x) < 16) || (z > FEST_Z - 22 && z < FEST_Z + 14 && Math.abs(x) < 20) || (Math.abs(z - GATE_Z) < 3);
   // wooden houses along the lane (fronts at |x| = 6), looser rows behind, spaced out like a hill village
   for (const sx of [-1, 1]) {
     let z = -150;
@@ -130,10 +131,14 @@ export const buildTown = (root: THREE.Object3D) => {
     if (r() < 0.55) beech(b, x, z, 6 + r() * 4, i, y); else pine(b, x, z, 7 + r() * 5, i, y);
   }
   // life along the lane: fences, wood piles, hay, laundry, drying racks, flowers
-  for (const sx of [-1, 1]) { fence(b, sx * 4.9, D0, -140, 140); for (let z = -130; z < 130; z += 22 + r() * 12) { if (clear(sx * 12, z)) continue; if (r() < 0.5) woodpile(b, sx * (6.4 + r()), D0, z, r()); else hay(b, sx * (10 + r() * 3), D0, z, 0.8 + r() * 0.5); } }
+  for (const sx of [-1, 1]) { for (let z = -140; z < 140; z += 9.6) if (!corridor(sx * 6, z) && !corridor(sx * 6, z + 9.6)) fence(b, sx * 4.9, D0, z, z + 9.6); for (let z = -130; z < 130; z += 22 + r() * 12) { if (clear(sx * 12, z)) continue; if (r() < 0.5) woodpile(b, sx * (6.4 + r()), D0, z, r()); else hay(b, sx * (10 + r() * 3), D0, z, 0.8 + r() * 0.5); } }
   for (const [x, z] of [[-11, 4], [11, -12], [-12, -48], [12, 24], [-11, 40], [13, -70]] as const) laundry(b, x, D0, z - 2.2, z + 2.2, Math.abs(x * z));
   for (const [x, z] of [[-12, MARKET_Z - 7], [12, MARKET_Z + 6], [-13, MARKET_Z + 7], [13, MARKET_Z - 6], [-9, 12], [9, -20]] as const) rack(b, x, D0, z, x < 0 ? 0 : Math.PI);
   for (let i = 0; i < 60; i++) { const sx = r() < 0.5 ? -1 : 1; flowers(b, sx * (5.4 + r() * 9), D0, (r() - 0.5) * 240, i); }
+  for (let i = 0; i < 260; i++) { const x = (r() - 0.5) * 8.4, z = (r() - 0.5) * 300, s = 0.12 + r() * 0.2; b.add(new THREE.SphereGeometry(1, 6, 4), mat("pebble", ["#9a8f80", "#b3a894", "#7d7466"][i % 3]), new THREE.Matrix4().compose(V(x, D0 + 0.01, z), new THREE.Quaternion(), V(s, s * 0.35, s * 0.8))); }
+  for (const S of Object.values(SETS)) { if (Math.abs(Math.sin(S.az)) < 0.5) continue; const sd = Math.sign(Math.sin(S.az));
+    for (let i = 0; i < 14; i++) flowers(b, sd * (5 + r() * 12), D0, S.c[1] + (r() - 0.5) * 16, 500 + i);
+    for (let i = 0; i < 6; i++) hazel(b, sd * (9 + r() * 12), S.c[1] + (r() < 0.5 ? -1 : 1) * (6 + r() * 3), 0.8 + r() * 0.4, 600 + i); }
   // steep green hills close around the village + far misty ridges
   const hill = new THREE.SphereGeometry(1, 26, 12, 0, Math.PI * 2, 0, Math.PI / 2);
   const hm = [mat("hillA", "#4f9a3a"), mat("hillB", "#3f8a35"), mat("hillC", "#63a845")];

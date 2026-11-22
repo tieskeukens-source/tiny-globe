@@ -18,21 +18,21 @@ export const LEAD = 2 / FPS;
 // ---------------- where everyone stands, per chapter ----------------
 type SetDef = { c: [number, number]; az: number; light: Light; clampX?: number };
 export const SETS: Record<number, SetDef> = {
-  1: { c: [0, 15], az: Math.PI, light: "day" },
-  2: { c: [0, MARKET_Z + 1], az: 0.2, light: "day", clampX: 9 },
-  3: { c: [0, -62], az: -0.4, light: "day" },
-  4: { c: [0, FEST_Z - 8], az: Math.PI, light: "golden" },
+  1: { c: [0, 8], az: Math.PI / 2 - 0.15, light: "day" },        // camera on the east side, looking across the valley
+  2: { c: [0, MARKET_Z], az: -Math.PI / 2 + 0.15, light: "day" }, // market square, looking at the east slope
+  3: { c: [0, -62], az: Math.PI / 2 + 0.2, light: "day" },
+  4: { c: [0, FEST_Z - 8], az: Math.PI, light: "golden" },        // festival stage at sunset
 };
+/** lateral (screen-right) and toward-camera unit vectors of a chapter */
+export const axes = (az: number) => ({ r: [Math.cos(az), -Math.sin(az)] as [number, number], f: [Math.sin(az), Math.cos(az)] as [number, number] });
 const OFF: Record<string, [number, number]> = {
-  pin: [1.1, 0], farmer: [-2.3, -1.0], skeptic: [2.3, -1.0],
+  pin: [0, 0], farmer: [-1.35, -0.5], skeptic: [1.35, -0.5],
 };
 const WHO: Record<number, string[]> = { 1: ["pin", "skeptic", "farmer"], 2: ["pin", "skeptic", "farmer"], 3: ["pin", "skeptic", "farmer"], 4: ["pin", "farmer"] };
 /** world position of a main character in chapter ch (depth and left/right follow the chapter's camera side) */
 export const posOf = (ch: number, who: string): V3 => {
-  const S = SETS[ch], o = OFF[who] ?? [0, 0], sg = Math.cos(S.az) < 0 ? -1 : 1;
-  const alt = null as number[] | null;
-  const [dx, dz] = alt ?? o;
-  return [S.c[0] + dx * sg, 0, S.c[1] + dz * sg];
+  const S = SETS[ch], [dx, dz] = OFF[who] ?? [0, 0], { r, f } = axes(S.az);
+  return [S.c[0] + r[0] * dx + f[0] * dz, 0, S.c[1] + r[1] * dx + f[1] * dz];
 };
 export const presentIn = (ch: number) => WHO[ch];
 

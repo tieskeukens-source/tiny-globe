@@ -971,3 +971,15 @@ export const VILL_A: Outfit = { jacket: "#c98a3a", pants: "#4a4f63", boots: "#3a
 export const VILL_B: Outfit = { jacket: "#8c3b4a", pants: "#3b3f52", boots: "#4a3426", hat: "hair", hair: "#4a3020", skin: "#ecd0b6" };
 export const VILL_C: Outfit = { jacket: "#2e7d6a", pants: "#3b3f52", boots: "#3a2a22", hat: "cap", cap: "#d8c9a0", skin: "#f5c9a0", moustache: "#5a4030" };
 export const VILL_D: Outfit = { jacket: "#d8d2c0", pants: "#4f4a3a", boots: "#3a2a22", hat: "hair", hair: "#9a9086", skin: "#f1c9a8", build: "stout" };
+
+/** whistle sound arcs on a 400 x 400 canvas: three bright arcs travelling outward, t in 0..1 (loops) */
+export const fxArcs = (p: Pen, t: number, col = "#fff6c2") => {
+  const g = p.g;
+  for (let k = 0; k < 3; k++) {
+    const u = (t + k / 3) % 1, r = 40 + 300 * u;
+    g.beginPath(); g.arc(30, 200, r, -0.55, 0.55);
+    g.strokeStyle = INK; g.lineWidth = 26 * (1 - u) + 8; g.globalAlpha = 1 - u * 0.85; g.lineCap = "round"; g.stroke();
+    g.strokeStyle = col; g.lineWidth = 16 * (1 - u) + 4; g.stroke();
+  }
+  g.globalAlpha = 1;
+};

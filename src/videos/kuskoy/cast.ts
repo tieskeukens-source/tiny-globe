@@ -4,9 +4,9 @@
 // the sun, painted crescent in the drawing); standing ones get a soft multiply contact blob. Effects are unlit cards.
 // Cards, effects and blobs live on the NOINK layer so the world ink pass never outlines their quads.
 import * as THREE from "three";
-import { Pen, bodyFront, bodySide, fxShadow, fxContact, Outfit, Expr, FrontOpts, SideOpts, HOST, FARMER, SKEPTIC, VILL_A, VILL_B, VILL_C, VILL_D, INK } from "./toon";
+import { Pen, bodyFront, bodySide, fxShadow, fxContact, fxArcs, fxNote, Outfit, Expr, FrontOpts, SideOpts, HOST, FARMER, SKEPTIC, VILL_A, VILL_B, VILL_C, VILL_D, INK } from "./toon";
 import { FPS, D0, V3, clamp01, smooth } from "./story";
-import { LINES, PLAN, SETS, posOf, presentIn, FEST_Z, MARKET_Z, whistling } from "./plan";
+import { LINES, PLAN, SETS, posOf, presentIn, FEST_Z, MARKET_Z, whistling, axes } from "./plan";
 import { LIGHTS } from "./lights";
 import { NOINK } from "./ink";
 import { cardShade, blobMaterial, CARD_K } from "./cardshade";
@@ -242,13 +242,10 @@ const exprOf = (who: string, t: number): Expr => {
 const PAIRS: Outfit[] = [VILL_A, VILL_B, VILL_C, VILL_D];
 type Pair = { x: number; z: number; pal: number };
 const pairsFor = (ch: number): Pair[] => {
-  const S = SETS[ch], r = (k: number) => hh(ch * 97 + k, 3), out: Pair[] = [], sg = Math.cos(S.az) < 0 ? 1 : -1; // sg: direction away from the main camera
-  const wide = 5.2, n = 6;
-  for (let k = 0; k < n; k++) {
-    const lat = (r(k) - 0.5) * 2 * wide, depth = 2.6 + r(k + 40) * (ch === 7 || ch === 5 ? 20 : 30);
-    const x = lat, z = S.c[1] + sg * depth;
-    if (Math.abs(lat) < 2.2 && depth < 6) continue; // keep the main cast's spot free
-    out.push({ x, z, pal: Math.floor(r(k + 80) * PAIRS.length) });
+  const S = SETS[ch], r = (k: number) => hh(ch * 97 + k, 3), out: Pair[] = [], A = axes(S.az);
+  for (let k = 0; k < 9; k++) {   // villagers along the lane / square behind the cast, left and right
+    const lat = (k % 2 ? 1 : -1) * (3.2 + r(k) * 11), depth = 1.2 + r(k + 40) * 2.6;
+    out.push({ x: S.c[0] + A.r[0] * lat - A.f[0] * depth, z: S.c[1] + A.r[1] * lat - A.f[1] * depth, pal: Math.floor(r(k + 80) * PAIRS.length) });
   }
   return out;
 };
@@ -271,6 +268,14 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
     pl.roll = talk ? 0.025 * Math.sin(t * 2.4 + i) : 0;
     out.places.push(pl);
     blob(out, x, 0, z);
+    if (who === "farmer" && whistling(t)) {  // sound arcs + notes leaving the mouth, toward the side he faces
+      const dir = facing, rx = cam.right.x * dir, rz = cam.right.z * dir, ph = Math.floor(t * FPS / 2) % 12;
+      out.fx.push({ key: `arcs|${ph}`, cw: 400, ch: 400, draw: (p) => fxArcs(p, ph / 12), x: x + rx * 0.75, y: 1.62, z: z + rz * 0.75, w: 1.0, h: 1.0, rot: dir < 0 ? Math.PI : 0 });
+      for (let n = 0; n < 3; n++) {
+        const u = ((t * 0.9 + n / 3) % 1), kind = n % 2;
+        out.fx.push({ key: `note|${kind}`, cw: 220, ch: 240, draw: (p) => fxNote(p, kind, "#ffd23f"), x: x + rx * (0.6 + u * 1.6), y: 1.7 + u * 1.1 + 0.15 * Math.sin(u * 9 + n), z: z + rz * (0.6 + u * 1.6), w: 0.32 * (1 - u * 0.3), h: 0.35 * (1 - u * 0.3) });
+      }
+    }
   });
   if (!PAIR_CACHE[ch]) PAIR_CACHE[ch] = pairsFor(ch);
   PAIR_CACHE[ch].forEach((p, k) => {
