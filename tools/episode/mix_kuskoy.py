@@ -12,8 +12,8 @@ def rd(path):
     return np.frombuffer(o, dtype=np.float32).copy()
 voice = np.zeros(N)
 for l in TL['lines']:
-    if l['f'] < 0: continue
-    a = rd(f"{vd}/{l['f']:03d}.mp3"); i = int(l['start'] * SR); voice[i:i + len(a)] += a[:N - i]
+    if l.get('whistle') or l['who'] == 'whistle' or l.get('f', 0) < 0: continue
+    a = rd(f"{vd}/{l['i']:03d}.wav" if 'f' not in l else f"{vd}/{l['f']:03d}.mp3"); i = int(l['start'] * SR); voice[i:i + len(a)] += a[:N - i]
 voice /= max(1e-6, np.abs(voice).max()) / 0.9
 def put(arr, t, s):
     i = int(t * SR)
@@ -54,7 +54,7 @@ for c in ev['cuts']: put(sfx, c[0], tick())
 for t0 in ev['kicks']: put(sfx, t0, thump())
 for c in ev['caps']: put(sfx, c[0], tick(0.12))
 for l in TL['lines']:
-    if l.get('whistle'): put(sfx, l['start'] + 0.04, whistle(l['dur'] - 0.08))
+    if l.get('whistle') or l['who'] == 'whistle': put(sfx, l['start'] + 0.04, whistle(l['dur'] - 0.08))
 # duck the music under the voice
 vo_env = np.convolve(np.abs(voice), np.ones(int(0.12 * SR)) / int(0.12 * SR), 'same')
 duck = 1 - 0.7 * np.clip(vo_env / 0.08, 0, 1)

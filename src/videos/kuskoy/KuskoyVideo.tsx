@@ -20,7 +20,7 @@ import { LensBlur, GrainEffect } from "./lensblur";
 import { GradeEffect, GRADES, GRADE_STRENGTH, gradeFor } from "./grade";
 import { Kit } from "./build";
 import { TOTAL, SHOTS, layersAt, dofAt } from "./story";
-import { capAt } from "./plan";
+import { TitleCard, Badge, Punch, Subs } from "./overlay";
 
 export const SHORT_FRAMES = TOTAL;
 
@@ -104,19 +104,6 @@ const ShotView: React.FC<{ id: number; kit: Kit; alpha: number }> = ({ id, kit, 
   </AbsoluteFill>
 );
 
-const Caption: React.FC<{ f: number }> = ({ f }) => {
-  const t = f / 30, c = capAt(t);
-  if (!c) return null;
-  const k = spring({ frame: f - Math.round(c.a * 30), fps: 30, config: { damping: 11, stiffness: 220, mass: 0.6 } });
-  const fs = c.text.length > 16 ? 84 : 118;
-  return (
-    <AbsoluteFill style={{ alignItems: "center", justifyContent: "flex-end", paddingBottom: 470 }}>
-      <div style={{ fontFamily: "Lilita One", fontSize: fs, color: c.col, letterSpacing: 2, textAlign: "center", transform: `scale(${0.6 + 0.4 * k}) rotate(${(1 - k) * -4}deg)`,
-        WebkitTextStroke: "14px #1b1b1f", paintOrder: "stroke fill", textShadow: "0 7px 0 #1b1b1f" }}>{c.text}</div>
-    </AbsoluteFill>
-  );
-};
-
 export const KuskoyVideo: React.FC = () => {
   const f = useCurrentFrame();
   const kit = useKit();
@@ -124,7 +111,10 @@ export const KuskoyVideo: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: "#cfe3c0" }}>
       {layersAt(f).map((l, i) => <ShotView key={i ? "over" : "base"} id={l.id} kit={kit} alpha={l.alpha} />)}
-      <Caption f={f} />
+      <Subs f={f} />
+      <Punch f={f} />
+      <Badge f={f} />
+      <TitleCard f={f} />
       {(getInputProps() as { audio?: boolean }).audio !== false && <Audio src={staticFile("kuskoy/mix.mp3")} />}
     </AbsoluteFill>
   );

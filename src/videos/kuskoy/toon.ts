@@ -18,6 +18,10 @@ export type Outfit = {
   jacket: string; pants: string; boots: string; hat?: string | null; belt?: string | null; buttons?: string; rifle?: boolean;
   sash?: string; sword?: boolean; moustache?: string; skin?: string; head?: number; cap?: string; hair?: string; dress?: string;
   build?: Build;
+  /** waistcoat over the shirt (jacket colour = shirt) */
+  vest?: string;
+  /** small print (dots/flowers) on the dress and headscarf */
+  pattern?: string;
   /** Tiny Globe host: a map-pin head in this colour with a big white face disc */
   pin?: string;
 };
@@ -360,6 +364,14 @@ const faceSide = (p: Pen, hx: number, hy: number, W: number, expr: Expr, lid: nu
 const BONNET = "#e9cf8f", BONNET_BRIM = "#d6b46a";
 /** parts of a hat that sit behind the head (bonnet) */
 const hatBehind = (p: Pen, o: Outfit, H: Blob, cx: number, hc: number, light: number, thick: number, ow: number, side: boolean) => {
+  if (o.hat === "scarf") { // Turkish yazma: cloth falls round the head to the shoulders
+    const col = o.cap ?? "#c0353a";
+    const bb = blobPts(cx, hc + 0.12 * H.b, { ...H, a: H.a * 1.2, b: H.b * 1.22, asym: 0, egg: -0.12, nBot: 1.6, seed: H.seed + 3 });
+    p.shadedFill(bb, col, mul(col, SH_CLOTH), light, H.a * 1.2);
+    if (o.pattern) for (let i = 0; i < 26; i++) { const ang = i * 2.399, rr = Math.sqrt((i + 0.5) / 26) * H.a * 1.1; const x = cx + Math.cos(ang) * rr, y = hc + 0.12 * H.b + Math.sin(ang) * rr * 1.1; p.dot(x, y, H.a * 0.045, o.pattern); }
+    p.inkRing(bb, ow * 0.85, thick);
+    return;
+  }
   if (o.hat !== "bonnet") return;
   const bb = blobPts(cx - (side ? 12 : 0) * (H.a / 50), hc - 0.07 * 2 * H.b, { ...H, a: H.a * 1.17, b: H.b * 1.13, asym: 0, egg: 0.04, seed: H.seed + 3 });
   p.shadedFill(bb, BONNET, mul(BONNET, SH_CLOTH), light, H.a * 1.17);
@@ -422,6 +434,21 @@ const hatOn = (p: Pen, o: Outfit, hp: P2[], H: Blob, cx: number, hc: number, lig
         p.ell(px, py, 32 * u, 0.06 * HH, shade(col, 0.8), ow, 0, 180, deg);
       }
     }
+  } else if (o.hat === "scarf") {
+    // band over the hair, framing the face; knot + two short tails under the chin
+    const col = o.cap ?? "#c0353a", cut = crown + 0.36 * HH;
+    const arc = hp.filter(([, y]) => y < cut).map(([x, y]) => [cx + (x - cx) * 1.06, hc + (y - hc) * 1.06] as P2);
+    if (arc.length > 3) {
+      arc.sort((A2, B2) => Math.atan2(A2[1] - hc, A2[0] - cx) - Math.atan2(B2[1] - hc, B2[0] - cx));
+      const band = R(arc);
+      p.shadedFill(band, col, mul(col, SH_CLOTH), light, H.a, 0.35);
+      if (o.pattern) p.clip(band, () => { for (let i = 0; i < 14; i++) p.dot(cx - H.a + (i % 7) * H.a / 3 + (i > 6 ? H.a / 6 : 0), crown + (i > 6 ? 0.2 : 0.08) * HH, H.a * 0.05, o.pattern!); });
+      p.poly(band, null, ow);
+      p.stroke(R([[cx - 0.42 * W, cut - 2 * u], [cx, cut + 3 * u], [cx + 0.42 * W, cut - 2 * u]]), 2 * u, shade(col, 0.7));
+    }
+    const ky = hc + H.b * 1.02, s = side ? 1 : facing || 1;
+    p.poly(R([[cx + s * 4 * u, ky - 4 * u], [cx + s * 16 * u, ky + 2 * u], [cx + s * 6 * u, ky + 9 * u]]), col, 1.8 * u);
+    p.poly(R([[cx + s * 10 * u, ky + 2 * u], [cx + s * 24 * u, ky + 16 * u], [cx + s * 14 * u, ky + 18 * u]]), shade(col, 0.88), 1.6 * u);
   } else if (o.hat === "gele") {
     // Yoruba head tie: a wrapped band round the head plus a big fan flaring up and out to one side
     const yb = crown + 0.42 * HH, col = o.cap ?? "#d8342b", A = 0.6 * W;
@@ -462,7 +489,7 @@ const hatOn = (p: Pen, o: Outfit, hp: P2[], H: Blob, cx: number, hc: number, lig
 // ---------------- bodies ----------------
 export type Arms = [P2[], P2[]];
 /** held prop; for the hammer the number is the strike 0 (raised) .. 1 (struck) */
-export type Prop = null | "icecream" | "shako" | ["hammer", number];
+export type Prop = null | "icecream" | "shako" | "tea" | ["hammer", number];
 
 const BUILD: Record<Build, { a: number; torso: number; legs: number; tw: number }> = {
   adult: { a: 118, torso: 1.1, legs: 1.4, tw: 0.8 },
@@ -577,7 +604,7 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
     } else if (wave !== undefined) {
       const S = sh(1);
       arms.push({ pts: [S, [tcx + 1.1 * T.a + 10 * u + 3 * u * wave, S[1] - 0.22 * HH], [tcx + 1.18 * T.a + 16 * u + 12 * u * wave, S[1] - 0.6 * HH]], front: false });
-    } else if (prop === "icecream") {
+    } else if (prop === "icecream" || prop === "tea") {
       const S = sh(1);
       arms.push({ pts: [S, [tcx + 1.05 * T.a + 4 * u, S[1] + 0.45 * HH], [tcx + 0.5 * T.a, S[1] + 0.4 * HH]], front: true });
     } else if (Array.isArray(prop)) {
@@ -603,6 +630,7 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
     const D: Blob = { a: 0.5 * W * 0.98, b: 0.5 * ((sole - 0.35 * HH) - (chin - 0.2 * HH)), nTop: 2.0, nBot: 3.0, egg: 0.35, asym: 0.03 * facing, rot: 0, noise: 0.006, seed: seed + 9 };
     const dp = blobPts(300, sole - 0.35 * HH - D.b, D);
     p.gradFill(dp, o.dress!, mul(o.dress!, SH_CLOTH), light);
+    if (o.pattern) p.clip(dp, () => { for (let i = 0; i < 60; i++) { const x = 300 - W * 0.5 + ((i * 37) % 100) / 100 * W, y = sole - 0.35 * HH - 2 * D.b + ((i * 61) % 100) / 100 * 2 * D.b; p.dot(x, y, 2.6 * u, o.pattern!); } });
     p.inkRing(dp, ow, thick);
     const Sw: Blob = { a: 0.37 * W, b: 0.3 * HH, nTop: 2.2, nBot: 2.4, egg: 0.1, asym: 0, rot: 0, noise: 0.006, seed: seed + 8 };
     const sp = blobPts(300, chin + 0.12 * HH, Sw);
@@ -616,8 +644,13 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
         const xc = tcx + 0.025 * T.a, yc = chin - 0.05 * HH + (torsoBot - 0.1 * HH - (chin - 0.05 * HH)) * (0.75 / 1.55);
         p.poly([[xc - 3.5 * u, yc - 3.5 * u], [xc + 3.5 * u, yc - 3.5 * u], [xc + 3.5 * u, yc + 3.5 * u], [xc - 3.5 * u, yc + 3.5 * u]], "#d9dde0", 1.5 * u);
       }
+      if (o.vest) for (const sd of [-1, 1]) {
+        const vp: P2[] = [[tcx + sd * 0.16 * T.a, chin + 0.02 * HH], [tcx + sd * 1.3 * T.a, chin - 0.1 * HH], [tcx + sd * 1.3 * T.a, torsoBot + 0.1 * HH], [tcx + sd * 0.1 * T.a, torsoBot + 0.1 * HH], [tcx + sd * 0.1 * T.a, chin + 0.45 * HH]];
+        p.poly(vp, o.vest, 1.8 * u);
+        p.dot(tcx + sd * 0.2 * T.a, chin + 0.62 * HH, 2.6 * u, shade(o.vest, 0.6));
+      }
       if (o.sash) p.band([[tcx - 1.3 * T.a, torsoBot - 0.32 * HH], [tcx + 1.3 * T.a, torsoBot - 0.32 * HH]], o.sash, 0.13 * HH, 1.8 * u);
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < (o.vest ? 0 : 4); i++) {
         const y = chin + 0.12 * HH + i * 0.2 * HH;
         if (o.sash && Math.abs(y - (torsoBot - 0.32 * HH)) < 0.08 * HH) continue;
         p.dot(tcx + 2 * u * facing, y, 2.2 * u + 0.8 * u, INK); p.dot(tcx + 2 * u * facing, y, 2.2 * u, o.buttons ?? shade(o.jacket, 0.7));
@@ -630,7 +663,12 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
   for (const a of arms) if (a.front) {
     drawArm(a);
     const [hx, hy] = a.pts[2];
-    if (prop === "icecream") {
+    if (prop === "tea") { // tulip tea glass on a little saucer
+      p.ell(hx, hy - 6 * u, 13 * u, 3 * u, "#e9e4dc", 1.6 * u);
+      p.poly([[hx - 6 * u, hy - 28 * u], [hx + 6 * u, hy - 28 * u], [hx + 3.5 * u, hy - 17 * u], [hx + 6 * u, hy - 8 * u], [hx - 6 * u, hy - 8 * u], [hx - 3.5 * u, hy - 17 * u]], "#b5482a", 1.6 * u);
+      p.stroke([[hx - 6 * u, hy - 28 * u], [hx + 6 * u, hy - 28 * u]], 2.2 * u, "#f3ead8");
+      p.dot(hx, hy, 5.5 * u);
+    } else if (prop === "icecream") {
       p.poly([[hx - 8 * u, hy - 12 * u], [hx + 8 * u, hy - 12 * u], [hx, hy + 7 * u]], "#e0a35a", 1.8 * u);
       p.ell(hx, hy - 19 * u, 11 * u, 10 * u, "#f7c6d9", 2.2 * u);
       p.dot(hx, hy, 5.5 * u);
@@ -1000,3 +1038,19 @@ export const fxArcs = (p: Pen, t: number, col = "#fff6c2") => {
   }
   g.globalAlpha = 1;
 };
+
+// ---------------- Kuşköy cast: Black Sea village dress ----------------
+/** Hasan: old hazelnut farmer, flat cap (kasket), thick grey moustache, white shirt + dark waistcoat */
+export const HASAN: Outfit = { jacket: "#f2ede0", vest: "#4a3b33", pants: "#3a3a40", boots: "#2a2220", hat: "cap", cap: "#5b5249", skin: "#e8b98f", build: "stout", moustache: "#9a948c" };
+/** Ayşe: floral headscarf (yazma), patterned dress, knitted cardigan */
+export const AYSE: Outfit = { jacket: "#2f7a5c", pants: "#7a2f3f", dress: "#9c2f43", pattern: "#f6d36b", boots: "#2a2220", hat: "scarf", cap: "#e04a3a", skin: "#efc6a0", build: "stout" };
+/** the visitor: city clothes, bright cap */
+export const TOURIST: Outfit = { jacket: "#3fa7c9", pants: "#e7d9b4", boots: "#f4f1ea", hat: "cap", cap: "#f08a2c", skin: "#f6d7bd", build: "adult", hair: "#6a4a2a" };
+export const TURK_BG: Outfit[] = [
+  { jacket: "#e9e2d2", vest: "#2f3a4a", pants: "#3a3a40", boots: "#2a2220", hat: "cap", cap: "#3a3530", skin: "#dfae84", build: "stout", moustache: "#3a2a20" },
+  { jacket: "#c94f3a", pants: "#3b3f52", dress: "#3a5f8f", pattern: "#f2f2f2", boots: "#2a2220", hat: "scarf", cap: "#f2c230", skin: "#efc6a0" },
+  { jacket: "#7a8a4a", vest: "#6a4a30", pants: "#4a4a52", boots: "#2a2220", hat: "cap", cap: "#6a6058", skin: "#e8b98f", moustache: "#5a4a40" },
+  { jacket: "#e8e0cc", pants: "#3b3f52", dress: "#2f7a4a", pattern: "#ffd6e0", boots: "#2a2220", hat: "scarf", cap: "#f4f0e8", skin: "#f1c9a8", build: "stout" },
+  { jacket: "#d8342b", pants: "#2f4b8a", boots: "#f4f1ea", hat: "hair", hair: "#2a1b14", skin: "#efc6a0", build: "kid" },
+  { jacket: "#5a6a8a", vest: "#2a2a2a", pants: "#2a2d3a", boots: "#2a2220", hat: "hair", hair: "#bfb8ae", skin: "#e2b48c", build: "stout", moustache: "#d8d2c8" },
+];

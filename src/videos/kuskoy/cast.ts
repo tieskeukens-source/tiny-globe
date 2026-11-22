@@ -4,7 +4,7 @@
 // the sun, painted crescent in the drawing); standing ones get a soft multiply contact blob. Effects are unlit cards.
 // Cards, effects and blobs live on the NOINK layer so the world ink pass never outlines their quads.
 import * as THREE from "three";
-import { Pen, bodyFront, bodySide, fxShadow, fxContact, fxArcs, fxNote, Gesture, Outfit, Expr, FrontOpts, SideOpts, HOST, FARMER, SKEPTIC, VILL_A, VILL_B, VILL_C, VILL_D, INK } from "./toon";
+import { Pen, bodyFront, bodySide, fxShadow, fxContact, fxArcs, fxNote, Gesture, Outfit, Expr, FrontOpts, SideOpts, HOST, HASAN, AYSE, TOURIST, TURK_BG, INK } from "./toon";
 import { FPS, D0, V3, clamp01, smooth } from "./story";
 import { LINES, PLAN, SETS, posOf, presentIn, FEST_Z, MARKET_Z, whistling, axes } from "./plan";
 import { LIGHTS } from "./lights";
@@ -222,12 +222,12 @@ const flap = (who: string, t: number, closed: Expr, open: Expr): Expr => (talkin
 const mouthOf = (who: string, t: number) => talking(who, t) && Math.floor((t * FPS) / 3) % 2 === 0;
 const lastSpeaker = (t: number) => { let w = "pin"; for (const l of LINES) { if (l.start <= t + 0.1) w = l.who; else break; } return w; };
 
-const OUTFIT: Record<string, Outfit> = { pin: HOST, farmer: FARMER, skeptic: SKEPTIC };
+const OUTFIT: Record<string, Outfit> = { pin: HOST, hasan: HASAN, ayse: AYSE, tourist: TOURIST };
 const MOOD: Record<string, [Expr, Expr, Expr]> = { // idle, talk-closed, talk-open
-  pin: ["smile_closed", "smile_closed", "grin"], farmer: ["smile_closed", "smile_closed", "grin"], skeptic: ["neutral", "neutral", "stern"],
+  pin: ["smile_closed", "smile_closed", "grin"], hasan: ["smile_closed", "smile_closed", "grin"], ayse: ["smile_closed", "smile_closed", "grin"], tourist: ["neutral", "neutral", "stern"],
 };
 const exprOf = (who: string, t: number): Expr => {
-  if (who === "farmer" && whistling(t)) return "whistle";
+  if (whistling(t, who)) return "whistle";
   const L = LINES.find((l) => l.who === who && t >= l.start - 0.1 && t < l.start + l.dur + 0.3);
   if (who === "pin" && L) {
     if (L.text.startsWith("Whoa") && t < L.start + 1.1) return "shock";
@@ -239,10 +239,19 @@ const exprOf = (who: string, t: number): Expr => {
 };
 
 // ---------------- background twin pairs ----------------
-const PAIRS: Outfit[] = [VILL_A, VILL_B, VILL_C, VILL_D];
+const PAIRS: Outfit[] = TURK_BG;
 type Pair = { x: number; z: number; pal: number; lat: number };
 const pairsFor = (ch: number): Pair[] => {
   const S = SETS[ch], r = (k: number) => hh(ch * 97 + k, 3), out: Pair[] = [], A = axes(S.az);
+  if (ch === 4) {   // tea garden: guests on the stools round the tables behind the cast, two strollers
+    const seats: [number, number][] = [];
+    for (const [tx, tz] of [[-4, 4.5], [4.2, 5], [-1.5, 8.5]] as const) for (const a of [1, 3.1, 5.2]) seats.push([tx + Math.cos(a), tz + Math.sin(a)]);
+    for (let k = 0; k < 9; k++) {
+      if (k % 2 === 0 && k < 4) { const lat = (k ? 1 : -1) * 5; out.push({ x: lat, z: S.c[1] + 11, pal: k % PAIRS.length, lat }); continue; }
+      const [sx, sz] = seats[k]; out.push({ x: sx, z: S.c[1] + sz, pal: Math.floor(r(k + 80) * PAIRS.length), lat: sx });
+    }
+    return out;
+  }
   for (let k = 0; k < 9; k++) {   // villagers along the lane / square behind the cast, left and right
     const lat = (k % 2 ? 1 : -1) * (3.2 + r(k) * 11), depth = 1.2 + r(k + 40) * 2.6;
     out.push({ x: S.c[0] + A.r[0] * lat - A.f[0] * depth, z: S.c[1] + A.r[1] * lat - A.f[1] * depth, pal: Math.floor(r(k + 80) * PAIRS.length), lat });
@@ -255,25 +264,30 @@ const PAIR_CACHE: Record<number, Pair[]> = {};
 // ---------------- acting: gestures + emotions on the exact words ----------------
 type Cue = { who: string; line: string; word: string; until?: string; gesture?: Gesture; expr?: Expr; hop?: boolean };
 const CUES: Cue[] = [
-  { who: "pin", line: "This Turkish village", word: "three", until: "people", gesture: "point", hop: true },
-  { who: "pin", line: "This Turkish village", word: "valley", until: "phone", gesture: "up" },
-  { who: "skeptic", line: "This Turkish village", word: "phone", expr: "shock" },
-  { who: "skeptic", line: "Impossible", word: "Impossible", until: "language", gesture: "cross", expr: "stern", hop: true },
-  { who: "farmer", line: "It is Turkish", word: "syllable", until: "note", gesture: "point" },
-  { who: "pin", line: "Those notes", word: "half", until: "mile", gesture: "point", hop: true },
-  { who: "skeptic", line: "Those notes", word: "half", until: "mile", expr: "shock" },
-  { who: "skeptic", line: "Why not just shout", word: "Why", until: "shout", gesture: "shrug", expr: "nervous" },
-  { who: "farmer", line: "A shout dies", word: "dies", until: "hills", gesture: "shrug" },
-  { who: "farmer", line: "A shout dies", word: "whistle", until: "not", gesture: "mouth", expr: "grin" },
-  { who: "pin", line: "Four hundred years", word: "Four", until: "ago", gesture: "up", hop: true },
-  { who: "skeptic", line: "But today", word: "today", until: "phone", gesture: "point", expr: "smile" },
-  { who: "farmer", line: "And now fewer", word: "Yes", until: "whistle", expr: "nervous" },
-  { who: "pin", line: "You see", word: "both", until: "one", gesture: "up", expr: "grin", hop: true },
-  { who: "skeptic", line: "You see", word: "both", until: "one", expr: "shock" },
-  { who: "pin", line: "So the village", word: "festival", until: "seven", gesture: "up" },
-  { who: "pin", line: "What did he say", word: "What", until: "say", gesture: "shrug", expr: "nervous" },
-  { who: "farmer", line: "Dinner", word: "Dinner", gesture: "up", expr: "laugh", hop: true },
-  { who: "pin", line: "Dinner", word: "Dinner", expr: "laugh" },
+  { who: "pin", line: "Did you know", word: "Turkey", gesture: "point", hop: true },
+  { who: "pin", line: "Did you know", word: "whistling", gesture: "up", expr: "grin" },
+  { who: "pin", line: "That whistle just said", word: "Hasan", until: "tea", gesture: "point", expr: "grin" },
+  { who: "hasan", line: "I am coming", word: "coming", gesture: "up", expr: "grin", hop: true },
+  { who: "pin", line: "called", word: "bird", gesture: "up", hop: true },
+  { who: "pin", line: "Every Turkish word", word: "whistle", gesture: "mouth" },
+  { who: "tourist", line: "Any word?", word: "Any", gesture: "shrug", expr: "shock" },
+  { who: "ayse", line: "Even your name", word: "Even", until: "name", gesture: "point", expr: "grin" },
+  { who: "tourist", line: "Even your name", word: "name", expr: "shock" },
+  { who: "pin", line: "so steep", word: "steep", until: "hour", gesture: "up" },
+  { who: "hasan", line: "A shout gets lost", word: "shout", until: "valley", gesture: "shrug" },
+  { who: "hasan", line: "A shout gets lost", word: "whistle", until: "mile", gesture: "mouth", expr: "grin" },
+  { who: "tourist", line: "A shout gets lost", word: "half", until: "mile", expr: "shock" },
+  { who: "pin", line: "four hundred", word: "four", until: "years", gesture: "up", hop: true },
+  { who: "tourist", line: "everyone has a phone", word: "phone", gesture: "point", expr: "smile" },
+  { who: "ayse", line: "stopped whistling", word: "Yes", until: "whistling", expr: "nervous" },
+  { who: "pin", line: "UNESCO", word: "UNESCO", until: "danger", gesture: "up", expr: "grin", hop: true },
+  { who: "tourist", line: "UNESCO", word: "danger", expr: "shock" },
+  { who: "pin", line: "kids learn", word: "festival", until: "year", gesture: "up", expr: "grin" },
+  { who: "tourist", line: "what did she", word: "what", until: "me", gesture: "shrug", expr: "nervous" },
+  { who: "hasan", line: "talk too much", word: "talk", until: "much", gesture: "point", expr: "laugh", hop: true },
+  { who: "ayse", line: "talk too much", word: "talk", expr: "laugh" },
+  { who: "pin", line: "talk too much", word: "much", expr: "laugh" },
+  { who: "tourist", line: "talk too much", word: "much", expr: "shock" },
 ];
 const wordT = (line: string, word: string, end = false): number => {
   const L = LINES.find((l) => l.text.toLowerCase().includes(line.toLowerCase()));
@@ -302,16 +316,17 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
     const mySide = (x - cam.pos.x) * cam.right.x + (z - cam.pos.z) * cam.right.z;
     const talk = talking(who, t);
     const facing = (who === spk ? (spkSide > 0 ? -1 : 1) : spkSide > mySide ? 1 : -1) as -1 | 1;
-    const cu = cueOf(who, t), wh = who === "farmer" && whistling(t);
+    const cu = cueOf(who, t), wh = whistling(t, who);
     const expr = wh ? "whistle" : cu?.c.expr && !(talking(who, t) && cu.c.expr === "laugh" && false) ? cu.c.expr : exprOf(who, t);
     const fo: FrontOpts = { phase: 0, expr, mode: "stand", look: 0, blink: lidAt(t, i), lift: 0, tilt: 0, facing, mouthOpen: mouthOf(who, t),
-      gesture: wh ? "mouth" : cu?.c.gesture, g: wh ? 1 : cu?.g ?? 0 };
+      gesture: wh ? "mouth" : cu?.c.gesture, g: wh ? 1 : cu?.g ?? 0,
+      prop: who === "ayse" && (ch === 1 || ch === 4) && !wh && !cu?.c.gesture ? "tea" : null };
     const pl = person(cam, { i, o: OUTFIT[who], okey: who }, x, 0, z, { side: false, mirror: false }, fo, {});
     pl.y = (talk ? 0.012 * Math.abs(Math.sin(t * 11 + i)) : 0) + hopOf(who, t);
     pl.roll = talk ? 0.025 * Math.sin(t * 2.4 + i) : 0;
     out.places.push(pl);
     blob(out, x, 0, z);
-    if (who === "farmer" && whistling(t)) {  // sound arcs + notes leaving the mouth, toward the side he faces
+    if (wh) {  // sound arcs + notes leaving the mouth, toward the side he faces
       const dir = facing, rx = cam.right.x * dir, rz = cam.right.z * dir, ph = Math.floor(t * FPS / 2) % 12;
       out.fx.push({ key: `arcs|${ph}`, cw: 400, ch: 400, draw: (p) => fxArcs(p, ph / 12), x: x + rx * 0.75, y: 1.62, z: z + rz * 0.75, w: 1.0, h: 1.0, rot: dir < 0 ? Math.PI : 0 });
       for (let n = 0; n < 3; n++) {
@@ -324,11 +339,12 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
   PAIR_CACHE[ch].forEach((p, k) => {
     {
       // every other villager strolls along the lane (wraps far outside the frame), the rest stand and chat
-      const walk = k % 2 === 0, A = axes(SETS[ch].az), dir = k % 4 === 0 ? 1 : -1, v = 0.9 + 0.25 * (k % 3);
+      const sit = ch === 4 && !(k % 2 === 0 && k < 4), walk = !sit && k % 2 === 0, A = axes(SETS[ch].az), dir = k % 4 === 0 ? 1 : -1, v = 0.9 + 0.25 * (k % 3);
       const L = walk ? ((((p.lat + dir * v * t) + 18) % 36) + 36) % 36 - 18 : p.lat, d = L - p.lat;
       const x = p.x + A.r[0] * d, z = p.z + A.r[1] * d, view = { side: false, mirror: false };
-      const fo: FrontOpts = { phase: walk ? (t * 1.7 + k * 0.3) % 1 : 0, expr: k % 3 ? "grin" : "smile_closed", mode: walk ? "stroll" : "stand", look: 0, blink: lidAt(t, 100 + k),
-        lift: walk ? 60 : 0, tilt: 0, facing: (walk ? dir : k % 4 === 1 ? 1 : -1) as -1 | 1, mouthOpen: !walk && Math.floor(t * 4 + k) % 3 === 0 };
+      const fo: FrontOpts = { phase: walk ? (t * 1.7 + k * 0.3) % 1 : 0, expr: k % 3 ? "grin" : "smile_closed", mode: walk ? "stroll" : sit ? "sit" : "stand", look: 0, blink: lidAt(t, 100 + k),
+        lift: walk ? 60 : 0, tilt: 0, facing: (walk ? dir : k % 4 === 1 ? 1 : -1) as -1 | 1, mouthOpen: !walk && Math.floor(t * 4 + k) % 3 === 0,
+        prop: !walk && k % 3 === 1 && PAIRS[p.pal].build !== "kid" ? "tea" : null };
       const pl = person(cam, { i: 100 + k, o: PAIRS[p.pal], okey: `pair${p.pal}` }, x, 0, z, view, fo, {});
       out.places.push(pl);
       blob(out, x, 0, z, 0.95, 0.9);

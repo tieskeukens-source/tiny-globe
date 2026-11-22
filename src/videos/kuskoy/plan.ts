@@ -7,10 +7,14 @@ const FPS = 30;
 export const GATE_Z = 26;       // town gate across the street
 export const MARKET_Z = -32;    // centre of the market square
 export const FEST_Z = 62;       // festival square, stage at the far end
+export const TEA_Z = -110;      // tea garden (çay bahçesi), tea house at the far end
+export const MOSQUE: [number, number] = [-20, 4]; // mosque behind the hook set, minaret toward the lane
 
 export type Word = [number, number, string];
 export type Line = { i: number; f?: number; whistle?: boolean; who: string; chapter: number; text: string; start: number; dur: number; words: Word[] };
-export const LINES = (TL as unknown as { lines: Line[] }).lines;
+/** whistle gaps in the voice timeline belong to a character: Ayşe calls, Hasan answers, Ayşe whistles the visitor's name */
+const WHISTLERS = ["ayse", "hasan", "ayse"];
+export const LINES = (() => { let n = 0; return (TL as unknown as { lines: Line[] }).lines.map((l) => (l.who === "whistle" ? { ...l, who: WHISTLERS[n++ % 3], whistle: true, words: [] } : l)); })();
 export const VOICE_TOTAL = (TL as unknown as { total: number }).total;
 export const TOTAL = Math.round(VOICE_TOTAL * FPS);
 export const LEAD = 2 / FPS;
@@ -18,20 +22,19 @@ export const LEAD = 2 / FPS;
 // ---------------- where everyone stands, per chapter ----------------
 type SetDef = { c: [number, number]; az: number; light: Light; clampX?: number };
 export const SETS: Record<number, SetDef> = {
-  1: { c: [0, 8], az: Math.PI / 2 - 0.15, light: "day" },        // camera on the east side, looking across the valley
-  2: { c: [0, MARKET_Z], az: -Math.PI / 2 + 0.15, light: "day" }, // market square, looking at the east slope
-  3: { c: [0, -62], az: Math.PI / 2 + 0.2, light: "day" },
-  4: { c: [0, FEST_Z - 8], az: Math.PI, light: "golden" },        // festival stage at sunset
+  1: { c: [0, 8], az: Math.PI / 2 - 0.15, light: "day" },        // mosque square: minaret, dome and the big flag behind the cast
+  2: { c: [0, MARKET_Z], az: -Math.PI / 2 + 0.15, light: "day" }, // village lane: wooden houses with kilims on the rails
+  3: { c: [0, -62], az: Math.PI / 2 + 0.2, light: "day" },        // steep hazelnut terraces with serender granaries
+  4: { c: [0, TEA_Z], az: Math.PI, light: "day" },                // tea garden under the vine pergola
+  5: { c: [0, FEST_Z - 8], az: Math.PI, light: "day" },           // whistling festival stage
 };
 /** lateral (screen-right) and toward-camera unit vectors of a chapter */
 export const axes = (az: number) => ({ r: [Math.cos(az), -Math.sin(az)] as [number, number], f: [Math.sin(az), Math.cos(az)] as [number, number] });
-const OFF: Record<string, [number, number]> = {
-  pin: [0, 0], farmer: [-1.35, -0.5], skeptic: [1.35, -0.5],
-};
-const WHO: Record<number, string[]> = { 1: ["pin", "skeptic", "farmer"], 2: ["pin", "skeptic", "farmer"], 3: ["pin", "skeptic", "farmer"], 4: ["pin", "farmer"] };
+const SLOT: [number, number][] = [[0, 0], [-1.35, -0.5], [1.35, -0.5], [2.7, -1.3]];
+const WHO: Record<number, string[]> = { 1: ["pin", "ayse", "hasan"], 2: ["pin", "tourist", "ayse"], 3: ["pin", "hasan", "tourist"], 4: ["pin", "tourist", "ayse"], 5: ["pin", "tourist", "hasan", "ayse"] };
 /** world position of a main character in chapter ch (depth and left/right follow the chapter's camera side) */
 export const posOf = (ch: number, who: string): V3 => {
-  const S = SETS[ch], [dx, dz] = OFF[who] ?? [0, 0], { r, f } = axes(S.az);
+  const S = SETS[ch], k = WHO[ch].indexOf(who), [dx, dz] = SLOT[Math.max(0, k)], { r, f } = axes(S.az);
   return [S.c[0] + r[0] * dx + f[0] * dz, 0, S.c[1] + r[1] * dx + f[1] * dz];
 };
 export const presentIn = (ch: number) => WHO[ch];
@@ -55,7 +58,7 @@ export const PLAN: Plan[] = [];
     cuts.forEach((tc, k) => {
       const end = k + 1 < cuts.length ? cuts[k + 1] : t1;
       const first = L.i === 0 || LINES[L.i - 1].chapter !== L.chapter;
-      const other = L.who === "pin" ? cast.find((c) => c !== "pin" && c !== prevWho) ?? "taiwo" : "pin";
+      const other = L.who === "pin" ? cast.find((c) => c !== "pin" && c !== prevWho) ?? "pin" : "pin";
       const kind: Kind = L.i === 0 && k === 0 ? "two" : first && k === 0 ? "wide" : k === 0 ? (L.who === "pin" || n % 3 !== 2 ? "single" : "two") : (k % 2 ? "two" : "single");
       const side = n % 2 ? 1 : -1;
       PLAN.push({ id: n + 1, a: F(tc) - (k === 0 ? 2 : 0), b: F(end) - 2, ch: L.chapter, line: L.i, who: L.who, other: cast.includes(other) ? other : "pin",
@@ -65,7 +68,7 @@ export const PLAN: Plan[] = [];
     prevWho = L.who === "pin" ? prevWho : L.who;
   }
   // hold shots longer: merge short shots into the previous one (same chapter), so the camera can move through the scene
-  const MINF = Math.round(3.4 * FPS), MAXF = Math.round(8 * FPS);
+  const MINF = Math.round(2.2 * FPS), MAXF = Math.round(5 * FPS);
   for (let k = 1; k < PLAN.length; ) {
     const a = PLAN[k - 1], c = PLAN[k], da = a.b - a.a, dc = c.b - c.a;
     if (a.ch === c.ch && (da < MINF || dc < MINF * 0.7) && da + dc <= MAXF) {
@@ -80,32 +83,60 @@ export const PLAN: Plan[] = [];
   for (let k = 1; k < PLAN.length; k++) PLAN[k].a = PLAN[k - 1].b; // gapless
 }
 
-// ---------------- captions (punch words) ----------------
-type Cap = { a: number; b: number; text: string; col: string };
-const find = (line: string, word: string, nth = 0): number => {
+// ---------------- captions ----------------
+export type Icon = "flag" | "bird" | "tea" | "notes" | "mountain" | "sound" | "hourglass" | "phone" | "down" | "shield" | "school" | "party" | "laugh" | "pin";
+type Cap = { a: number; b: number; text: string; col: string; icon?: Icon };
+const norm = (w: string) => w.toLowerCase().replace(/[^a-z0-9]/g, "");
+/** time of the first spoken word (whisper timing) in the line that contains `line`, matching any of `words` */
+const find = (line: string, words: string[]): number => {
   const L = LINES.find((l) => l.text.toLowerCase().includes(line.toLowerCase()));
   if (!L) { console.warn("caption line not found", line); return -1; }
-  const ws = L.words.filter((w) => w[2].toLowerCase().replace(/[^a-z0-9-]/g, "").includes(word.toLowerCase()));
-  return ws[nth]?.[0] ?? (console.warn("caption word not found", line, word), -1);
+  const w = L.words.find((x) => words.some((k) => norm(x[2]).startsWith(norm(k))));
+  return w ? w[0] : (console.warn("caption word not found", line, words), L.start + 0.2);
 };
-const cap = (line: string, word: string, text: string, col = "#ffffff", dur = 1.1, nth = 0): Cap | null => {
-  const t = find(line, word, nth);
-  return t < 0 ? null : { a: t - 1 / FPS, b: t + dur, text, col };
+const cap = (line: string, words: string[], text: string, icon: Icon, col = "#ffd23f", dur = 1.5): Cap | null => {
+  const t = find(line, words);
+  return t < 0 ? null : { a: t - 1 / FPS, b: t + dur, text, col, icon };
 };
 const Y = "#ffd23f", WH = "#ffffff";
+/** punch captions: big word + icon on the exact spoken word */
 export const CAPS: Cap[] = [
-  cap("three hundred", "ninety", "393 PEOPLE", Y, 1.6),
-  cap("not a language", "language", "A LANGUAGE?", WH, 1.2),
-  cap("every syllable", "note", "1 SOUND = 1 NOTE", Y, 1.4),
-  cap("half a mile", "half", "½ MILE", Y, 1.4),
-  cap("four hundred", "hundred", "400 YEARS OLD", Y, 1.5),
-  cap("fewer people", "fewer", "FEWER WHISTLERS", WH, 1.4),
-  cap("both sides", "both", "BOTH BRAIN SIDES", Y, 1.6),
-  cap("nineteen ninety", "ninety", "SINCE 1997", Y, 1.5),
-  cap("dinner", "dinner", "DINNER.", WH, 1.5),
-  ...LINES.filter((l) => l.whistle).map((l) => ({ a: l.start, b: l.start + l.dur, text: "♪  ♪  ♪", col: Y })),
+  cap("Did you know", ["Turkey"], "TURKEY", "flag", WH, 1.2),
+  cap("Did you know", ["whistl"], "TALK BY WHISTLING?", "bird", Y, 1.6),
+  cap("come for tea", ["tea"], "“COME FOR TEA!”", "tea", WH, 1.4),
+  cap("called", ["bird"], "KUŞKÖY = BIRD VILLAGE", "bird", Y, 1.8),
+  cap("Every Turkish word", ["whistle"], "WORD → WHISTLE", "notes", Y, 1.4),
+  cap("Even your name", ["name"], "EVEN YOUR NAME", "notes", WH, 1.2),
+  cap("so steep", ["hour"], "1 HOUR WALK", "mountain", Y, 1.5),
+  cap("half a mile", ["half"], "½ MILE+", "sound", Y, 1.6),
+  cap("four hundred", ["four", "400"], "400 YEARS", "hourglass", Y, 1.6),
+  cap("everyone has a phone", ["phone"], "PHONES", "phone", WH, 1.2),
+  cap("stopped whistling", ["stopped"], "FEWER WHISTLERS", "down", WH, 1.5),
+  cap("UNESCO", ["UNESCO", "unesco"], "UNESCO 2017", "shield", Y, 1.9),
+  cap("kids learn", ["school"], "TAUGHT AT SCHOOL", "school", Y, 1.4),
+  cap("kids learn", ["festival"], "FESTIVAL EVERY YEAR", "party", Y, 1.6),
+  cap("talk too much", ["much"], "YOU TALK TOO MUCH.", "laugh", WH, 1.8),
+  ...LINES.filter((l) => l.whistle).map((l) => ({ a: l.start, b: l.start + l.dur, text: "♪  ♪  ♪", col: Y, icon: "bird" as Icon })),
 ].filter((c): c is Cap => !!c);
-export const whistling = (t: number) => LINES.some((l) => l.whistle && t >= l.start && t < l.start + l.dur);
+export const whistling = (t: number, who?: string) => LINES.some((l) => l.whistle && (!who || l.who === who) && t >= l.start && t < l.start + l.dur);
 export const capAt = (t: number) => CAPS.find((c) => t >= c.a && t < c.b);
+/** subtitles: every spoken word, in chunks of up to 3 words (break on punctuation); the word being said is yellow */
+export type Sub = { a: number; b: number; words: Word[] };
+export const SUBS: Sub[] = (() => {
+  const out: Sub[] = [];
+  for (const L of LINES) {
+    if (L.whistle || !L.words.length) continue;
+    let cur: Word[] = [];
+    const FIX: Record<string, string> = { hassan: "Hasan", "hassan,": "Hasan,", khush: "Kuşköy.", "khoi.": "" };
+    const ws = L.words.map((w) => [w[0], w[1], FIX[w[2].toLowerCase()] ?? w[2]] as Word).filter((w) => w[2] !== "");
+    ws.forEach((w, k) => {
+      cur.push(w);
+      const end = k === ws.length - 1 || cur.length >= 3 || /[.,!?:]$/.test(w[2]);
+      if (end) { out.push({ a: cur[0][0] - 0.04, b: k === ws.length - 1 ? L.start + L.dur + 0.15 : ws[k + 1][0] - 0.04, words: cur }); cur = []; }
+    });
+  }
+  return out;
+})();
+export const subAt = (t: number) => SUBS.find((s) => t >= s.a && t < s.b);
 /** kicks (image shakes) on the biggest punch words */
-export const KICKS: [number, number][] = CAPS.filter((c) => /393|½|400|BOTH|1997/.test(c.text)).map((c) => [c.a + 1 / FPS, 0.8]);
+export const KICKS: [number, number][] = CAPS.filter((c) => /TURKEY|BIRD VILLAGE|½|400|2017/.test(c.text)).map((c) => [c.a + 1 / FPS, 0.8]);

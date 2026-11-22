@@ -37,7 +37,7 @@ export const zoom = (pos: V3, look: V3, fov: number, k: number, rest: Partial<Ca
 export const rolled = (s: (f: number) => Shot, roll: number) => (f: number): Shot => ({ ...s(f), roll });
 
 // ---------------- shots (generated from plan.ts) ----------------
-import { PLAN, SETS, TOTAL as PT, posOf, KICKS as KK } from "./plan";
+import { PLAN, SETS, TOTAL as PT, posOf, presentIn, KICKS as KK } from "./plan";
 export const TOTAL = PT;
 export const FLASH_AT = -100;
 export const SHOTS: ShotDef[] = PLAN.map((p) => ({ id: p.id, a: p.a, b: p.b, light: p.light, tau: (t: number) => t }));
@@ -63,7 +63,8 @@ const frame = (id: number, f: number): Shot => {
     const lat = Math.abs((S[0] - O[0]) * rx + (S[2] - O[2]) * rz), d = Math.max(5.0, (lat + 1.5) / 0.36);
     pos = [look[0] + sx * d, 0.95, look[2] + sz * d];
   } else {
-    look = [set.c[0] + rx * 0.6 * side, 1.4, set.c[1] + rz * 0.6 * side];
+    const cast = presentIn(p.ch).map((w) => posOf(p.ch, w)), cx = cast.reduce((a, q) => a + q[0], 0) / cast.length, cz = cast.reduce((a, q) => a + q[2], 0) / cast.length;
+    look = [cx, 1.4, cz];
     pos = [look[0] + sx * 13, 1.3, look[2] + sz * 13]; fov = 42; k = pr(0.18);
   }
   // continuous camera move through the shot (crane down over the roofs / orbit / lateral track)
