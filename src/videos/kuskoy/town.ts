@@ -134,10 +134,10 @@ export const buildTown = (root: THREE.Object3D) => {
   for (const sx of [-1, 1]) { for (let z = -140; z < 140; z += 9.6) if (!corridor(sx * 6, z) && !corridor(sx * 6, z + 9.6)) fence(b, sx * 4.9, D0, z, z + 9.6); for (let z = -130; z < 130; z += 22 + r() * 12) { if (clear(sx * 12, z)) continue; if (r() < 0.5) woodpile(b, sx * (6.4 + r()), D0, z, r()); else hay(b, sx * (10 + r() * 3), D0, z, 0.8 + r() * 0.5); } }
   for (const [x, z] of [[-11, 4], [11, -12], [-12, -48], [12, 24], [-11, 40], [13, -70]] as const) laundry(b, x, D0, z - 2.2, z + 2.2, Math.abs(x * z));
   for (const [x, z] of [[-12, MARKET_Z - 7], [12, MARKET_Z + 6], [-13, MARKET_Z + 7], [13, MARKET_Z - 6], [-9, 12], [9, -20]] as const) rack(b, x, D0, z, x < 0 ? 0 : Math.PI);
-  for (let i = 0; i < 60; i++) { const sx = r() < 0.5 ? -1 : 1; flowers(b, sx * (5.4 + r() * 9), D0, (r() - 0.5) * 240, i); }
+  for (let i = 0; i < 60; i++) { const sx = r() < 0.5 ? -1 : 1, fx = sx * (5.4 + r() * 9), fz = (r() - 0.5) * 240; if (!corridor(fx, fz)) flowers(b, fx, D0, fz, i); }
   for (let i = 0; i < 260; i++) { const x = (r() - 0.5) * 8.4, z = (r() - 0.5) * 300, s = 0.12 + r() * 0.2; b.add(new THREE.SphereGeometry(1, 6, 4), mat("pebble", ["#9a8f80", "#b3a894", "#7d7466"][i % 3]), new THREE.Matrix4().compose(V(x, D0 + 0.01, z), new THREE.Quaternion(), V(s, s * 0.35, s * 0.8))); }
   for (const S of Object.values(SETS)) { if (Math.abs(Math.sin(S.az)) < 0.5) continue; const sd = Math.sign(Math.sin(S.az));
-    for (let i = 0; i < 14; i++) flowers(b, sd * (4.8 + r() * 2.2), D0, S.c[1] + (r() - 0.5) * 16, 500 + i);
+    for (let i = 0; i < 14; i++) flowers(b, -sd * (4.8 + r() * 2.2), D0, S.c[1] + (r() - 0.5) * 16, 500 + i);
     for (let i = 0; i < 6; i++) hazel(b, sd * (9 + r() * 12), S.c[1] + (r() < 0.5 ? -1 : 1) * (6 + r() * 3), 0.8 + r() * 0.4, 600 + i); }
   // steep green hills close around the village + far misty ridges
   const hill = new THREE.SphereGeometry(1, 26, 12, 0, Math.PI * 2, 0, Math.PI / 2);

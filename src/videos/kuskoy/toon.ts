@@ -470,9 +470,12 @@ const BUILD: Record<Build, { a: number; torso: number; legs: number; tw: number 
   kid: { a: 112, torso: 0.85, legs: 1.0, tw: 0.72 },
 };
 
+export type Gesture = "point" | "shrug" | "cross" | "mouth" | "up";
 export type FrontOpts = {
   phase?: number; expr?: Expr; mode?: "march" | "stroll" | "stand" | "sit" | "fall"; look?: number; blink?: boolean | number; lift?: number;
   prop?: Prop; tilt?: number; headTilt?: number; wave?: number;
+  /** acting: arm gesture and how far into it (0 = arms hang, 1 = full pose) */
+  gesture?: Gesture; g?: number;
   /** canvas angle the key light comes FROM (painted crescent + thick outline side) */
   light?: number; facing?: -1 | 0 | 1; seed?: number;
   /** talking: mouth open on this frame (the eyes keep the expression's own eyes) */
@@ -485,7 +488,7 @@ const footStroke = (p: Pen, a: P2, b: P2, w: number, col: string) => {
 };
 
 export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
-  const { phase = 0, expr = "neutral", mode = "march", look = 0, blink = false, lift = 60, prop = null, tilt = 0, headTilt = 0, wave,
+  const { phase = 0, expr = "neutral", mode = "march", look = 0, blink = false, lift = 60, prop = null, tilt = 0, headTilt = 0, wave, gesture, g = 1,
     light = DEF_LIGHT, facing = 0, seed = 1 } = opts;
   const Bd = BUILD[o.build ?? "adult"], skin = o.skin ?? SKIN, two = Math.PI * 2, lid = lidOf(blink);
   const H = headBlob(seed, Bd.a, facing), W = 2 * H.a, HH = 2 * H.b, u = W / 100;
@@ -552,7 +555,21 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
   const arms: Arm[] = [];
   if (mode === "sit") for (const side of [-1, 1]) arms.push({ pts: [sh(side), [tcx + side * (1.1 * T.a + 6 * u), sh(side)[1] + 0.4 * HH], [tcx + side * (1.2 * T.a + 10 * u), torsoBot + 0.04 * HH]], front: false });
   else if (mode === "fall") for (const side of [-1, 1]) arms.push({ pts: [sh(side), [tcx + side * (1.15 * T.a + 12 * u), sh(side)[1] - 0.25 * HH], [tcx + side * (1.3 * T.a + 24 * u), sh(side)[1] - 0.68 * HH]], front: false });
-  else {
+  else if (gesture && g > 0.01) {
+    const k = g * g * (3 - 2 * g), fs = facing || 1;
+    const blend = (side: number, pose: [P2, P2, P2]): [P2, P2, P2] => { const h = hang(side, 0); return [h[0], lerp2(h[1], pose[1], k), lerp2(h[2], pose[2], k)]; };
+    for (const side of [-1, 1]) {
+      const S = sh(side), act = gesture === "point" || gesture === "mouth" ? side === fs : true;
+      if (!act) { arms.push({ pts: hang(side, 0), front: false }); continue; }
+      let pose: [P2, P2, P2];
+      if (gesture === "point") pose = [S, [tcx + side * (1.3 * T.a + 16 * u), S[1] - 0.02 * HH], [tcx + side * (1.75 * T.a + 38 * u), S[1] - 0.22 * HH]];
+      else if (gesture === "shrug") pose = [S, [tcx + side * (1.3 * T.a + 12 * u), S[1] + 0.32 * HH], [tcx + side * (1.55 * T.a + 22 * u), S[1] - 0.06 * HH]];
+      else if (gesture === "cross") pose = [S, [tcx + side * (1.08 * T.a + 2 * u), S[1] + 0.42 * HH], [tcx - side * 0.42 * T.a, S[1] + 0.3 * HH]];
+      else if (gesture === "mouth") pose = [S, [tcx + side * (1.25 * T.a + 12 * u), S[1] + 0.12 * HH], [300 + side * 0.5 * W, chin - 0.28 * HH]];
+      else pose = [S, [tcx + side * (1.25 * T.a + 16 * u), S[1] - 0.32 * HH], [tcx + side * (1.15 * T.a + 24 * u), S[1] - 0.9 * HH]];
+      arms.push({ pts: blend(side, pose), front: gesture === "cross" });
+    }
+  } else {
     arms.push({ pts: prop === "shako" ? hang(-1, 0) : hang(-1, -sw), front: false });
     if (rifle) {
       const G = lerp2(R0, R1, 0.1);

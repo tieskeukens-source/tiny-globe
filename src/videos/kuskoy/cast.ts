@@ -4,7 +4,7 @@
 // the sun, painted crescent in the drawing); standing ones get a soft multiply contact blob. Effects are unlit cards.
 // Cards, effects and blobs live on the NOINK layer so the world ink pass never outlines their quads.
 import * as THREE from "three";
-import { Pen, bodyFront, bodySide, fxShadow, fxContact, fxArcs, fxNote, Outfit, Expr, FrontOpts, SideOpts, HOST, FARMER, SKEPTIC, VILL_A, VILL_B, VILL_C, VILL_D, INK } from "./toon";
+import { Pen, bodyFront, bodySide, fxShadow, fxContact, fxArcs, fxNote, Gesture, Outfit, Expr, FrontOpts, SideOpts, HOST, FARMER, SKEPTIC, VILL_A, VILL_B, VILL_C, VILL_D, INK } from "./toon";
 import { FPS, D0, V3, clamp01, smooth } from "./story";
 import { LINES, PLAN, SETS, posOf, presentIn, FEST_Z, MARKET_Z, whistling, axes } from "./plan";
 import { LIGHTS } from "./lights";
@@ -240,16 +240,56 @@ const exprOf = (who: string, t: number): Expr => {
 
 // ---------------- background twin pairs ----------------
 const PAIRS: Outfit[] = [VILL_A, VILL_B, VILL_C, VILL_D];
-type Pair = { x: number; z: number; pal: number };
+type Pair = { x: number; z: number; pal: number; lat: number };
 const pairsFor = (ch: number): Pair[] => {
   const S = SETS[ch], r = (k: number) => hh(ch * 97 + k, 3), out: Pair[] = [], A = axes(S.az);
   for (let k = 0; k < 9; k++) {   // villagers along the lane / square behind the cast, left and right
     const lat = (k % 2 ? 1 : -1) * (3.2 + r(k) * 11), depth = 1.2 + r(k + 40) * 2.6;
-    out.push({ x: S.c[0] + A.r[0] * lat - A.f[0] * depth, z: S.c[1] + A.r[1] * lat - A.f[1] * depth, pal: Math.floor(r(k + 80) * PAIRS.length) });
+    out.push({ x: S.c[0] + A.r[0] * lat - A.f[0] * depth, z: S.c[1] + A.r[1] * lat - A.f[1] * depth, pal: Math.floor(r(k + 80) * PAIRS.length), lat });
   }
   return out;
 };
 const PAIR_CACHE: Record<number, Pair[]> = {};
+
+
+// ---------------- acting: gestures + emotions on the exact words ----------------
+type Cue = { who: string; line: string; word: string; until?: string; gesture?: Gesture; expr?: Expr; hop?: boolean };
+const CUES: Cue[] = [
+  { who: "pin", line: "This Turkish village", word: "three", until: "people", gesture: "point", hop: true },
+  { who: "pin", line: "This Turkish village", word: "valley", until: "phone", gesture: "up" },
+  { who: "skeptic", line: "This Turkish village", word: "phone", expr: "shock" },
+  { who: "skeptic", line: "Impossible", word: "Impossible", until: "language", gesture: "cross", expr: "stern", hop: true },
+  { who: "farmer", line: "It is Turkish", word: "syllable", until: "note", gesture: "point" },
+  { who: "pin", line: "Those notes", word: "half", until: "mile", gesture: "point", hop: true },
+  { who: "skeptic", line: "Those notes", word: "half", until: "mile", expr: "shock" },
+  { who: "skeptic", line: "Why not just shout", word: "Why", until: "shout", gesture: "shrug", expr: "nervous" },
+  { who: "farmer", line: "A shout dies", word: "dies", until: "hills", gesture: "shrug" },
+  { who: "farmer", line: "A shout dies", word: "whistle", until: "not", gesture: "mouth", expr: "grin" },
+  { who: "pin", line: "Four hundred years", word: "Four", until: "ago", gesture: "up", hop: true },
+  { who: "skeptic", line: "But today", word: "today", until: "phone", gesture: "point", expr: "smile" },
+  { who: "farmer", line: "And now fewer", word: "Yes", until: "whistle", expr: "nervous" },
+  { who: "pin", line: "You see", word: "both", until: "one", gesture: "up", expr: "grin", hop: true },
+  { who: "skeptic", line: "You see", word: "both", until: "one", expr: "shock" },
+  { who: "pin", line: "So the village", word: "festival", until: "seven", gesture: "up" },
+  { who: "pin", line: "What did he say", word: "What", until: "say", gesture: "shrug", expr: "nervous" },
+  { who: "farmer", line: "Dinner", word: "Dinner", gesture: "up", expr: "laugh", hop: true },
+  { who: "pin", line: "Dinner", word: "Dinner", expr: "laugh" },
+];
+const wordT = (line: string, word: string, end = false): number => {
+  const L = LINES.find((l) => l.text.toLowerCase().includes(line.toLowerCase()));
+  const w = L?.words.find((x) => x[2].toLowerCase().replace(/[^a-z]/g, "").startsWith(word.toLowerCase()));
+  return w ? (end ? w[1] : w[0]) : -1;
+};
+const CUE_T = CUES.map((c) => { const a = wordT(c.line, c.word) - 0.12; const b = c.until ? wordT(c.line, c.until, true) + 0.35 : a + 1.3; return { ...c, a, b: Math.max(b, a + 0.9) }; }).filter((c) => c.a > 0);
+/** active cue for who at t: gesture amount eases in/out over ~0.2 s */
+const cueOf = (who: string, t: number) => {
+  for (const c of CUE_T) if (c.who === who && t >= c.a && t < c.b) return { c, g: Math.min(1, (t - c.a) / 0.2, (c.b - t) / 0.2) };
+  return null;
+};
+const hopOf = (who: string, t: number) => {
+  for (const c of CUE_T) if (c.who === who && c.hop && t >= c.a && t < c.a + 0.45) { const u = (t - c.a) / 0.45; return 0.16 * Math.sin(Math.PI * u); }
+  return 0;
+};
 
 export const stage = (id: number, t: number, cam: CamInfo): Stage => {
   const out: Stage = { places: [], fx: [] };
@@ -262,9 +302,12 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
     const mySide = (x - cam.pos.x) * cam.right.x + (z - cam.pos.z) * cam.right.z;
     const talk = talking(who, t);
     const facing = (who === spk ? (spkSide > 0 ? -1 : 1) : spkSide > mySide ? 1 : -1) as -1 | 1;
-    const fo: FrontOpts = { phase: 0, expr: exprOf(who, t), mode: "stand", look: 0, blink: lidAt(t, i), lift: 0, tilt: 0, facing, mouthOpen: mouthOf(who, t) };
+    const cu = cueOf(who, t), wh = who === "farmer" && whistling(t);
+    const expr = wh ? "whistle" : cu?.c.expr && !(talking(who, t) && cu.c.expr === "laugh" && false) ? cu.c.expr : exprOf(who, t);
+    const fo: FrontOpts = { phase: 0, expr, mode: "stand", look: 0, blink: lidAt(t, i), lift: 0, tilt: 0, facing, mouthOpen: mouthOf(who, t),
+      gesture: wh ? "mouth" : cu?.c.gesture, g: wh ? 1 : cu?.g ?? 0 };
     const pl = person(cam, { i, o: OUTFIT[who], okey: who }, x, 0, z, { side: false, mirror: false }, fo, {});
-    pl.y = talk ? 0.012 * Math.abs(Math.sin(t * 11 + i)) : 0;
+    pl.y = (talk ? 0.012 * Math.abs(Math.sin(t * 11 + i)) : 0) + hopOf(who, t);
     pl.roll = talk ? 0.025 * Math.sin(t * 2.4 + i) : 0;
     out.places.push(pl);
     blob(out, x, 0, z);
@@ -279,12 +322,16 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
   });
   if (!PAIR_CACHE[ch]) PAIR_CACHE[ch] = pairsFor(ch);
   PAIR_CACHE[ch].forEach((p, k) => {
-    for (const s of [0]) {
-      const x = p.x, view = { side: false, mirror: false };
-      const fo: FrontOpts = { phase: 0, expr: k % 3 ? "grin" : "smile_closed", mode: "stand", look: 0, blink: lidAt(t, 100 + k), lift: 0, tilt: 0, facing: k % 2 ? 1 : -1 };
-      const pl = person(cam, { i: 100 + k, o: PAIRS[p.pal], okey: `pair${p.pal}` }, x, 0, p.z, view, fo, {});
+    {
+      // every other villager strolls along the lane (wraps far outside the frame), the rest stand and chat
+      const walk = k % 2 === 0, A = axes(SETS[ch].az), dir = k % 4 === 0 ? 1 : -1, v = 0.9 + 0.25 * (k % 3);
+      const L = walk ? ((((p.lat + dir * v * t) + 18) % 36) + 36) % 36 - 18 : p.lat, d = L - p.lat;
+      const x = p.x + A.r[0] * d, z = p.z + A.r[1] * d, view = { side: false, mirror: false };
+      const fo: FrontOpts = { phase: walk ? (t * 1.7 + k * 0.3) % 1 : 0, expr: k % 3 ? "grin" : "smile_closed", mode: walk ? "stroll" : "stand", look: 0, blink: lidAt(t, 100 + k),
+        lift: walk ? 60 : 0, tilt: 0, facing: (walk ? dir : k % 4 === 1 ? 1 : -1) as -1 | 1, mouthOpen: !walk && Math.floor(t * 4 + k) % 3 === 0 };
+      const pl = person(cam, { i: 100 + k, o: PAIRS[p.pal], okey: `pair${p.pal}` }, x, 0, z, view, fo, {});
       out.places.push(pl);
-      blob(out, x, 0, p.z, 0.95, 0.9);
+      blob(out, x, 0, z, 0.95, 0.9);
     }
   });
   return out;
