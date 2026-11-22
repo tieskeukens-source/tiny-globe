@@ -54,7 +54,7 @@ export const buildTown = (root: THREE.Object3D) => {
   const b = new Batch(), r = rng(21);
   const pick = <T,>(a: T[]) => a[Math.floor(r() * a.length) % a.length];
   const grass = lam("kgrass", () => ({ map: grassHD(), color: "#9ad45a" }));
-  const lane = lam("klane", () => ({ color: "#8c7a5e" }));
+  const lane = lam("klane", () => ({ color: "#6d6354" }));
   const flat = (x0: number, x1: number, z0: number, z1: number, u: number, v: number, dy: number) => {
     const y = D0 + dy, g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.Float32BufferAttribute([x0, y, z1, x1, y, z1, x1, y, z0, x0, y, z1, x1, y, z0, x0, y, z0], 3));
