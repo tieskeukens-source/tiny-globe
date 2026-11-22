@@ -9,7 +9,7 @@ export const MARKET_Z = -32;    // centre of the market square
 export const FEST_Z = 62;       // festival square, stage at the far end
 
 export type Word = [number, number, string];
-export type Line = { i: number; who: string; chapter: number; text: string; start: number; dur: number; words: Word[] };
+export type Line = { i: number; f?: number; whistle?: boolean; who: string; chapter: number; text: string; start: number; dur: number; words: Word[] };
 export const LINES = (TL as unknown as { lines: Line[] }).lines;
 export const VOICE_TOTAL = (TL as unknown as { total: number }).total;
 export const TOTAL = Math.round(VOICE_TOTAL * FPS);
@@ -91,7 +91,9 @@ export const CAPS: Cap[] = [
   cap("both sides", "both", "BOTH BRAIN SIDES", Y, 1.6),
   cap("nineteen ninety", "ninety", "SINCE 1997", Y, 1.5),
   cap("dinner", "dinner", "DINNER.", WH, 1.5),
+  ...LINES.filter((l) => l.whistle).map((l) => ({ a: l.start, b: l.start + l.dur, text: "♪  ♪  ♪", col: Y })),
 ].filter((c): c is Cap => !!c);
+export const whistling = (t: number) => LINES.some((l) => l.whistle && t >= l.start && t < l.start + l.dur);
 export const capAt = (t: number) => CAPS.find((c) => t >= c.a && t < c.b);
 /** kicks (image shakes) on the biggest punch words */
 export const KICKS: [number, number][] = CAPS.filter((c) => /393|½|400|BOTH|1997/.test(c.text)).map((c) => [c.a + 1 / FPS, 0.8]);

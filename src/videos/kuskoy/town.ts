@@ -54,7 +54,7 @@ export const buildTown = (root: THREE.Object3D) => {
   const b = new Batch(), r = rng(21);
   const pick = <T,>(a: T[]) => a[Math.floor(r() * a.length) % a.length];
   const grass = lam("kgrass", () => ({ map: grassHD(), color: "#9ad45a" }));
-  const lane = lam("klane", () => ({ map: earthHD(), color: "#c9b48a" }));
+  const lane = lam("klane", () => ({ color: "#8c7a5e" }));
   const flat = (x0: number, x1: number, z0: number, z1: number, u: number, v: number, dy: number) => {
     const y = D0 + dy, g = new THREE.BufferGeometry();
     g.setAttribute("position", new THREE.Float32BufferAttribute([x0, y, z1, x1, y, z1, x1, y, z0, x0, y, z1, x1, y, z0, x0, y, z0], 3));
@@ -99,8 +99,8 @@ export const buildTown = (root: THREE.Object3D) => {
   const hill = new THREE.SphereGeometry(1, 26, 12, 0, Math.PI * 2, 0, Math.PI / 2);
   const hm = [mat("hillA", "#4f9a3a"), mat("hillB", "#3f8a35"), mat("hillC", "#63a845")];
   for (let i = 0; i < 34; i++) {
-    const a = (i / 34) * Math.PI * 2 + r() * 0.15, d = 140 + r() * 120, s = 50 + r() * 50;
-    b.add(hill, hm[i % 3], new THREE.Matrix4().compose(V(Math.cos(a) * d, D0 - 2, Math.sin(a) * d), new THREE.Quaternion(), V(s * 1.2, 45 + r() * 45, s)));
+    const a = (i / 34) * Math.PI * 2 + r() * 0.15, d = 230 + r() * 170, s = 70 + r() * 60;
+    b.add(hill, hm[i % 3], new THREE.Matrix4().compose(V(Math.cos(a) * d, D0 - 2, Math.sin(a) * d), new THREE.Quaternion(), V(s * 1.4, 28 + r() * 30, s)));
   }
   for (let i = 0; i < 200; i++) {
     const a = r() * Math.PI * 2, d = 110 + r() * 150;

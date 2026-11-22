@@ -50,7 +50,7 @@ export const layersAt = (f: number): { id: number; alpha: number }[] => [{ id: s
 const sub = (a: V3, b: V3): V3 => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 const frame = (id: number, f: number): Shot => {
   const p = PLAN[id - 1], S = posOf(p.ch, p.who), O = posOf(p.ch, p.other), set = SETS[p.ch];
-  const sx = Math.sin(p.az), sz = Math.cos(p.az), rx = sz, rz = -sx, side = p.seed % 2 ? 1 : -1;
+  const sx0 = Math.sin(p.az), sx = p.kind === "two" ? Math.max(-0.3, Math.min(0.3, sx0)) : sx0, sz = (Math.cos(p.az) < 0 ? -1 : 1) * Math.sqrt(1 - sx * sx), rx = sz, rz = -sx, side = p.seed % 2 ? 1 : -1;
   const lim = set.clampX ?? 5.0;
   const cl = (v: V3): V3 => [Math.max(-lim, Math.min(lim, v[0])), v[1], v[2]];
   if (p.kind === "single") {

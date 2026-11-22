@@ -6,7 +6,7 @@
 import * as THREE from "three";
 import { Pen, bodyFront, bodySide, fxShadow, fxContact, Outfit, Expr, FrontOpts, SideOpts, HOST, FARMER, SKEPTIC, VILL_A, VILL_B, VILL_C, VILL_D, INK } from "./toon";
 import { FPS, D0, V3, clamp01, smooth } from "./story";
-import { LINES, PLAN, SETS, posOf, presentIn, FEST_Z, MARKET_Z } from "./plan";
+import { LINES, PLAN, SETS, posOf, presentIn, FEST_Z, MARKET_Z, whistling } from "./plan";
 import { LIGHTS } from "./lights";
 import { NOINK } from "./ink";
 import { cardShade, blobMaterial, CARD_K } from "./cardshade";
@@ -227,6 +227,7 @@ const MOOD: Record<string, [Expr, Expr, Expr]> = { // idle, talk-closed, talk-op
   pin: ["smile_closed", "smile_closed", "grin"], farmer: ["smile_closed", "smile_closed", "grin"], skeptic: ["neutral", "neutral", "stern"],
 };
 const exprOf = (who: string, t: number): Expr => {
+  if (who === "farmer" && whistling(t)) return "whistle";
   const L = LINES.find((l) => l.who === who && t >= l.start - 0.1 && t < l.start + l.dur + 0.3);
   if (who === "pin" && L) {
     if (L.text.startsWith("Whoa") && t < L.start + 1.1) return "shock";
