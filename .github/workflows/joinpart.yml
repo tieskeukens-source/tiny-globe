@@ -1,0 +1,25 @@
+name: joinpart
+on:
+  workflow_dispatch:
+    inputs:
+      run_id: {required: true}
+      out: {default: "igbo_deel"}
+      n: {default: "20"}
+      audio: {default: "public/igbo/mix.mp3"}
+jobs:
+  join:
+    runs-on: ubuntu-latest
+    permissions: {contents: write, actions: read}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: {path: parts, merge-multiple: true, run-id: "${{ inputs.run_id }}", github-token: "${{ secrets.GITHUB_TOKEN }}"}
+      - run: |
+          sudo apt-get install -y ffmpeg >/dev/null
+          ls parts | sort | head -${{ inputs.n }} | sed "s#^#file 'parts/#; s#\$#'#" > list.txt
+          ffmpeg -v error -f concat -safe 0 -i list.txt -i ${{ inputs.audio }} -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 192k -shortest final.mp4
+          ls -la final.mp4
+          mkdir /tmp/r && split -b 90M -d final.mp4 /tmp/r/${{ inputs.out }}.mp4.part
+          git config user.name render-bot; git config user.email render@bot
+          git checkout --orphan rnew && git rm -rq --cached . && git clean -fdqx -e parts
+          rm -rf parts; mkdir -p r3d && cp /tmp/r/* r3d/ && git add r3d && git commit -qm "render ${{ inputs.out }}" && git push -f origin rnew:renderspart
