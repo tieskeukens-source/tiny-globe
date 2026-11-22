@@ -111,10 +111,7 @@ export const KuskoyVideo: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: "#cfe3c0" }}>
       {layersAt(f).map((l, i) => <ShotView key={i ? "over" : "base"} id={l.id} kit={kit} alpha={l.alpha} />)}
-      <Subs f={f} />
-      <Punch f={f} />
-      <Badge f={f} />
-      <TitleCard f={f} />
+      {(getInputProps() as { overlay?: boolean }).overlay !== false && <><Subs f={f} /><Punch f={f} /><Badge f={f} /><TitleCard f={f} /></>}
       {(getInputProps() as { audio?: boolean }).audio !== false && <Audio src={staticFile("kuskoy/mix.mp3")} />}
     </AbsoluteFill>
   );
