@@ -7,12 +7,12 @@ for ln in open("voices/igboshort/script.md",encoding="utf8"):
     if ln.startswith("---"): break
     m=re.match(r"^(PIN|TAIWO|KEHINDE|MAMA|CHIEF|DOCTOR): (.+)$",ln.strip())
     if m: LINES.append((m.group(1).lower(),m.group(2).replace("…","...").strip(),chap))
-VO={"pin":("en-US-AndrewNeural","+4%","+0Hz"),
-    "taiwo":("en-NG-AbeoNeural","+0%","+0Hz"),
-    "kehinde":("en-NG-AbeoNeural","+0%","+10Hz"),
+VO={"pin":("en-US-AndrewNeural","+16%","+0Hz"),
+    "taiwo":("en-NG-AbeoNeural","+8%","+0Hz"),
+    "kehinde":("en-NG-AbeoNeural","+8%","+10Hz"),
     "mama":("en-NG-EzinneNeural","+0%","+0Hz"),
-    "chief":("en-NG-AbeoNeural","-8%","-18Hz"),
-    "doctor":("en-ZA-LukeNeural","+0%","+0Hz")}
+    "chief":("en-NG-AbeoNeural","+2%","-18Hz"),
+    "doctor":("en-ZA-LukeNeural","+10%","+0Hz")}
 async def one(i,who,text):
     v,r,p=VO[who]
     for a in range(8):
