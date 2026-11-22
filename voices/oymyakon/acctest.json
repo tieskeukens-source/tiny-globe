@@ -1,12 +1,15 @@
-{"nikolai": {"ref_en": "Come in, come in, it is warm inside. Here in Oymyakon we drink hot tea, we keep the stove burning, and we never complain about the cold.",
+{
+ "nikolai": {
+  "ref_en": "Come in, come in, it is warm inside. Here in Oymyakon we drink hot tea, we keep the stove burning, and we never complain about the cold.",
   "ref_native": "Заходите, заходите, внутри тепло. Здесь, в Оймяконе, мы пьём горячий чай, топим печку и никогда не жалуемся на холод.",
   "edge": "ru-RU-DmitryNeural",
-  "design": "An old Russian village grandfather, about 70, speaking English with a heavy Russian accent: rolled R, hard consonants, Russian vowels. Deep, warm, dry humour, slow and calm.",
-  "test": ["And the toilet? Outside.", "Be quick.", "You missed it. It was on Tuesday."]},
- "sardaana": {"ref_en": "Good morning! I am Sardaana, I am nine years old, and I walk to school every day, even when it is very, very cold outside.",
-  "edge": "en-US-AnaNeural",
-  "design": "A cheerful nine-year-old girl from Siberia speaking English with a light Russian accent. Bright, proud, energetic child voice, a bit cheeky.",
-  "test": ["I go every day!", "Only when it's colder than minus fifty-two."]},
- "tourist": {"ref_en": "Wait, what? You people really live out here? Come on, that sounds totally crazy to me.",
-  "design": "An American man in his thirties, skeptical and surprised, expressive and slightly sarcastic, casual tone.",
-  "test": ["Outside?! At minus fifty?"]}}
+  "design": "An old Russian grandfather from Siberia, about 70, who speaks broken English with a VERY thick Russian accent: strongly rolled R, hard Russian consonants, Russian vowel sounds, flat Russian intonation, no articles. Deep, gravelly, slow, deadpan humour.",
+  "test": [
+   "And the toilet? Outside.",
+   "Be quick.",
+   "You missed it. It was on Tuesday."
+  ],
+  "native_lang": "Russian",
+  "design_native": "Пожилой сибирский дедушка, около семидесяти лет. Низкий, хрипловатый, спокойный голос, сухой юмор, говорит медленно."
+ }
+}

@@ -19,12 +19,16 @@ asyncio.run(prep())
 vd=Qwen3TTSModel.from_pretrained("Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign",device_map="cpu",dtype=torch.float32)
 for who,c in C.items():
     torch.manual_seed(3); w,sr=vd.generate_voice_design(text=c["ref_en"],language="English",instruct=c["design"]); sf.write(f"{O}/ref_{who}_A.wav",w[0],sr); print("design",who,flush=True)
+for who,c in C.items():
+    if "native_lang" in c:   # D: designed voice speaking its own language, cloned into English (cross-lingual accent)
+        torch.manual_seed(5); w,sr=vd.generate_voice_design(text=c["ref_native"],language=c["native_lang"],instruct=c.get("design_native",c["design"])); sf.write(f"{O}/ref_{who}_D.wav",w[0],sr); print("design native",who,flush=True)
 del vd
 b=Qwen3TTSModel.from_pretrained("Qwen/Qwen3-TTS-12Hz-1.7B-Base",device_map="cpu",dtype=torch.float32)
 for who,c in C.items():
-    for v,rt in (("A",c["ref_en"]),("B",c["ref_en"]),("C",c.get("ref_native"))):
+    for v,rt in (("A",c["ref_en"]),("B",c["ref_en"]),("C",c.get("ref_native")),("D",c.get("ref_native"))):
         if v=="B" and "edge" not in c: continue
-        if v=="C" and not rt: continue
+        if v=="C" and (not rt or "edge" not in c): continue
+        if v=="D" and (not rt or "native_lang" not in c): continue
         p=b.create_voice_clone_prompt(ref_audio=f"{O}/ref_{who}_{v}.wav",ref_text=rt)
         for k,t in enumerate(c["test"]):
             cap=int(14*(len(t.split())*0.55+2.5)); torch.manual_seed(1)
