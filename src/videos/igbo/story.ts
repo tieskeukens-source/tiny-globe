@@ -36,25 +36,55 @@ export const zoom = (pos: V3, look: V3, fov: number, k: number, rest: Partial<Ca
   ({ pos, look, fov: (360 / Math.PI) * Math.atan(Math.tan((fov * Math.PI) / 360) * k), ...rest });
 export const rolled = (s: (f: number) => Shot, roll: number) => (f: number): Shot => ({ ...s(f), roll });
 
-// ---------------- test shots (world / cast review) ----------------
-export const TOTAL = 60;
+// ---------------- shots (generated from plan.ts) ----------------
+import { PLAN, SETS, TOTAL as PT, posOf, KICKS as KK } from "./plan";
+export const TOTAL = PT;
 export const FLASH_AT = -100;
-export const SHOTS: ShotDef[] = [1, 2, 3, 4, 5, 6].map((id) => ({ id, a: (id - 1) * 10, b: id * 10, light: "day" as Light, tau: (t: number) => t }));
-export const shotAt = (f: number) => SHOTS.find((s) => f >= s.a && f < s.b) ?? SHOTS[SHOTS.length - 1];
-export const layersAt = (f: number): { id: number; alpha: number }[] => [{ id: shotAt(f).id, alpha: 1 }];
-const CAMS: Record<number, Key[]> = {
-  1: [{ f: 0, s: () => ({ pos: [5, 1.7, 24], look: [0, 1.3, 8], fov: 38 }) }],
-  2: [{ f: 0, s: () => ({ pos: [1.5, 1.4, 14.2], look: [0.4, 1.15, 8.2], fov: 30 }) }],
-  3: [{ f: 0, s: () => ({ pos: [-3, 2.4, -14], look: [1, 1.5, -40], fov: 40 }) }],
-  4: [{ f: 0, s: () => ({ pos: [0.5, 1.5, 14.5], look: [-0.2, 1.4, 9.5], fov: 34 }) }],
-  5: [{ f: 0, s: () => ({ pos: [60, 42, 90], look: [0, 0, 10], fov: 40 }) }],
-  6: [{ f: 0, s: () => ({ pos: [0, 3.2, 38], look: [0, 3.2, 68], fov: 44 }) }],
+export const SHOTS: ShotDef[] = PLAN.map((p) => ({ id: p.id, a: p.a, b: p.b, light: p.light, tau: (t: number) => t }));
+export const shotAt = (f: number) => {
+  let lo = 0, hi = SHOTS.length - 1;
+  while (lo < hi) { const m = (lo + hi + 1) >> 1; if (SHOTS[m].a <= f) lo = m; else hi = m - 1; }
+  return SHOTS[lo];
 };
-export const camAt = (id: number, f: number): Cam => run(CAMS[id], f);
+export const layersAt = (f: number): { id: number; alpha: number }[] => [{ id: shotAt(f).id, alpha: 1 }];
+const sub = (a: V3, b: V3): V3 => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+const frame = (id: number, f: number): Shot => {
+  const p = PLAN[id - 1], S = posOf(p.ch, p.who), O = posOf(p.ch, p.other), set = SETS[p.ch];
+  const sx = Math.sin(p.az), sz = Math.cos(p.az), rx = sz, rz = -sx, side = p.seed % 2 ? 1 : -1;
+  const lim = set.clampX ?? 5.0;
+  const cl = (v: V3): V3 => [Math.max(-lim, Math.min(lim, v[0])), v[1], v[2]];
+  if (p.kind === "single") {
+    const look: V3 = [S[0] + rx * 0.45 * side, 1.18, S[2] + rz * 0.45 * side];
+    return dolly(cl([look[0] + sx * 3.0, 1.32, look[2] + sz * 3.0]), look, pushK(f, p.a, 0.0032), { fov: 30, roll: 0.025 * side });
+  }
+  if (p.kind === "two") {
+    const M: V3 = [(S[0] + O[0]) / 2, 1.2, (S[2] + O[2]) / 2], d = 4.4 + 0.9 * Math.hypot(...sub(S, O));
+    return dolly(cl([M[0] + sx * d, 1.55, M[2] + sz * d]), M, pushK(f, p.a, 0.0026), { fov: 34, roll: -0.02 * side });
+  }
+  const look: V3 = [set.c[0] + rx * 0.8 * side, 1.5, set.c[1] + rz * 0.8 * side];
+  return dolly(cl([look[0] + sx * 10, 2.2, look[2] + sz * 10]), look, pushK(f, p.a, 0.0018), { fov: 38 });
+};
+export const camAt = (id: number, f: number): Cam => {
+  const c = full(frame(id, f)), a = kickAt(f / FPS);
+  if (!a) return c;
+  const d: V3 = sub(c.look, c.pos), L = Math.hypot(...d), h = Math.hypot(d[0], d[2]) || 1;
+  const m = (3 / 640) * Math.tan((c.fov * Math.PI) / 360) * L * a;
+  return { ...c, look: [c.look[0] - (d[2] / h) * m, c.look[1] + 0.6 * m, c.look[2] + (d[0] / h) * m], roll: c.roll + a * 0.004 };
+};
+export const kickAt = (t: number) => {
+  let a = 0;
+  for (const [t0, g] of KK) {
+    const n = Math.floor((t - t0) * FPS + 1e-6);
+    if (n >= 0 && n < 7) a += g * (n % 2 ? -1 : 1) * (1 - n / 7) ** 1.5;
+  }
+  return a;
+};
 export type Dof = { f: number; dur?: number; cInf: number; focus?: (f: number) => V3 };
-export const DOF: Dof[] = [{ f: 0, cInf: 0 }, { f: 10, cInf: 9 }, { f: 20, cInf: 0 }, { f: 30, cInf: 9 }, { f: 40, cInf: 0 }, { f: 50, cInf: 0 }];
 export const dofAt = (f: number) => {
-  let i = 0; while (i + 1 < DOF.length && f >= DOF[i + 1].f) i++;
-  return { cInf: DOF[i].cInf, focus: DOF[i].focus };
+  const s = shotAt(f), p = PLAN[s.id - 1];
+  if (p.kind === "wide") return { cInf: 4, focus: undefined as undefined | ((f: number) => V3) };
+  const S = posOf(p.ch, p.who), O = posOf(p.ch, p.other);
+  const fp: V3 = p.kind === "single" ? [S[0], 1.4, S[2]] : [(S[0] + O[0]) / 2, 1.3, (S[2] + O[2]) / 2];
+  return { cInf: p.kind === "single" ? 13 : 9, focus: () => fp };
 };
 export const W: Record<string, number> = {};

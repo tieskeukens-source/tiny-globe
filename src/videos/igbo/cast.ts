@@ -6,6 +6,8 @@
 import * as THREE from "three";
 import { Pen, bodyFront, bodySide, fxShadow, fxContact, Outfit, Expr, FrontOpts, SideOpts, HOST, TWIN_A, TWIN_B, MAMA, CHIEF, DOCTOR, VILLAGER_F, VILLAGER_M, INK } from "./toon";
 import { FPS, D0, V3, clamp01, smooth } from "./story";
+import { LINES, PLAN, SETS, posOf, presentIn } from "./plan";
+import { FEST_Z, MARKET_Z } from "./town";
 import { LIGHTS } from "./lights";
 import { NOINK } from "./ink";
 import { cardShade, blobMaterial, CARD_K } from "./cardshade";
@@ -214,19 +216,82 @@ export type Stage = { places: Place[]; fx: FxPlace[] };
 export { person, blob, viewOf, lidAt, hh, q };
 export const setLight = (n: "day" | "golden") => { LNAME = n; };
 
-/** test staging for the world / cast review stills: everyone faces the camera */
-export const stage = (id: number, t: number, cam: CamInfo): Stage => {
-  const out: Stage = { places: [], fx: [] };
-  const cast: [number, Outfit, string, number, number, Expr, number][] = [
-    [0, HOST, "host", 1.3, 10, "grin", 1], [1, TWIN_A, "twinA", -0.5, 8.2, "grin", 1], [2, TWIN_B, "twinB", 0.55, 8.2, "grin", 1],
-    [3, MAMA, "mama", -2.2, 10, "smile_closed", 1], [4, CHIEF, "chief", 3.2, 9.4, "smile_closed", 1], [5, DOCTOR, "doctor", -4.0, 8, "neutral", 1],
-    [6, VILLAGER_F, "vf", 5.2, 12, "grin", 1], [7, VILLAGER_M, "vm", -6, 12.5, "grin", 1],
-  ];
-  for (const [i, o, k, x, z, expr] of cast) {
-    const view = viewOf(cam, x, z, 0, -1);
-    const fo: FrontOpts = { phase: 0, expr, mode: "stand", look: 0, blink: lidAt(t, i), lift: 0, tilt: 0 };
-    out.places.push(person(cam, { i, o, okey: k }, x, D0, z, { side: false, mirror: false }, fo, {}));
-    blob(out, x, D0, z);
+// ---------------- talking ----------------
+const talking = (who: string, t: number) => LINES.some((l) => l.who === who && l.words.some(([a, b]) => t >= a - 0.03 && t < b + 0.02));
+/** mouth flaps every 3 frames while the voice speaks; the eyes/brows alternate only every 24 frames */
+const flap = (who: string, t: number, closed: Expr, open: Expr): Expr => (talking(who, t) && Math.floor((t * FPS) / 24) % 2 ? open : closed);
+const mouthOf = (who: string, t: number) => talking(who, t) && Math.floor((t * FPS) / 3) % 2 === 0;
+const lastSpeaker = (t: number) => { let w = "pin"; for (const l of LINES) { if (l.start <= t + 0.1) w = l.who; else break; } return w; };
+
+const OUTFIT: Record<string, Outfit> = { pin: HOST, taiwo: TWIN_A, kehinde: TWIN_B, chief: CHIEF, mama: MAMA, doctor: DOCTOR };
+const MOOD: Record<string, [Expr, Expr, Expr]> = { // idle, talk-closed, talk-open
+  pin: ["smile_closed", "smile_closed", "grin"], taiwo: ["grin", "grin", "laugh"], kehinde: ["grin", "grin", "laugh"],
+  chief: ["smile_closed", "smile_closed", "grin"], mama: ["smile_closed", "grin", "laugh"], doctor: ["neutral", "neutral", "stern"],
+};
+const exprOf = (who: string, t: number): Expr => {
+  const L = LINES.find((l) => l.who === who && t >= l.start - 0.1 && t < l.start + l.dur + 0.3);
+  if (who === "pin" && L) {
+    if (L.text.startsWith("Whoa") && t < L.start + 1.1) return "shock";
+    if (L.i === 0) { const w = L.words.find((x) => x[2].startsWith("Wait")); if (w && t >= w[0] - LEAD) return "nervous"; }
+    if (L.text.startsWith("And nobody")) return "nervous";
+  }
+  const m = MOOD[who];
+  return talking(who, t) ? flap(who, t, m[1], m[2]) : m[0];
+};
+
+// ---------------- background twin pairs ----------------
+const PAIRS: Outfit[] = [
+  { jacket: "#e8a317", pants: "#2f4b8a", boots: "#3a2a22", hat: "fila", cap: "#2f4b8a", skin: "#8a5a3c" },
+  { jacket: "#d8342b", pants: "#d8342b", dress: "#d8342b", boots: "#3a2a22", hat: "gele", cap: "#f2c230", skin: "#7a4a30" },
+  { jacket: "#2d8fb3", pants: "#3b3f52", boots: "#3a2a22", hat: "fila", cap: "#f2c230", skin: "#9a6a48" },
+  { jacket: "#2e8b57", pants: "#2e8b57", dress: "#2e8b57", boots: "#3a2a22", hat: "gele", cap: "#e86a1f", skin: "#8a5a3c" },
+  { jacket: "#8e44ad", pants: "#8e44ad", dress: "#8e44ad", boots: "#3a2a22", hat: "gele", cap: "#e0529c", skin: "#9a6a48" },
+  { jacket: "#f4efe2", pants: "#3b3f52", boots: "#3a2a22", hat: "fila", cap: "#b3262d", skin: "#7a4a30" },
+  { jacket: "#e86a1f", pants: "#e86a1f", dress: "#e86a1f", boots: "#3a2a22", hat: "gele", cap: "#2d8fb3", skin: "#8a5a3c" },
+  { jacket: "#c0392b", pants: "#2c3e50", boots: "#3a2a22", hat: "fila", cap: "#f4efe2", skin: "#9a6a48" },
+];
+type Pair = { x: number; z: number; pal: number };
+const pairsFor = (ch: number): Pair[] => {
+  const S = SETS[ch], r = (k: number) => hh(ch * 97 + k, 3), out: Pair[] = [], sg = Math.cos(S.az) < 0 ? 1 : -1; // sg: direction away from the main camera
+  const wide = ch === 7 ? 17 : ch === 5 ? 15 : 5.2, n = ch === 7 ? 34 : ch === 5 ? 20 : 15;
+  for (let k = 0; k < n; k++) {
+    const lat = (r(k) - 0.5) * 2 * wide, depth = 2.6 + r(k + 40) * (ch === 7 || ch === 5 ? 20 : 30);
+    const x = lat, z = S.c[1] + sg * depth;
+    if (Math.abs(lat) < 2.2 && depth < 6) continue; // keep the main cast's spot free
+    out.push({ x, z, pal: Math.floor(r(k + 80) * PAIRS.length) });
   }
   return out;
 };
+const PAIR_CACHE: Record<number, Pair[]> = {};
+
+export const stage = (id: number, t: number, cam: CamInfo): Stage => {
+  const out: Stage = { places: [], fx: [] };
+  const P = PLAN[id - 1], ch = P.ch, spk = lastSpeaker(t);
+  setLight(P.light);
+  const speakerPos = posOf(ch, WHO_OK(ch, spk));
+  const spkSide = (speakerPos[0] - cam.pos.x) * cam.right.x + (speakerPos[2] - cam.pos.z) * cam.right.z;
+  presentIn(ch).forEach((who, i) => {
+    const [x, , z] = posOf(ch, who);
+    const mySide = (x - cam.pos.x) * cam.right.x + (z - cam.pos.z) * cam.right.z;
+    const talk = talking(who, t);
+    const facing = (who === spk ? (spkSide > 0 ? -1 : 1) : spkSide > mySide ? 1 : -1) as -1 | 1;
+    const fo: FrontOpts = { phase: 0, expr: exprOf(who, t), mode: "stand", look: 0, blink: lidAt(t, i), lift: 0, tilt: 0, facing, mouthOpen: mouthOf(who, t) };
+    const pl = person(cam, { i, o: OUTFIT[who], okey: who }, x, 0, z, { side: false, mirror: false }, fo, {});
+    pl.y = talk ? 0.012 * Math.abs(Math.sin(t * 11 + i)) : 0;
+    pl.roll = talk ? 0.025 * Math.sin(t * 2.4 + i) : 0;
+    out.places.push(pl);
+    blob(out, x, 0, z);
+  });
+  if (!PAIR_CACHE[ch]) PAIR_CACHE[ch] = pairsFor(ch);
+  PAIR_CACHE[ch].forEach((p, k) => {
+    for (const s of [-1, 1]) {
+      const x = p.x + s * 0.42, view = { side: false, mirror: false };
+      const fo: FrontOpts = { phase: 0, expr: k % 3 ? "grin" : "smile_closed", mode: "stand", look: 0, blink: lidAt(t, 100 + k), lift: 0, tilt: 0, facing: s < 0 ? 1 : -1 };
+      const pl = person(cam, { i: 100 + k, o: PAIRS[p.pal], okey: `pair${p.pal}` }, x, 0, p.z, view, fo, {});
+      out.places.push(pl);
+      blob(out, x, 0, p.z, 0.95, 0.9);
+    }
+  });
+  return out;
+};
+const WHO_OK = (ch: number, who: string) => (presentIn(ch).includes(who) ? who : "pin");

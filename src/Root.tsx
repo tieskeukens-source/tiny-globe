@@ -25,7 +25,7 @@ export const Root: React.FC = () => (
     <Composition id="ProfielC" component={Profiel} durationInFrames={1} fps={FPS} width={1000} height={1000} defaultProps={{v: 'C'}} />
     <Composition id="BannerC" component={Banner} durationInFrames={1} fps={FPS} width={2560} height={1440} defaultProps={{v: 'C'}} />
     <Composition id="BridgeShort" component={BridgeShort} durationInFrames={BRIDGE_FRAMES} fps={30} width={1080} height={1920} />
-    <Composition id="IgboTest" component={IgboVideo} durationInFrames={IGBO_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="Igbo" component={IgboVideo} durationInFrames={IGBO_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="IgboCast" component={IgboCast} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="Baarle" component={BaarleVideo} durationInFrames={BAARLE_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="CastSheet" component={CastSheet} durationInFrames={1} fps={30} width={1920} height={1080} />

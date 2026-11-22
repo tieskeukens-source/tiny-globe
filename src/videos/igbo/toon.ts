@@ -423,17 +423,18 @@ const hatOn = (p: Pen, o: Outfit, hp: P2[], H: Blob, cx: number, hc: number, lig
       }
     }
   } else if (o.hat === "gele") {
-    // Yoruba head tie: big pleated fan above and beyond the head
-    const yb = crown + 0.4 * HH, A = 0.74 * W, B = 0.95 * HH, col = o.cap ?? "#d8342b";
-    const pts: P2[] = [];
-    for (let i = 0; i <= 26; i++) { const t = (Math.PI * i) / 26; pts.push([cx - A * Math.cos(t) + (i > 13 ? 0.08 * A * Math.sin(t) : 0), yb - B * Math.sin(t) * (0.85 + 0.15 * Math.cos(t * 2))]); }
-    const body = R(pts);
+    // Yoruba head tie: a wrapped band round the head plus a big fan flaring up and out to one side
+    const yb = crown + 0.42 * HH, col = o.cap ?? "#d8342b", A = 0.6 * W;
+    const wrap: P2[] = [];
+    for (let i = 0; i <= 20; i++) { const t = (Math.PI * i) / 20; wrap.push([cx - A * Math.cos(t), yb - 0.62 * HH * Math.sin(t)]); }
+    const body = R(wrap);
     p.shadedFill(body, col, mul(col, SH_CLOTH), light, A, 0.4);
     p.poly(body, null, ow);
-    for (const k of [0.35, 0.62]) p.stroke(R(pts.slice(3, 24).map(([x, y]) => [cx + (x - cx) * k + 0.1 * A * (k - 0.5), yb + (y - yb) * (0.45 + k * 0.6)] as P2)), 2.2 * u, shade(col, 0.78));
-    const [kx, ky] = R([[cx + 0.46 * A, yb - 0.55 * B]])[0];
-    p.ell(kx, ky, 0.22 * A, 0.2 * B, shade(col, 1.08), ow * 0.8);
-    p.band(R([[cx - A * 0.97, yb + 1 * u], [cx + A * 0.97, yb + 1 * u]]), shade(col, 0.88), 0.09 * HH, 1.2 * u);
+    const fan = R([[cx - 0.1 * W, yb - 0.45 * HH], [cx + 0.02 * W, yb - 1.05 * HH], [cx + 0.55 * W, yb - 1.25 * HH], [cx + 0.95 * W, yb - 0.85 * HH], [cx + 0.7 * W, yb - 0.4 * HH], [cx + 0.35 * W, yb - 0.3 * HH]]);
+    p.shadedFill(fan, shade(col, 1.08), mul(shade(col, 1.08), SH_CLOTH), light, W, 0.4);
+    p.poly(fan, null, ow);
+    for (const k of [0.25, 0.5, 0.75]) p.stroke(R([[cx + (0.0 + 0.5 * k) * W, yb - 0.4 * HH], [cx + (0.1 + 0.7 * k) * W, yb - (0.8 + 0.3 * k) * HH]]), 2.4 * u, shade(col, 0.72));
+    p.band(R([[cx - A * 0.97, yb + 2 * u], [cx + A * 0.97, yb + 2 * u]]), shade(col, 0.82), 0.1 * HH, 1.2 * u);
   } else if (o.hat === "fila") {
     // Yoruba soft cap, folded to one side
     const yb = crown + 0.44 * HH, col = o.cap ?? "#8c3b4a", s = 1;

@@ -8,7 +8,7 @@
 // Place changes crossfade by stacking a second canvas for the fade frames; the hook ends on a 4-frame white flash.
 import React, { useEffect, useMemo, useState } from "react";
 import * as THREE from "three";
-import { AbsoluteFill, continueRender, delayRender, getInputProps, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Audio, continueRender, delayRender, getInputProps, staticFile, useCurrentFrame, spring } from "remotion";
 import "../../components/Scenes"; // brand fonts (Lilita One)
 import { ThreeCanvas } from "@remotion/three";
 import { useThree } from "@react-three/fiber";
@@ -20,6 +20,7 @@ import { LensBlur, GrainEffect } from "./lensblur";
 import { GradeEffect, GRADES, GRADE_STRENGTH, gradeFor } from "./grade";
 import { Kit } from "./build";
 import { TOTAL, SHOTS, layersAt, dofAt } from "./story";
+import { capAt } from "./plan";
 
 export const IGBO_FRAMES = TOTAL;
 
@@ -103,6 +104,19 @@ const ShotView: React.FC<{ id: number; kit: Kit; alpha: number }> = ({ id, kit, 
   </AbsoluteFill>
 );
 
+const Caption: React.FC<{ f: number }> = ({ f }) => {
+  const t = f / 30, c = capAt(t);
+  if (!c) return null;
+  const k = spring({ frame: f - Math.round(c.a * 30), fps: 30, config: { damping: 11, stiffness: 220, mass: 0.6 } });
+  const fs = c.text.length > 20 ? 80 : 104;
+  return (
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "flex-end", paddingBottom: 110 }}>
+      <div style={{ fontFamily: "Lilita One", fontSize: fs, color: c.col, letterSpacing: 2, textAlign: "center", transform: `scale(${0.6 + 0.4 * k}) rotate(${(1 - k) * -4}deg)`,
+        WebkitTextStroke: "14px #1b1b1f", paintOrder: "stroke fill", textShadow: "0 7px 0 #1b1b1f" }}>{c.text}</div>
+    </AbsoluteFill>
+  );
+};
+
 export const IgboVideo: React.FC = () => {
   const f = useCurrentFrame();
   const kit = useKit();
@@ -110,6 +124,8 @@ export const IgboVideo: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: "#cfe3f2" }}>
       {layersAt(f).map((l, i) => <ShotView key={i ? "over" : "base"} id={l.id} kit={kit} alpha={l.alpha} />)}
+      <Caption f={f} />
+      {(getInputProps() as { audio?: boolean }).audio !== false && <Audio src={staticFile("igbo/mix.wav")} />}
     </AbsoluteFill>
   );
 };
