@@ -1,0 +1,18 @@
+{
+ "pin": {
+  "ref": "voices/common/pin.wav",
+  "text": "Did you know there's a village in Turkey where people talk by whistling?"
+ },
+ "tourist": {
+  "ref": "voices/common/tourist.wav",
+  "text": "Wait, what? You people really live out here? Come on, that sounds totally crazy to me."
+ },
+ "sardaana": {
+  "ref": "voices/oymyakon/ref/sardaana.wav",
+  "text": "Good morning! I am Sardaana, I am nine years old, and I walk to school every day, even when it is very, very cold outside."
+ },
+ "nikolai": {
+  "ref": "voices/oymyakon/ref/nikolai.wav",
+  "text": "Заходите, заходите, внутри тепло. Здесь, в Оймяконе, мы пьём горячий чай, топим печку и никогда не жалуемся на холод."
+ }
+}

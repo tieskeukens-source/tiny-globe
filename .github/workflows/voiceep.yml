@@ -1,0 +1,37 @@
+name: voiceep
+on:
+  workflow_dispatch:
+    inputs:
+      ep: {description: "episode dir under voices/"}
+      cast: {description: "JSON list of characters, e.g. [\"pin\",\"tourist\"]"}
+jobs:
+  gen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy: {matrix: {who: "${{ fromJSON(inputs.cast) }}"}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -U qwen-tts soundfile && pip install --force-reinstall --no-deps torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+      - run: sudo apt-get update -qq && sudo apt-get install -y sox libsox-fmt-all >/dev/null
+      - run: mkdir -p voices/${{ inputs.ep }}/voice && python tools/voice/qgen.py ${{ inputs.ep }} ${{ matrix.who }}
+      - uses: actions/upload-artifact@v4
+        with: {name: "v-${{ matrix.who }}", path: "voices/${{ inputs.ep }}/voice"}
+  join:
+    needs: gen
+    runs-on: ubuntu-latest
+    permissions: {contents: write}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - uses: actions/download-artifact@v4
+        with: {path: "voices/${{ inputs.ep }}/voice", merge-multiple: true}
+      - run: pip install faster-whisper soundfile numpy && python tools/voice/qtime.py ${{ inputs.ep }}
+      - run: |
+          git config user.name tts-bot; git config user.email tts@bot
+          mkdir /tmp/v && cp -r voices/${{ inputs.ep }}/voice /tmp/v/
+          git checkout --orphan vq && git rm -rq --cached . && git clean -fdq
+          mkdir -p voices/${{ inputs.ep }}/voice && cp -r /tmp/v/voice/* voices/${{ inputs.ep }}/voice/
+          git add voices/${{ inputs.ep }}/voice && git commit -qm voice && git push -f origin vq:voices-${{ inputs.ep }}
