@@ -1,0 +1,65 @@
+name: episode
+# Hele keten in een klik: script.md -> stemmen -> timeline -> muziek/effecten -> 48 render-stukken -> samenvoegen.
+# Resultaat: branch `renders3d`, bestanden r3d/<out>.mp4.part* (aan elkaar plakken met cat).
+on:
+  workflow_dispatch:
+    inputs:
+      out: {default: "igbo"}
+jobs:
+  prep:
+    runs-on: ubuntu-latest
+    permissions: {contents: write}
+    outputs: {total: "${{ steps.t.outputs.total }}"}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 20, cache: npm}
+      - run: npm ci && pip install edge-tts mutagen numpy scipy
+      - run: mkdir -p out voices/igbo/voice && python voices/igbo/tts.py && cp voices/igbo/voice/lines.json src/videos/igbo/timeline.json
+      - id: t
+        run: |
+          python tools/episode/voicewav.py
+          node tools/episode/events.mjs | tee out/t.txt
+          python tools/episode/mix.py
+          echo "total=$(sed -n 's/TOTAL_FRAMES=//p' out/t.txt)" >> $GITHUB_OUTPUT
+      - run: |
+          git config user.name ep-bot; git config user.email ep@bot
+          git checkout -b ep-build && git add -f src/videos/igbo/timeline.json public/igbo/mix.mp3 && git commit -qm "episode build" && git push -f origin ep-build
+  chunk:
+    needs: prep
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: {k: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47]}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: ep-build}
+      - uses: actions/setup-node@v4
+        with: {node-version: 20, cache: npm}
+      - run: npm ci
+      - run: |
+          N=${{ needs.prep.outputs.total }}; K=${{ matrix.k }}; S=$(( (N + 47) / 48 ))
+          A=$(( K * S )); B=$(( A + S - 1 )); [ $B -ge $N ] && B=$(( N - 1 ))
+          [ $A -ge $N ] && exit 0
+          npx remotion render src/index.ts Igbo out/c_$(printf %02d $K).mp4 --frames=$A-$B --gl=swangle --concurrency=4 \
+            --props='{"audio":false}' --muted --codec=h264 --crf=17 --x264-preset=medium --timeout=300000
+      - uses: actions/upload-artifact@v4
+        with: {name: "c${{ matrix.k }}", path: out/c_*.mp4, if-no-files-found: ignore}
+  join:
+    needs: chunk
+    runs-on: ubuntu-latest
+    permissions: {contents: write}
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: ep-build}
+      - uses: actions/download-artifact@v4
+        with: {path: parts, merge-multiple: true}
+      - run: |
+          ls parts | sort | sed "s#^#file 'parts/#; s#\$#'#" > list.txt
+          ffmpeg -v error -f concat -safe 0 -i list.txt -i public/igbo/mix.mp3 -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 192k -shortest final.mp4
+          mkdir /tmp/r && split -b 90M -d final.mp4 /tmp/r/${{ inputs.out }}.mp4.part
+          git config user.name render-bot; git config user.email render@bot
+          git checkout --orphan rnew && git rm -rq --cached . && git clean -fdqx -e parts
+          rm -rf parts; mkdir -p r3d && cp /tmp/r/* r3d/ && git add r3d && git commit -qm "episode ${{ inputs.out }}" && git push -f origin rnew:renders3d
