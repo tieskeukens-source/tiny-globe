@@ -137,7 +137,7 @@ export const buildTown = (root: THREE.Object3D) => {
   for (let i = 0; i < 60; i++) { const sx = r() < 0.5 ? -1 : 1; flowers(b, sx * (5.4 + r() * 9), D0, (r() - 0.5) * 240, i); }
   for (let i = 0; i < 260; i++) { const x = (r() - 0.5) * 8.4, z = (r() - 0.5) * 300, s = 0.12 + r() * 0.2; b.add(new THREE.SphereGeometry(1, 6, 4), mat("pebble", ["#9a8f80", "#b3a894", "#7d7466"][i % 3]), new THREE.Matrix4().compose(V(x, D0 + 0.01, z), new THREE.Quaternion(), V(s, s * 0.35, s * 0.8))); }
   for (const S of Object.values(SETS)) { if (Math.abs(Math.sin(S.az)) < 0.5) continue; const sd = Math.sign(Math.sin(S.az));
-    for (let i = 0; i < 14; i++) flowers(b, sd * (5 + r() * 12), D0, S.c[1] + (r() - 0.5) * 16, 500 + i);
+    for (let i = 0; i < 14; i++) flowers(b, sd * (4.8 + r() * 2.2), D0, S.c[1] + (r() - 0.5) * 16, 500 + i);
     for (let i = 0; i < 6; i++) hazel(b, sd * (9 + r() * 12), S.c[1] + (r() < 0.5 ? -1 : 1) * (6 + r() * 3), 0.8 + r() * 0.4, 600 + i); }
   // steep green hills close around the village + far misty ridges
   const hill = new THREE.SphereGeometry(1, 26, 12, 0, Math.PI * 2, 0, Math.PI / 2);
