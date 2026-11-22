@@ -6,8 +6,7 @@
 import * as THREE from "three";
 import { Pen, bodyFront, bodySide, fxShadow, fxContact, Outfit, Expr, FrontOpts, SideOpts, HOST, TWIN_A, TWIN_B, MAMA, CHIEF, DOCTOR, VILLAGER_F, VILLAGER_M, INK } from "./toon";
 import { FPS, D0, V3, clamp01, smooth } from "./story";
-import { LINES, PLAN, SETS, posOf, presentIn } from "./plan";
-import { FEST_Z, MARKET_Z } from "./town";
+import { LINES, PLAN, SETS, posOf, presentIn, FEST_Z, MARKET_Z } from "./plan";
 import { LIGHTS } from "./lights";
 import { NOINK } from "./ink";
 import { cardShade, blobMaterial, CARD_K } from "./cardshade";

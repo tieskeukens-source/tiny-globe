@@ -4,7 +4,9 @@
 import TL from "./timeline.json";
 import type { V3, Light } from "./story";
 const FPS = 30;
-import { MARKET_Z, FEST_Z, GATE_Z } from "./town";
+export const GATE_Z = 26;       // town gate across the street
+export const MARKET_Z = -32;    // centre of the market square
+export const FEST_Z = 62;       // festival square, stage at the far end
 
 export type Word = [number, number, string];
 export type Line = { i: number; who: string; chapter: number; text: string; start: number; dur: number; words: Word[] };

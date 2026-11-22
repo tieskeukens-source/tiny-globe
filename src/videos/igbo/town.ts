@@ -5,9 +5,8 @@ import { Batch, boxGeo, V, lam, quad, tri, house } from "./build";
 import { ctex, rng, earthHD, frondHD, signHD, grassHD } from "./paint";
 import { D0 } from "./story";
 
-export const GATE_Z = 26;       // town gate across the street
-export const MARKET_Z = -32;    // centre of the market square
-export const FEST_Z = 62;       // festival square, stage at the far end
+import { GATE_Z, MARKET_Z, FEST_Z } from "./plan";
+export { GATE_Z, MARKET_Z, FEST_Z };
 const BUNT = ["#d23b3b", "#f3d35a", "#2f8a4f", "#f7f1e1", "#3f6fb5", "#e8731f"];
 
 const stripeTex = (a: string, b: string) => ctex(`stripe${a}${b}`, 256, 256, (g) => {

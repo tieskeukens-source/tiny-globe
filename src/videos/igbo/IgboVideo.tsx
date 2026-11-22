@@ -125,7 +125,7 @@ export const IgboVideo: React.FC = () => {
     <AbsoluteFill style={{ background: "#cfe3f2" }}>
       {layersAt(f).map((l, i) => <ShotView key={i ? "over" : "base"} id={l.id} kit={kit} alpha={l.alpha} />)}
       <Caption f={f} />
-      {(getInputProps() as { audio?: boolean }).audio !== false && <Audio src={staticFile("igbo/mix.wav")} />}
+      {(getInputProps() as { audio?: boolean }).audio !== false && <Audio src={staticFile("igbo/mix.mp3")} />}
     </AbsoluteFill>
   );
 };
