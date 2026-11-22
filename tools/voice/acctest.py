@@ -4,13 +4,17 @@ import asyncio, json, subprocess, sys, torch, soundfile as sf, edge_tts
 from qwen_tts import Qwen3TTSModel
 EP=sys.argv[1]; O=f"voices/{EP}/acc"; C=json.load(open(f"voices/{EP}/acctest.json")); torch.set_num_threads(4)
 async def edge(text,voice,out):
-    await edge_tts.Communicate(text,voice).save(out+".mp3")
-    subprocess.run(["ffmpeg","-y","-v","error","-i",out+".mp3","-ar","24000","-ac","1",out],check=True)
+    for a in range(6):
+        try:
+            await edge_tts.Communicate(text,voice).save(out+".mp3")
+            subprocess.run(["ffmpeg","-y","-v","error","-i",out+".mp3","-ar","24000","-ac","1",out],check=True); return True
+        except Exception as e: print("edge retry",voice,a,e,flush=True); await asyncio.sleep(3+3*a)
+    return False
 async def prep():
     for who,c in C.items():
         if "edge" in c:
-            await edge(c["ref_en"],c["edge"],f"{O}/ref_{who}_B.wav")
-            if "ref_native" in c: await edge(c["ref_native"],c["edge"],f"{O}/ref_{who}_C.wav")
+            if not await edge(c["ref_en"],c["edge"],f"{O}/ref_{who}_B.wav"): print("no edge voice for",who); c.pop("edge"); c.pop("ref_native",None); continue
+            if "ref_native" in c and not await edge(c["ref_native"],c["edge"],f"{O}/ref_{who}_C.wav"): c.pop("ref_native")
 asyncio.run(prep())
 vd=Qwen3TTSModel.from_pretrained("Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign",device_map="cpu",dtype=torch.float32)
 for who,c in C.items():
