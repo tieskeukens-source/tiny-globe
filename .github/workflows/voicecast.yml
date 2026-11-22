@@ -1,0 +1,33 @@
+name: voicecast
+on: {workflow_dispatch: {}}
+jobs:
+  gen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy: {matrix: {who: [pin, hasan, ayse, tourist]}}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install -U qwen-tts soundfile && pip install --force-reinstall --no-deps torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+      - run: sudo apt-get update -qq && sudo apt-get install -y sox libsox-fmt-all >/dev/null
+      - run: mkdir -p voices/kuskoy/voice4 && python voices/kuskoy/qgen.py ${{ matrix.who }}
+      - uses: actions/upload-artifact@v4
+        with: {name: "v-${{ matrix.who }}", path: voices/kuskoy/voice4}
+  join:
+    needs: gen
+    runs-on: ubuntu-latest
+    permissions: {contents: write}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - uses: actions/download-artifact@v4
+        with: {path: voices/kuskoy/voice4, merge-multiple: true}
+      - run: pip install faster-whisper soundfile && python voices/kuskoy/qtime.py
+      - run: |
+          git config user.name tts-bot; git config user.email tts@bot
+          mkdir /tmp/v && cp -r voices/kuskoy/voice4 /tmp/v/
+          git checkout --orphan vq && git rm -rq --cached . && git clean -fdq
+          mkdir -p voices/kuskoy/voice4 && cp -r /tmp/v/voice4/* voices/kuskoy/voice4/
+          git add voices/kuskoy/voice4 && git commit -qm voice && git push -f origin vq:voices4
