@@ -314,7 +314,7 @@ const mouth = (p: Pen, kind: MouthK, mx: number, my: number, u: number, k = 1) =
 /** face v2 (front / 3-4). u = 1 % of the head path width W. Eyes 26u apart on the centre line, brows 20u up, mouth 20u
  *  down, everything slid toward the facing side. No blush, no catchlights. */
 const faceFront = (p: Pen, cx: number, cy: number, W: number, expr: Expr, facing: number, look: number, lid: number, brim: boolean,
-  skin: string, moustache?: string, stout = false) => {
+  skin: string, moustache?: string, stout = false, mouthOpen = false) => {
   const u = W / 100, F = FACE[expr], fx = cx + 7 * u * facing;
   const ex = (F.eye[0] === "shock" ? 12 : 13) * u, ey = cy;
   for (const side of [-1, 1]) {
@@ -326,7 +326,8 @@ const faceFront = (p: Pen, cx: number, cy: number, W: number, expr: Expr, facing
     else taper(p, [x - side * 8.5 * u, by + dI * u], [x + side * 8.5 * u, by + dO * u], 5 * u, 2.5 * u);
   }
   const mx = cx + 8 * u * facing, my = cy + 20 * u;
-  mouth(p, F.mouth, mx, my, u);
+  const openK: MouthK = F.mouth === "O" || F.mouth === "laugh" || F.mouth === "grin" || F.mouth === "teeth" ? F.mouth : expr === "shock" || expr === "nervous" ? "O" : "grin";
+  mouth(p, mouthOpen ? openK : F.mouth, mx, my, u);
   if (moustache) for (const s of [-1, 1])
     taper(p, [mx + s * 1.5 * u, cy + 12.5 * u], [mx + s * (stout ? 19 : 15) * u, cy + (stout ? 10.5 : 15) * u], stout ? 5.5 * u : 4.5 * u, 1.6 * u, moustache);
   if (expr === "nervous") p.ell(cx + 40 * u * (facing || 1), cy - 22 * u, 3 * u, 5 * u, "#9fd4ff", 2 * u);
@@ -445,6 +446,8 @@ export type FrontOpts = {
   prop?: Prop; tilt?: number; headTilt?: number; wave?: number;
   /** canvas angle the key light comes FROM (painted crescent + thick outline side) */
   light?: number; facing?: -1 | 0 | 1; seed?: number;
+  /** talking: mouth open on this frame (the eyes keep the expression's own eyes) */
+  mouthOpen?: boolean;
 };
 
 const footStroke = (p: Pen, a: P2, b: P2, w: number, col: string) => {
@@ -614,7 +617,7 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
     const fr = 0.76 * R;
     p.shadedFill(ellPts(300, cy0, fr, fr), "#ffffff", "#e9e4ee", light, fr, 0.45, 1.15, 1.3);
     p.ell(300, cy0, fr, fr, null, ow * 0.7);
-    faceFront(p, 300, cy0 - 0.02 * fr, 1.25 * W, expr, facing, look, lid, false, "#ffffff");
+    faceFront(p, 300, cy0 - 0.02 * fr, 1.25 * W, expr, facing, look, lid, false, "#ffffff", undefined, false, opts.mouthOpen);
     p.rot = null;
     return;
   }
@@ -624,7 +627,7 @@ export const bodyFront = (p: Pen, o: Outfit, opts: FrontOpts) => {
   p.inkRing(hp, ow, thick);
   hatOn(p, o, hp, H, 300, hc, light, seed, facing, false);
   const brim = !!o.hat && o.hat !== "hair" && o.hat !== "bonnet" && o.hat !== "cap";
-  faceFront(p, 300, hc, W, expr, facing, look, lid, brim, skin, o.moustache, o.build === "stout");
+  faceFront(p, 300, hc, W, expr, facing, look, lid, brim, skin, o.moustache, o.build === "stout", opts.mouthOpen);
   p.rot = null;
 };
 

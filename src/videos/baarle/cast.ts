@@ -432,11 +432,11 @@ import TL from "./timeline.json";
 type Line = { who: string; words: [number, number, string][] };
 const LINES = (TL as unknown as { lines: Line[] }).lines;
 const talking = (who: string, t: number) => LINES.some((l) => l.who === who && l.words.some(([a, b]) => t >= a - 0.03 && t < b + 0.02));
-/** open/closed mouth flap every 3 frames while the character is speaking */
-const flap = (who: string, t: number, closed: Expr, open: Expr): Expr => {
-  if (!talking(who, t)) return closed;
-  return Math.floor(t * FPS / 3) % 2 ? closed : open;
-};
+/** talking: the mouth flaps every 3 frames; the eyes/brows change much slower (every ~0.8 s) between the calm and the
+ *  lively expression, so the face does not flicker */
+const flap = (who: string, t: number, closed: Expr, open: Expr): Expr =>
+  talking(who, t) && Math.floor((t * FPS) / 24) % 2 ? open : closed;
+const mouthOf = (who: string, t: number) => talking(who, t) && Math.floor((t * FPS) / 3) % 2 === 0;
 const F2 = (w: number) => w - LEAD;
 /** hops across the border line: [landing time, z after landing] */
 const HOPS: [number, number][] = [[F2(1.502), ZB + 0.55], [F2(W.be), ZB - 0.55], [F2(W.nl2), ZB + 0.55]];
@@ -499,7 +499,7 @@ const baarle = (id: number, t: number, cam: CamInfo, out: Stage) => {
     // the host hops across the line
     const h = hostAtLine(t), tl = t < F2(W.oneStep) ? "smile" : "grin";
     const expr: Expr = id === 1 ? flap("host", t, tl as Expr, "grin") : h.air > 0 ? "laugh" : flap("host", t, "grin", "laugh");
-    const fo: FrontOpts = { mode: "stand", expr, blink: lidAt(t, 1), wave: id === 2 && h.air === 0 ? q(0.5 + 0.5 * Math.sin(t * 10), 10) : undefined, facing: 0 };
+    const fo: FrontOpts = { mode: "stand", expr, mouthOpen: mouthOf("host", t), blink: lidAt(t, 1), wave: id === 2 && h.air === 0 ? q(0.5 + 0.5 * Math.sin(t * 10), 10) : undefined, facing: 0 };
     out.places.push(person(cam, HOSTW, HOST_X, D0 + h.y, h.z, { side: false, mirror: false }, fo, {}));
     blob(out, HOST_X, D0, h.z, 1, 1 - 0.6 * h.air);
     if (id === 2) ([[W.nl1, "nl"], [W.be, "be"], [W.nl2, "nl"]] as [number, "nl" | "be"][]).forEach(([w, kind]) => {
@@ -530,9 +530,9 @@ const baarle = (id: number, t: number, cam: CamInfo, out: Stage) => {
   const hostExpr: Expr = id === 6 ? flap("host", t, "nervous", "shock") : id === 8 ? flap("host", t, t > W.withA - LEAD ? "shock" : "nervous", "shock")
     : id === 7 && t > W.moved - LEAD ? "shock" : flap("host", t, "smile", "grin");
   const locExpr: Expr = flap("local", t, id === 7 && t > W.some ? "smile" : "neutral", "grin");
-  if (!(id === 7 && t < W.some - LEAD)) out.places.push(person(cam, HOSTW, hx, D0, hz, { side: false, mirror: false }, { mode: "stand", expr: hostExpr, blink: lidAt(t, 1), facing: face(cam, hx, hz, lx, lz), look: face(cam, hx, hz, lx, lz) }, {}));
+  if (!(id === 7 && t < W.some - LEAD)) out.places.push(person(cam, HOSTW, hx, D0, hz, { side: false, mirror: false }, { mode: "stand", expr: hostExpr, mouthOpen: mouthOf("host", t), blink: lidAt(t, 1), facing: face(cam, hx, hz, lx, lz), look: face(cam, hx, hz, lx, lz) }, {}));
   if (!(id === 7 && t < W.some - LEAD)) blob(out, hx, D0, hz);
-  out.places.push(person(cam, LOCW, lx, D0, lz, { side: false, mirror: false }, { mode: "stand", expr: locExpr, blink: lidAt(t, 2), facing: face(cam, lx, lz, hx, hz), look: face(cam, lx, lz, hx, hz),
+  out.places.push(person(cam, LOCW, lx, D0, lz, { side: false, mirror: false }, { mode: "stand", expr: locExpr, mouthOpen: mouthOf("local", t), blink: lidAt(t, 2), facing: face(cam, lx, lz, hx, hz), look: face(cam, lx, lz, hx, hz),
     wave: id === 5 && t > W.where - LEAD ? 0.2 : undefined }, {}));
   blob(out, lx, D0, lz);
   if (id === 7 && t > W.moved - 0.6) {
