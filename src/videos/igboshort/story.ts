@@ -54,11 +54,11 @@ const frame = (id: number, f: number): Shot => {
   const lim = set.clampX ?? 5.0;
   const cl = (v: V3): V3 => [Math.max(-lim, Math.min(lim, v[0])), v[1], v[2]];
   if (p.kind === "single") {
-    const look: V3 = [S[0] + rx * 0.25 * side, 1.12, S[2] + rz * 0.25 * side];
-    return dolly(cl([look[0] + sx * 2.7, 1.3, look[2] + sz * 2.7]), look, pushK(f, p.a, 0.0045), { fov: 36, roll: 0.03 * side });
+    const look: V3 = [S[0] + rx * 0.25 * side, 1.2, S[2] + rz * 0.25 * side];
+    return dolly(cl([look[0] + sx * 3.5, 1.35, look[2] + sz * 3.5]), look, pushK(f, p.a, 0.0045), { fov: 36, roll: 0.03 * side });
   }
   if (p.kind === "two") {
-    const M: V3 = [(S[0] + O[0]) / 2, 1.15, (S[2] + O[2]) / 2], d = 5.0 + 1.3 * Math.hypot(...sub(S, O));
+    const M: V3 = [(S[0] + O[0]) / 2, 1.15, (S[2] + O[2]) / 2], lat = Math.abs((S[0] - O[0]) * rx + (S[2] - O[2]) * rz), d = Math.max(6.5, (lat + 2.8) / 0.34);
     return dolly(cl([M[0] + sx * d, 1.5, M[2] + sz * d]), M, pushK(f, p.a, 0.0035), { fov: 36, roll: -0.025 * side });
   }
   const look: V3 = [set.c[0] + rx * 0.6 * side, 1.4, set.c[1] + rz * 0.6 * side];

@@ -71,7 +71,7 @@ export const PLAN: Plan[] = [];
 // ---------------- captions (punch words) ----------------
 type Cap = { a: number; b: number; text: string; col: string };
 const find = (line: string, word: string, nth = 0): number => {
-  const L = LINES.find((l) => l.text.includes(line));
+  const L = LINES.find((l) => l.text.toLowerCase().includes(line.toLowerCase()));
   if (!L) { console.warn("caption line not found", line); return -1; }
   const ws = L.words.filter((w) => w[2].toLowerCase().replace(/[^a-z0-9-]/g, "").includes(word.toLowerCase()));
   return ws[nth]?.[0] ?? (console.warn("caption word not found", line, word), -1);

@@ -91,5 +91,5 @@ mix=voice*1.0+mus*0.55+sfx*0.55
 mix=np.tanh(mix*1.1)/1.1
 with wave.open('out/mix_raw.wav','wb') as w:
     w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((np.clip(mix,-1,1)*32767).astype(np.int16).tobytes())
-subprocess.run(['ffmpeg','-v','error','-y','-i','out/mix_raw.wav','-af','loudnorm=I=-15:TP=-1.5:LRA=8','-ar','48000','-ac','2','mix.wav'],check=True)
+subprocess.run(['ffmpeg','-v','error','-y','-i','out/mix_raw.wav','-af','loudnorm=I=-15:TP=-1.5:LRA=8','-ar','48000','-ac','2','-b:a','192k','public/igbo/mix.mp3'],check=True)
 print('ok',len(mix)/SR)
