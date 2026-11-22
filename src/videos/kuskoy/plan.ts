@@ -59,11 +59,23 @@ export const PLAN: Plan[] = [];
       const kind: Kind = L.i === 0 && k === 0 ? "two" : first && k === 0 ? "wide" : k === 0 ? (L.who === "pin" || n % 3 !== 2 ? "single" : "two") : (k % 2 ? "two" : "single");
       const side = n % 2 ? 1 : -1;
       PLAN.push({ id: n + 1, a: F(tc) - (k === 0 ? 2 : 0), b: F(end) - 2, ch: L.chapter, line: L.i, who: L.who, other: cast.includes(other) ? other : "pin",
-        kind, az: S.az + side * (kind === "wide" ? 0.45 : 0.35 + 0.25 * ((n >> 1) % 2)), light: S.light, seed: n });
+        kind, az: S.az + side * (kind === "wide" ? 0.2 : 0.12 + 0.1 * ((n >> 1) % 2)), light: S.light, seed: n });
       n++;
     });
     prevWho = L.who === "pin" ? prevWho : L.who;
   }
+  // hold shots longer: merge short shots into the previous one (same chapter), so the camera can move through the scene
+  const MINF = Math.round(3.4 * FPS), MAXF = Math.round(8 * FPS);
+  for (let k = 1; k < PLAN.length; ) {
+    const a = PLAN[k - 1], c = PLAN[k], da = a.b - a.a, dc = c.b - c.a;
+    if (a.ch === c.ch && (da < MINF || dc < MINF * 0.7) && da + dc <= MAXF) {
+      if (dc > da) { a.who = c.who; a.other = c.other; }
+      a.b = c.b; if (!WHO[a.ch].includes(a.other)) a.other = "pin";
+      PLAN.splice(k, 1);
+    } else k++;
+  }
+  const KP: Kind[] = ["wide", "two", "single", "two", "wide", "single", "two", "wide", "two", "single", "two", "wide"];
+  PLAN.forEach((q, i) => { q.id = i + 1; q.seed = i; q.kind = KP[i % KP.length]; if (!WHO[q.ch].includes(q.other) || q.other === q.who) q.other = WHO[q.ch].find((w) => w !== q.who) ?? "pin"; });
   PLAN[0].a = 0; PLAN[PLAN.length - 1].b = TOTAL;
   for (let k = 1; k < PLAN.length; k++) PLAN[k].a = PLAN[k - 1].b; // gapless
 }
