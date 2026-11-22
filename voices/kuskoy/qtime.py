@@ -1,5 +1,5 @@
 # build lines.json (timeline) + word timings with faster-whisper
-import re, json, soundfile as sf
+import re, json, soundfile as sf, numpy as np
 from faster_whisper import WhisperModel
 OUT="voices/kuskoy/voice4"; SRC="voices/kuskoy/script2.md"
 L=[];chap=0
@@ -17,7 +17,9 @@ for i,(who,x,ch) in enumerate(L):
     if who=="whistle":
         out.append({"i":i,"who":"whistle","chapter":ch,"text":"(whistle)","start":round(t,3),"dur":x,"words":[]}); t+=x+0.1; continue
     f=f"{OUT}/{i:03d}.wav"; a,sr=sf.read(f); d=len(a)/sr
-    segs,_=wm.transcribe(f,word_timestamps=True,language="en")
+    a16=a if a.ndim==1 else a.mean(1)
+    a16=np.interp(np.arange(0,len(a16),sr/16000),np.arange(len(a16)),a16).astype(np.float32)
+    segs,_=wm.transcribe(a16,word_timestamps=True,language="en")
     W=[[round(t+w.start,3),round(t+w.end,3),w.word.strip()] for s in segs for w in s.words]
     out.append({"i":i,"who":who,"chapter":ch,"text":x,"start":round(t,3),"dur":round(d,3),"words":W,"heard":" ".join(w[2] for w in W)})
     t+=d+(0.22 if i+1<len(L) and L[i+1][2]!=ch else 0.06)
