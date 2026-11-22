@@ -128,8 +128,12 @@ export const SUBS: Sub[] = (() => {
   for (const L of LINES) {
     if (L.whistle || !L.words.length) continue;
     let cur: Word[] = [];
-    const FIX: Record<string, string> = {};
-    const ws = L.words.map((w) => [w[0], w[1], FIX[w[2].toLowerCase()] ?? w[2]] as Word).filter((w) => w[2] !== "");
+    const FIX: Record<string, string> = { oymyakan: "Oymyakon" };
+    const ws: Word[] = [];
+    for (const w of L.words) {   // fix whisper spellings, glue ".7" onto "67"
+      const x = FIX[w[2].toLowerCase().replace(/[^a-z]/g, "")] ?? w[2];
+      if (/^\.\d/.test(x) && ws.length) { const p = ws[ws.length - 1]; ws[ws.length - 1] = [p[0], w[1], p[2] + x]; } else if (x) ws.push([w[0], w[1], x]);
+    }
     ws.forEach((w, k) => {
       cur.push(w);
       const end = k === ws.length - 1 || cur.length >= 3 || /[.,!?:]$/.test(w[2]);

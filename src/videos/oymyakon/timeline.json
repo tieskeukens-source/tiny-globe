@@ -1,5 +1,5 @@
 {
- "total": 62.04,
+ "total": 52.98,
  "lines": [
   {
    "i": 0,
@@ -7,769 +7,773 @@
    "chapter": 1,
    "text": "Would you go to school at minus fifty degrees?",
    "start": 0.9,
-   "dur": 3.81,
+   "dur": 2.8,
    "words": [
     [
      0.9,
-     1.32,
+     1.26,
      "Would"
     ],
     [
-     1.37,
-     1.67,
+     1.26,
+     1.42,
      "you"
     ],
     [
-     1.72,
-     1.96,
+     1.42,
+     1.56,
      "go"
     ],
     [
-     2.01,
-     2.25,
+     1.56,
+     1.7,
      "to"
     ],
     [
-     2.3,
-     2.78,
+     1.7,
+     1.96,
      "school"
     ],
     [
-     2.83,
-     3.07,
+     1.96,
+     2.2,
      "at"
     ],
     [
-     3.12,
-     3.54,
+     2.2,
+     2.48,
      "minus"
     ],
     [
-     3.59,
-     4.01,
-     "fifty"
+     2.48,
+     2.88,
+     "50"
     ],
     [
-     4.06,
-     4.66,
+     2.88,
+     3.18,
      "degrees?"
     ]
-   ]
+   ],
+   "heard": "Would you go to school at minus 50 degrees?"
   },
   {
    "i": 1,
    "who": "sardaana",
    "chapter": 1,
    "text": "I go every day!",
-   "start": 4.86,
-   "dur": 1.4,
+   "start": 3.76,
+   "dur": 1.52,
    "words": [
     [
-     4.86,
-     5.04,
+     3.76,
+     3.96,
      "I"
     ],
     [
-     5.09,
-     5.33,
+     3.96,
+     4.14,
      "go"
     ],
     [
-     5.38,
-     5.8,
+     4.14,
+     4.52,
      "every"
     ],
     [
-     5.85,
-     6.21,
+     4.52,
+     4.88,
      "day!"
     ]
-   ]
+   ],
+   "heard": "I go every day!"
   },
   {
    "i": 2,
    "who": "pin",
    "chapter": 1,
    "text": "This is Oymyakon, in Siberia. The coldest village on Earth where people live all year.",
-   "start": 6.41,
-   "dur": 6.87,
+   "start": 5.34,
+   "dur": 5.68,
    "words": [
     [
-     6.41,
-     6.77,
+     5.34,
+     5.68,
      "This"
     ],
     [
-     6.82,
-     7.06,
+     5.68,
+     5.98,
      "is"
     ],
     [
-     7.11,
-     7.77,
-     "Oymyakon,"
+     5.98,
+     6.88,
+     "Oymyakan"
     ],
     [
-     7.82,
-     8.06,
+     6.88,
+     7.1,
      "in"
     ],
     [
-     8.11,
-     8.71,
-     "Siberia."
+     7.1,
+     7.56,
+     "Siberia,"
     ],
     [
-     8.76,
-     9.06,
-     "The"
+     8.26,
+     8.34,
+     "the"
     ],
     [
-     9.11,
-     9.65,
+     8.34,
+     8.82,
      "coldest"
     ],
     [
-     9.7,
-     10.24,
+     8.82,
+     9.04,
      "village"
     ],
     [
-     10.29,
-     10.53,
+     9.04,
+     9.34,
      "on"
     ],
     [
-     10.58,
-     11.0,
+     9.34,
+     9.56,
      "Earth"
     ],
     [
-     11.05,
-     11.47,
+     9.56,
+     9.8,
      "where"
     ],
     [
-     11.52,
-     12.0,
+     9.8,
+     10.04,
      "people"
     ],
     [
-     12.05,
-     12.41,
+     10.04,
+     10.34,
      "live"
     ],
     [
-     12.46,
-     12.76,
+     10.34,
+     10.62,
      "all"
     ],
     [
-     12.81,
-     13.23,
+     10.62,
+     10.92,
      "year."
     ]
-   ]
+   ],
+   "heard": "This is Oymyakan in Siberia, the coldest village on Earth where people live all year."
   },
   {
    "i": 3,
    "who": "tourist",
    "chapter": 2,
    "text": "Wait... the school doesn't close?",
-   "start": 13.43,
-   "dur": 2.59,
+   "start": 11.24,
+   "dur": 2.56,
    "words": [
     [
-     13.43,
-     13.97,
-     "Wait..."
+     11.24,
+     12.08,
+     "Wait,"
     ],
     [
-     14.02,
-     14.32,
+     12.58,
+     12.66,
      "the"
     ],
     [
-     14.37,
-     14.85,
+     12.66,
+     12.86,
      "school"
     ],
     [
-     14.9,
-     15.44,
+     12.86,
+     13.18,
      "doesn't"
     ],
     [
-     15.49,
-     15.97,
+     13.18,
+     13.42,
      "close?"
     ]
-   ]
+   ],
+   "heard": "Wait, the school doesn't close?"
   },
   {
    "i": 4,
    "who": "sardaana",
    "chapter": 2,
    "text": "Only when it's colder than minus fifty-two.",
-   "start": 16.17,
-   "dur": 3.41,
+   "start": 13.86,
+   "dur": 2.72,
    "words": [
     [
-     16.17,
-     16.53,
+     13.86,
+     14.28,
      "Only"
     ],
     [
-     16.58,
-     16.94,
+     14.28,
+     14.46,
      "when"
     ],
     [
-     16.99,
-     17.35,
+     14.46,
+     14.68,
      "it's"
     ],
     [
-     17.4,
-     17.88,
+     14.68,
+     14.9,
      "colder"
     ],
     [
-     17.93,
-     18.29,
+     14.9,
+     15.18,
      "than"
     ],
     [
-     18.34,
-     18.76,
+     15.18,
+     15.5,
      "minus"
     ],
     [
-     18.81,
-     19.53,
-     "fifty-two."
+     15.5,
+     15.98,
+     "52."
     ]
-   ]
+   ],
+   "heard": "Only when it's colder than minus 52."
   },
   {
    "i": 5,
    "who": "pin",
    "chapter": 2,
    "text": "And if you're older than eleven, it has to hit minus fifty-six before you can stay home.",
-   "start": 19.73,
-   "dur": 7.21,
+   "start": 16.64,
+   "dur": 4.88,
    "words": [
     [
-     19.73,
-     20.03,
+     16.64,
+     17.28,
      "And"
     ],
     [
-     20.08,
-     20.32,
+     17.28,
+     17.4,
      "if"
     ],
     [
-     20.37,
-     20.85,
+     17.4,
+     17.6,
      "you're"
     ],
     [
-     20.9,
-     21.32,
+     17.6,
+     17.88,
      "older"
     ],
     [
-     21.37,
-     21.73,
+     17.88,
+     18.08,
      "than"
     ],
     [
-     21.78,
-     22.32,
-     "eleven,"
+     18.08,
+     18.38,
+     "11,"
     ],
     [
-     22.37,
-     22.61,
+     18.62,
+     18.74,
      "it"
     ],
     [
-     22.66,
-     22.96,
+     18.74,
+     18.94,
      "has"
     ],
     [
-     23.01,
-     23.25,
+     18.94,
+     19.12,
      "to"
     ],
     [
-     23.3,
-     23.6,
+     19.12,
+     19.28,
      "hit"
     ],
     [
-     23.65,
-     24.07,
+     19.28,
+     19.58,
      "minus"
     ],
     [
-     24.12,
-     24.78,
-     "fifty-six"
+     19.58,
+     20.12,
+     "56"
     ],
     [
-     24.83,
-     25.31,
+     20.12,
+     20.5,
      "before"
     ],
     [
-     25.36,
-     25.66,
+     20.5,
+     20.7,
      "you"
     ],
     [
-     25.71,
-     26.01,
+     20.7,
+     20.82,
      "can"
     ],
     [
-     26.06,
-     26.42,
+     20.82,
+     21.08,
      "stay"
     ],
     [
-     26.47,
-     26.89,
+     21.08,
+     21.34,
      "home."
     ]
-   ]
+   ],
+   "heard": "And if you're older than 11, it has to hit minus 56 before you can stay home."
   },
   {
    "i": 6,
    "who": "pin",
    "chapter": 3,
    "text": "It's so cold that people leave their cars running all day, or the engine freezes.",
-   "start": 27.09,
-   "dur": 6.57,
+   "start": 21.74,
+   "dur": 5.2,
    "words": [
     [
-     27.09,
-     27.45,
+     21.74,
+     22.62,
      "It's"
     ],
     [
-     27.5,
-     27.74,
+     22.62,
+     22.88,
      "so"
     ],
     [
-     27.79,
-     28.15,
+     22.88,
+     23.26,
      "cold"
     ],
     [
-     28.2,
-     28.56,
+     23.26,
+     23.48,
      "that"
     ],
     [
-     28.61,
-     29.09,
+     23.48,
+     23.7,
      "people"
     ],
     [
-     29.14,
-     29.56,
+     23.7,
+     23.96,
      "leave"
     ],
     [
-     29.61,
-     30.03,
+     23.96,
+     24.16,
      "their"
     ],
     [
-     30.08,
-     30.44,
+     24.16,
+     24.46,
      "cars"
     ],
     [
-     30.49,
-     31.03,
+     24.46,
+     24.78,
      "running"
     ],
     [
-     31.08,
-     31.38,
+     24.78,
+     25.04,
      "all"
     ],
     [
-     31.43,
-     31.79,
-     "day,"
+     25.04,
+     25.34,
+     "day"
     ],
     [
-     31.84,
-     32.08,
+     25.34,
+     25.76,
      "or"
     ],
     [
-     32.13,
-     32.43,
+     25.76,
+     25.88,
      "the"
     ],
     [
-     32.48,
-     32.96,
+     25.88,
+     26.2,
      "engine"
     ],
     [
-     33.01,
-     33.61,
+     26.2,
+     26.6,
      "freezes."
     ]
-   ]
+   ],
+   "heard": "It's so cold that people leave their cars running all day or the engine freezes."
   },
   {
    "i": 7,
    "who": "nikolai",
    "chapter": 3,
    "text": "And the toilet? Outside.",
-   "start": 33.81,
-   "dur": 1.94,
+   "start": 27.0,
+   "dur": 1.76,
    "words": [
     [
-     33.81,
-     34.11,
-     "And"
+     27.0,
+     27.28,
+     "and"
     ],
     [
-     34.16,
-     34.46,
+     27.28,
+     27.4,
      "the"
     ],
     [
-     34.51,
-     35.05,
-     "toilet?"
+     27.4,
+     27.74,
+     "toilet"
     ],
     [
-     35.1,
-     35.7,
-     "Outside."
+     27.74,
+     28.42,
+     "outside."
     ]
-   ]
+   ],
+   "heard": "and the toilet outside."
   },
   {
    "i": 8,
    "who": "tourist",
    "chapter": 3,
    "text": "Outside?! At minus fifty?",
-   "start": 35.9,
-   "dur": 2.0,
+   "start": 28.82,
+   "dur": 2.72,
    "words": [
     [
-     35.9,
-     36.56,
-     "Outside?!"
+     28.82,
+     29.9,
+     "Outside?"
     ],
     [
-     36.61,
-     36.85,
+     30.58,
+     30.64,
      "At"
     ],
     [
-     36.9,
-     37.32,
+     30.64,
+     30.94,
      "minus"
     ],
     [
-     37.37,
-     37.85,
-     "fifty?"
+     30.94,
+     31.24,
+     "50?"
     ]
-   ]
+   ],
+   "heard": "Outside? At minus 50?"
   },
   {
    "i": 9,
    "who": "nikolai",
    "chapter": 3,
    "text": "Be quick.",
-   "start": 38.05,
-   "dur": 0.82,
+   "start": 31.6,
+   "dur": 0.88,
    "words": [
     [
-     38.05,
-     38.29,
+     31.6,
+     31.9,
      "Be"
     ],
     [
-     38.34,
-     38.82,
+     31.9,
+     32.08,
      "quick."
     ]
-   ]
+   ],
+   "heard": "Be quick."
   },
   {
    "i": 10,
    "who": "pin",
    "chapter": 4,
    "text": "In nineteen thirty-three, it hit minus sixty-seven point seven degrees. The coldest temperature ever officially measured in the Northern Hemisphere.",
-   "start": 39.02,
-   "dur": 11.14,
+   "start": 32.7,
+   "dur": 8.96,
    "words": [
     [
-     39.02,
-     39.26,
+     32.7,
+     33.42,
      "In"
     ],
     [
-     39.31,
-     39.91,
-     "nineteen"
+     33.42,
+     34.22,
+     "1933,"
     ],
     [
-     39.96,
-     40.86,
-     "thirty-three,"
-    ],
-    [
-     40.91,
-     41.15,
+     34.9,
+     35.1,
      "it"
     ],
     [
-     41.2,
-     41.5,
+     35.1,
+     35.28,
      "hit"
     ],
     [
-     41.55,
-     41.97,
+     35.28,
+     35.68,
      "minus"
     ],
     [
-     42.02,
-     42.8,
-     "sixty-seven"
+     35.68,
+     36.4,
+     "67"
     ],
     [
-     42.85,
-     43.27,
-     "point"
+     36.4,
+     37.12,
+     ".7"
     ],
     [
-     43.32,
-     43.74,
-     "seven"
+     37.12,
+     37.38,
+     "degrees,"
     ],
     [
-     43.79,
-     44.39,
-     "degrees."
-    ],
-    [
-     44.44,
-     44.74,
-     "The"
-    ],
-    [
-     44.79,
-     45.33,
-     "coldest"
-    ],
-    [
-     45.38,
-     46.16,
-     "temperature"
-    ],
-    [
-     46.21,
-     46.57,
-     "ever"
-    ],
-    [
-     46.62,
-     47.34,
-     "officially"
-    ],
-    [
-     47.39,
-     47.99,
-     "measured"
-    ],
-    [
-     48.04,
-     48.28,
-     "in"
-    ],
-    [
-     48.33,
-     48.63,
+     38.08,
+     38.18,
      "the"
     ],
     [
-     48.68,
-     49.28,
+     38.18,
+     38.7,
+     "coldest"
+    ],
+    [
+     38.7,
+     39.1,
+     "temperature"
+    ],
+    [
+     39.1,
+     39.4,
+     "ever"
+    ],
+    [
+     39.4,
+     39.84,
+     "officially"
+    ],
+    [
+     39.84,
+     40.36,
+     "measured"
+    ],
+    [
+     40.36,
+     40.56,
+     "in"
+    ],
+    [
+     40.56,
+     40.72,
+     "the"
+    ],
+    [
+     40.72,
+     40.94,
      "Northern"
     ],
     [
-     49.33,
-     50.11,
+     40.94,
+     41.28,
      "Hemisphere."
     ]
-   ]
+   ],
+   "heard": "In 1933, it hit minus 67 .7 degrees, the coldest temperature ever officially measured in the Northern Hemisphere."
   },
   {
    "i": 11,
    "who": "pin",
    "chapter": 4,
    "text": "And the funny part? Oymyakon means unfrozen water, after a hot spring nearby.",
-   "start": 50.31,
-   "dur": 6.11,
+   "start": 41.72,
+   "dur": 6.16,
    "words": [
     [
-     50.31,
-     50.61,
+     41.72,
+     42.32,
      "And"
     ],
     [
-     50.66,
-     50.96,
+     42.32,
+     42.46,
      "the"
     ],
     [
-     51.01,
-     51.43,
+     42.46,
+     42.68,
      "funny"
     ],
     [
-     51.48,
-     51.9,
+     42.68,
+     43.14,
      "part?"
     ],
     [
-     51.95,
-     52.55,
+     44.06,
+     44.6,
      "Oymyakon"
     ],
     [
-     52.6,
-     53.02,
+     44.6,
+     44.86,
      "means"
     ],
     [
-     53.07,
-     53.67,
+     44.86,
+     45.58,
      "unfrozen"
     ],
     [
-     53.72,
-     54.2,
-     "water,"
+     45.58,
+     46.04,
+     "water"
     ],
     [
-     54.25,
-     54.67,
+     46.04,
+     46.56,
      "after"
     ],
     [
-     54.72,
-     54.9,
+     46.56,
+     46.76,
      "a"
     ],
     [
-     54.95,
-     55.25,
+     46.76,
+     46.98,
      "hot"
     ],
     [
-     55.3,
-     55.78,
+     46.98,
+     47.28,
      "spring"
     ],
     [
-     55.83,
-     56.37,
+     47.28,
+     47.64,
      "nearby."
     ]
-   ]
+   ],
+   "heard": "And the funny part? Oymyakon means unfrozen water after a hot spring nearby."
   },
   {
    "i": 12,
    "who": "tourist",
    "chapter": 5,
    "text": "So... when is summer?",
-   "start": 56.57,
-   "dur": 1.76,
+   "start": 48.1,
+   "dur": 2.08,
    "words": [
     [
-     56.57,
-     56.99,
-     "So..."
+     48.1,
+     48.86,
+     "So,"
     ],
     [
-     57.04,
-     57.4,
+     49.34,
+     49.54,
      "when"
     ],
     [
-     57.45,
-     57.69,
+     49.54,
+     49.72,
      "is"
     ],
     [
-     57.74,
-     58.28,
+     49.72,
+     49.94,
      "summer?"
     ]
-   ]
+   ],
+   "heard": "So, when is summer?"
   },
   {
    "i": 13,
    "who": "nikolai",
    "chapter": 5,
    "text": "You missed it. It was on Tuesday.",
-   "start": 58.48,
-   "dur": 2.81,
+   "start": 50.24,
+   "dur": 2.08,
    "words": [
     [
-     58.48,
-     58.78,
+     50.24,
+     50.54,
      "You"
     ],
     [
-     58.83,
-     59.31,
+     50.54,
+     50.8,
      "missed"
     ],
     [
-     59.36,
-     59.66,
+     50.8,
+     51.12,
      "it."
     ],
     [
-     59.71,
-     59.95,
+     51.28,
+     51.38,
      "It"
     ],
     [
-     60.0,
-     60.3,
+     51.38,
+     51.54,
      "was"
     ],
     [
-     60.35,
-     60.59,
+     51.54,
+     51.72,
      "on"
     ],
     [
-     60.64,
-     61.24,
+     51.72,
+     51.96,
      "Tuesday."
     ]
-   ]
+   ],
+   "heard": "You missed it. It was on Tuesday."
   }
  ]
 }
