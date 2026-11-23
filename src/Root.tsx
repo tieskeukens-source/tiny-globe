@@ -12,6 +12,7 @@ import {IgboCast} from './videos/igbo/IgboCast';
 import {IgboShortVideo, SHORT_FRAMES} from './videos/igboshort/IgboShortVideo';
 import {KuskoyVideo, SHORT_FRAMES as KUSKOY_FRAMES} from './videos/kuskoy/KuskoyVideo';
 import {OymyakonVideo, SHORT_FRAMES as OYM_FRAMES} from './videos/oymyakon/OymyakonVideo';
+import {GuessVideo, SHORT_FRAMES as GUESS1_FRAMES} from './videos/guess1/GuessVideo';
 import {BridgeShort, BRIDGE_FRAMES} from './videos/bridge/Bridge';
 import {Oymyakon} from './Oymyakon';
 import {Video, estimate, frames, Timings} from './Video';
@@ -32,6 +33,7 @@ export const Root: React.FC = () => (
     <Composition id="IgboCast" component={IgboCast} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="IgboShort" component={IgboShortVideo} durationInFrames={SHORT_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="Kuskoy" component={KuskoyVideo} durationInFrames={KUSKOY_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="Guess1" component={GuessVideo} durationInFrames={GUESS1_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="OymyakonShort" component={OymyakonVideo} durationInFrames={OYM_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="Baarle" component={BaarleVideo} durationInFrames={BAARLE_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="CastSheet" component={CastSheet} durationInFrames={1} fps={30} width={1920} height={1080} />
