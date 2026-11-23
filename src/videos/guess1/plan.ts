@@ -80,6 +80,10 @@ export const PLAN: Plan[] = [];
   }
   const KP: Kind[] = ["wide", "two", "single", "two", "wide", "single", "two", "wide", "two", "single", "two", "wide"];
   PLAN.forEach((q, i) => { q.id = i + 1; q.seed = i; q.kind = KP[i % KP.length]; if (!WHO[q.ch].includes(q.other) || q.other === q.who) q.other = WHO[q.ch].find((w) => w !== q.who) ?? "pin"; });
+  // a shot that holds two speakers is never a single on one of them; the closing question is a wide shot
+  PLAN.forEach((q) => { const sp = [...new Set(LINES.filter((l) => F(l.start) >= q.a - 3 && F(l.start) < q.b).map((l) => l.who))];
+    if (sp.length > 1 && q.kind !== "wide") { q.kind = WHO[q.ch].length > 2 ? "wide" : "two"; q.who = sp[sp.length - 1]; q.other = sp[0]; } });
+  PLAN[PLAN.length - 1].kind = "wide";
   PLAN[0].a = 0; PLAN[PLAN.length - 1].b = TOTAL;
   for (let k = 1; k < PLAN.length; k++) PLAN[k].a = PLAN[k - 1].b; // gapless
 }
@@ -130,7 +134,7 @@ export const SUBS: Sub[] = (() => {
     const ws: Word[] = [];
     for (const w of L.words) {   // fix whisper spellings, glue ".7" onto "67"
       const x = FIX[w[2].toLowerCase().replace(/[^a-z]/g, "")] ?? w[2];
-      if (/^\.\d/.test(x) && ws.length) { const p = ws[ws.length - 1]; ws[ws.length - 1] = [p[0], w[1], p[2] + x]; } else if (x) ws.push([w[0], w[1], x]);
+      if (/^[.,]\d/.test(x) && ws.length) { const p = ws[ws.length - 1]; ws[ws.length - 1] = [p[0], w[1], p[2] + x]; } else if (x) ws.push([w[0], w[1], x]);
     }
     ws.forEach((w, k) => {
       cur.push(w);
@@ -147,7 +151,7 @@ export const KICKS: [number, number][] = CAPS.filter((c) => /121,000|WEIGHT IN B
 /** hint counter: the moment PIN says "Hint one / two / three" (overlay counter + fog stages) */
 export const HINT_T: number[] = ["one", "two", "three"].map((n) => {
   const L = LINES.find((l) => new RegExp(`Hint ${n}`, "i").test(l.text));
-  const w = L?.words.find((x, k) => /^hint/i.test(x[2]) && norm(L.words[k + 1]?.[2] ?? "").startsWith(n.slice(0, 3)));
+  const dg = { one: "1", two: "2", three: "3" }[n]!, w = L?.words.find((x, k) => { const nx = norm(L.words[k + 1]?.[2] ?? ""); return /^hint/i.test(x[2]) && (nx.startsWith(n.slice(0, 3)) || nx === dg); });
   return w ? w[0] : L ? L.start : 1e9;
 });
 /** the closing question: "Which country is it?" */

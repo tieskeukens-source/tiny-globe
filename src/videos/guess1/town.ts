@@ -44,7 +44,7 @@ const signpost = (b: Batch, x: number, z: number) => {
   for (const [y, yaw, t, c] of arrows) {
     const m = new THREE.Matrix4().makeRotationY(yaw).setPosition(x, D0 + y, z), mt = lam("qa" + t + c, () => ({ map: qTex(t, c), alphaTest: 0.5, transparent: false }));
     b.add(quad(V(0.15, -0.3, 0.16), V(2.0, -0.3, 0.16), V(2.0, 0.3, 0.16), V(0.15, 0.3, 0.16)), mt, m);
-    b.add(quad(V(2.0, -0.3, 0.12), V(0.15, -0.3, 0.12), V(0.15, 0.3, 0.12), V(2.0, 0.3, 0.12), 0, 1, 1, 0), mt, m);
+    b.add(quad(V(2.0, -0.3, 0.12), V(0.15, -0.3, 0.12), V(0.15, 0.3, 0.12), V(2.0, 0.3, 0.12)), mt, m);
   }
 };
 /** low red sports car */
@@ -123,7 +123,7 @@ const sauna = (b: Batch, x: number, z: number, yaw: number, s: number, seed: num
   const cx = -hw * 0.45;
   b.add(boxGeo(V(cx - 0.18, h, -0.18), V(cx + 0.18, h + rh + 0.9, 0.18)), mat("chim", "#5a5a5e"), m);
   const p = new THREE.Vector3(cx, h + rh + 1.2, 0).applyMatrix4(m);
-  for (let k = 0; k < 5; k++) { const sz = 0.35 + k * 0.25; b.add(BALL, mat("smoke" + (k % 2), k % 2 ? "#e6e8ee" : "#f6f6fa"), S(p.x + k * 0.3, p.y + k * 0.6, p.z + Math.sin(k + seed) * 0.25, sz, sz * 0.8, sz)); }
+  for (let k = 0; k < 4; k++) { const sz = 0.22 + k * 0.12; b.add(BALL, mat("smoke" + (k % 2), k % 2 ? "#f2f3f7" : "#fbfbfd"), S(p.x + k * 0.25, p.y + k * 0.45, p.z + Math.sin(k + seed) * 0.25, sz, sz * 0.8, sz)); }
 };
 /** wooden jetty from (x,z) out into the lake along -z */
 const jetty = (b: Batch, x: number, z: number, len: number) => {
@@ -176,7 +176,7 @@ export const buildTown = (root: THREE.Object3D) => {
     // grandstand behind the far side
     for (let row = 0; row < 4; row++) b.add(boxGeo(V(12, D0, COURSE_Z - 9 - row * 0.9), V(30, D0 + 0.45 + row * 0.45, COURSE_Z - 8.1 - row * 0.9)), mat("stand", row % 2 ? "#d8d2c0" : "#c8c0aa"));
     for (let i = 0; i < 46; i++) { const row = i % 4, x = 12.6 + ((i * 7) % 17) + r() * 0.6, y = D0 + 0.45 + row * 0.45; b.add(BALL, mat("fan", ["#e8443a", "#ffd23f", "#4fb3e8", "#f4f1ea", "#5fae4a", "#c98ae8"][i % 6]), S(x, y + 0.4, COURSE_Z - 8.5 - row * 0.9, 0.24, 0.4, 0.2)); b.add(BALL, mat("fanHead", "#f1c9a8"), S(x, y + 0.95, COURSE_Z - 8.5 - row * 0.9, 0.17, 0.17, 0.17)); }
-    seesaw(b, 11.5, COURSE_Z + 6.6, 0);
+    seesaw(b, 12.5, COURSE_Z + 3.4, 0);
   }
   // ---- the lake (set 4): blue water, reeds, red saunas on the shore, jetties, an island with spruces
   { const lz = LAKE_Z - 6;

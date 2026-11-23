@@ -346,7 +346,7 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
   if (ch === 3) {
     // two couples racing down the course toward the camera, the wife upside down on the carrier's back (Estonian carry)
     for (let n = 0; n < 2; n++) {
-      const u = ((t * 0.09 + n * 0.45) % 1), x = 34 - u * 24, z = COURSE_Z + (n ? 1.6 : -1.6), jump = (Math.abs(x - 13) < 0.9 || Math.abs(x - 25) < 0.9) ? 0.35 : 0;
+      const u = ((t * 0.09 + n * 0.45) % 1), x = 34 - u * 18, z = COURSE_Z + (n ? 0.4 : -2.2), jump = (Math.abs(x - 13) < 0.9 || Math.abs(x - 25) < 0.9) ? 0.35 : 0;
       const wet = x > 17.5 && x < 21.5 ? -0.35 : 0, y = jump + wet;
       const man = person(cam, { i: 200 + n, o: PAIRS[(n * 3 + 1) % PAIRS.length], okey: `run${n}` }, x, y, z, { side: false, mirror: false },
         { phase: (t * 2.6 + n * 0.4) % 1, expr: "shock", mode: "march", look: 0, blink: 0, lift: 70, tilt: 0, facing: 1, mouthOpen: true, prop: null }, {});
@@ -356,7 +356,7 @@ export const stage = (id: number, t: number, cam: CamInfo): Stage => {
       wife.roll = Math.PI + 0.12 * Math.sin(t * 9 + n); out.places.push(wife);
     }
     // the wife on the seesaw scale, beer crates on the other end
-    const sit = person(cam, { i: 220, o: PAIRS[2], okey: "seesaw" }, 9.3, 1.05, COURSE_Z + 6.6, { side: false, mirror: false },
+    const sit = person(cam, { i: 220, o: PAIRS[2], okey: "seesaw" }, 10.3, 1.05, COURSE_Z + 3.4, { side: false, mirror: false },
       { phase: 0, expr: "grin", mode: "sit", look: 0, blink: lidAt(t, 220), lift: 0, tilt: 0, facing: 1, mouthOpen: false, prop: null, gesture: "up", g: 1 }, {});
     out.places.push(sit);
   }

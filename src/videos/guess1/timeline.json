@@ -1,5 +1,5 @@
 {
- "total": 43.04,
+ "total": 50.64,
  "lines": [
   {
    "i": 0,
@@ -7,649 +7,649 @@
    "chapter": 1,
    "text": "Three hints. One country. Can you guess it before the tourist does?",
    "start": 0.9,
-   "dur": 4.8,
+   "dur": 4.48,
    "words": [
     [
      0.9,
-     1.24,
+     1.58,
      "Three"
     ],
     [
-     1.3,
-     1.64,
+     1.58,
+     1.86,
      "hints."
     ],
     [
-     1.7,
-     2.04,
+     2.34,
+     2.46,
      "One"
     ],
     [
-     2.1,
-     2.44,
+     2.46,
+     2.84,
      "country."
     ],
     [
-     2.5,
-     2.84,
+     3.62,
+     3.7,
      "Can"
     ],
     [
-     2.9,
-     3.24,
+     3.7,
+     3.88,
      "you"
     ],
     [
-     3.3,
-     3.64,
+     3.88,
+     4.08,
      "guess"
     ],
     [
-     3.7,
-     4.04,
+     4.08,
+     4.26,
      "it"
     ],
     [
-     4.1,
-     4.44,
+     4.26,
+     4.48,
      "before"
     ],
     [
-     4.5,
-     4.84,
+     4.48,
+     4.64,
      "the"
     ],
     [
-     4.9,
-     5.24,
+     4.64,
+     4.92,
      "tourist"
     ],
     [
-     5.3,
-     5.64,
+     4.92,
+     5.18,
      "does?"
     ]
-   ]
+   ],
+   "heard": "Three hints. One country. Can you guess it before the tourist does?"
   },
   {
    "i": 1,
    "who": "tourist",
    "chapter": 1,
    "text": "Easy. I've been everywhere!",
-   "start": 5.76,
-   "dur": 1.6,
+   "start": 5.44,
+   "dur": 3.12,
    "words": [
     [
-     5.76,
-     6.1,
+     5.44,
+     6.44,
      "Easy."
     ],
     [
-     6.16,
-     6.5,
+     7.28,
+     7.4,
      "I've"
     ],
     [
-     6.56,
-     6.9,
+     7.4,
+     7.54,
      "been"
     ],
     [
-     6.96,
-     7.3,
-     "everywhere!"
+     7.54,
+     8.14,
+     "everywhere."
     ]
-   ]
+   ],
+   "heard": "Easy. I've been everywhere."
   },
   {
    "i": 2,
    "who": "pin",
    "chapter": 2,
    "text": "Hint one: here, a speeding ticket depends on how rich you are.",
-   "start": 7.58,
-   "dur": 4.8,
+   "start": 8.78,
+   "dur": 4.32,
    "words": [
     [
-     7.58,
-     7.92,
+     8.78,
+     9.34,
      "Hint"
     ],
     [
-     7.98,
-     8.32,
-     "one:"
+     9.34,
+     9.62,
+     "one."
     ],
     [
-     8.38,
-     8.72,
-     "here,"
+     10.14,
+     10.24,
+     "Here,"
     ],
     [
-     8.78,
-     9.12,
+     10.72,
+     10.8,
      "a"
     ],
     [
-     9.18,
-     9.52,
+     10.8,
+     11.12,
      "speeding"
     ],
     [
-     9.58,
-     9.92,
+     11.12,
+     11.48,
      "ticket"
     ],
     [
-     9.98,
-     10.32,
+     11.48,
+     11.88,
      "depends"
     ],
     [
-     10.38,
-     10.72,
+     11.88,
+     12.1,
      "on"
     ],
     [
-     10.78,
-     11.12,
+     12.1,
+     12.32,
      "how"
     ],
     [
-     11.18,
-     11.52,
+     12.32,
+     12.52,
      "rich"
     ],
     [
-     11.58,
-     11.92,
+     12.52,
+     12.76,
      "you"
     ],
     [
-     11.98,
-     12.32,
+     12.76,
+     13.0,
      "are."
     ]
-   ]
+   ],
+   "heard": "Hint one. Here, a speeding ticket depends on how rich you are."
   },
   {
    "i": 3,
    "who": "aino",
    "chapter": 2,
    "text": "Thirty over the limit. That's a hundred and twenty-one thousand euros.",
-   "start": 12.44,
-   "dur": 4.4,
+   "start": 13.16,
+   "dur": 4.64,
    "words": [
     [
-     12.44,
-     12.78,
-     "Thirty"
+     13.16,
+     13.62,
+     "30"
     ],
     [
-     12.84,
-     13.18,
+     13.62,
+     14.04,
      "over"
     ],
     [
-     13.24,
-     13.58,
+     14.04,
+     14.24,
      "the"
     ],
     [
-     13.64,
-     13.98,
-     "limit."
+     14.24,
+     14.54,
+     "limit,"
     ],
     [
-     14.04,
-     14.38,
-     "That's"
+     15.02,
+     15.26,
+     "that's"
     ],
     [
-     14.44,
-     14.78,
-     "a"
+     15.26,
+     16.12,
+     "121"
     ],
     [
-     14.84,
-     15.18,
-     "hundred"
+     16.12,
+     17.18,
+     ",000"
     ],
     [
-     15.24,
-     15.58,
-     "and"
-    ],
-    [
-     15.64,
-     15.98,
-     "twenty-one"
-    ],
-    [
-     16.04,
-     16.38,
-     "thousand"
-    ],
-    [
-     16.44,
-     16.78,
+     17.18,
+     17.44,
      "euros."
     ]
-   ]
+   ],
+   "heard": "30 over the limit, that's 121 ,000 euros."
   },
   {
    "i": 4,
    "who": "rich",
    "chapter": 2,
    "text": "For one ticket?!",
-   "start": 16.9,
-   "dur": 1.2,
+   "start": 17.86,
+   "dur": 0.96,
    "words": [
     [
-     16.9,
-     17.24,
+     17.86,
+     18.1,
      "For"
     ],
     [
-     17.3,
-     17.64,
+     18.1,
+     18.32,
      "one"
     ],
     [
-     17.7,
-     18.04,
-     "ticket?!"
+     18.32,
+     18.58,
+     "ticket?"
     ]
-   ]
+   ],
+   "heard": "For one ticket?"
   },
   {
    "i": 5,
    "who": "tourist",
    "chapter": 2,
    "text": "Switzerland!",
-   "start": 18.16,
-   "dur": 0.4,
+   "start": 18.88,
+   "dur": 1.28,
    "words": [
     [
-     18.16,
-     18.5,
-     "Switzerland!"
+     18.88,
+     19.72,
+     "Switzerland."
     ]
-   ]
+   ],
+   "heard": "Switzerland."
   },
   {
    "i": 6,
    "who": "pin",
    "chapter": 3,
    "text": "Nope! Hint two: this country hosts the world championship of... carrying your wife.",
-   "start": 18.78,
-   "dur": 5.2,
+   "start": 20.38,
+   "dur": 5.52,
    "words": [
     [
-     18.78,
-     19.12,
-     "Nope!"
+     20.38,
+     20.84,
+     "Nope."
     ],
     [
-     19.18,
-     19.52,
+     21.4,
+     21.46,
      "Hint"
     ],
     [
-     19.58,
-     19.92,
-     "two:"
+     21.46,
+     21.78,
+     "two."
     ],
     [
-     19.98,
-     20.32,
-     "this"
-    ],
-    [
-     20.38,
-     20.72,
-     "country"
-    ],
-    [
-     20.78,
-     21.12,
-     "hosts"
-    ],
-    [
-     21.18,
-     21.52,
-     "the"
-    ],
-    [
-     21.58,
-     21.92,
-     "world"
-    ],
-    [
-     21.98,
-     22.32,
-     "championship"
+     22.26,
+     22.38,
+     "This"
     ],
     [
      22.38,
-     22.72,
-     "of..."
+     22.7,
+     "country"
     ],
     [
-     22.78,
-     23.12,
+     22.7,
+     23.08,
+     "hosts"
+    ],
+    [
+     23.08,
+     23.34,
+     "the"
+    ],
+    [
+     23.34,
+     23.6,
+     "world"
+    ],
+    [
+     23.6,
+     24.14,
+     "championship"
+    ],
+    [
+     24.14,
+     24.48,
+     "of"
+    ],
+    [
+     24.48,
+     25.14,
      "carrying"
     ],
     [
-     23.18,
-     23.52,
+     25.14,
+     25.42,
      "your"
     ],
     [
-     23.58,
-     23.92,
+     25.42,
+     25.66,
      "wife."
     ]
-   ]
+   ],
+   "heard": "Nope. Hint two. This country hosts the world championship of carrying your wife."
   },
   {
    "i": 7,
    "who": "tourist",
    "chapter": 3,
    "text": "Wait, what?",
-   "start": 24.04,
-   "dur": 0.8,
+   "start": 25.96,
+   "dur": 1.52,
    "words": [
     [
-     24.04,
-     24.38,
+     25.96,
+     26.78,
      "Wait,"
     ],
     [
-     24.44,
-     24.78,
+     27.2,
+     27.28,
      "what?"
     ]
-   ]
+   ],
+   "heard": "Wait, what?"
   },
   {
    "i": 8,
    "who": "pin",
    "chapter": 3,
    "text": "And the prize? Her weight in beer.",
-   "start": 24.9,
-   "dur": 2.8,
+   "start": 27.54,
+   "dur": 3.52,
    "words": [
     [
-     24.9,
-     25.24,
+     27.54,
+     28.16,
      "And"
     ],
     [
-     25.3,
-     25.64,
+     28.16,
+     28.28,
      "the"
     ],
     [
-     25.7,
-     26.04,
+     28.28,
+     28.68,
      "prize?"
     ],
     [
-     26.1,
-     26.44,
+     29.74,
+     29.82,
      "Her"
     ],
     [
-     26.5,
-     26.84,
+     29.82,
+     30.14,
      "weight"
     ],
     [
-     26.9,
-     27.24,
+     30.14,
+     30.46,
      "in"
     ],
     [
-     27.3,
-     27.64,
+     30.46,
+     30.82,
      "beer."
     ]
-   ]
+   ],
+   "heard": "And the prize? Her weight in beer."
   },
   {
    "i": 9,
    "who": "tourist",
    "chapter": 3,
    "text": "Germany! Obviously.",
-   "start": 27.76,
-   "dur": 0.8,
+   "start": 31.12,
+   "dur": 2.32,
    "words": [
     [
-     27.76,
-     28.1,
-     "Germany!"
+     31.12,
+     32.08,
+     "Germany,"
     ],
     [
-     28.16,
-     28.5,
-     "Obviously."
+     32.72,
+     33.06,
+     "obviously."
     ]
-   ]
+   ],
+   "heard": "Germany, obviously."
   },
   {
    "i": 10,
    "who": "pin",
    "chapter": 4,
    "text": "Wrong again. Hint three: three million saunas, for only five and a half million people.",
-   "start": 28.78,
-   "dur": 6.0,
+   "start": 33.66,
+   "dur": 7.04,
    "words": [
     [
-     28.78,
-     29.12,
+     33.66,
+     34.6,
      "Wrong"
     ],
     [
-     29.18,
-     29.52,
-     "again."
+     34.6,
+     34.98,
+     "again?"
     ],
     [
-     29.58,
-     29.92,
+     35.76,
+     35.86,
      "Hint"
     ],
     [
-     29.98,
-     30.32,
-     "three:"
+     35.86,
+     36.22,
+     "3."
     ],
     [
-     30.38,
-     30.72,
-     "three"
+     36.74,
+     36.96,
+     "3"
     ],
     [
-     30.78,
-     31.12,
+     36.96,
+     37.46,
      "million"
     ],
     [
-     31.18,
-     31.52,
-     "saunas,"
+     37.46,
+     38.04,
+     "saunas"
     ],
     [
-     31.58,
-     31.92,
+     38.04,
+     38.48,
      "for"
     ],
     [
-     31.98,
-     32.32,
+     38.48,
+     38.7,
      "only"
     ],
     [
-     32.38,
-     32.72,
+     38.7,
+     39.1,
      "five"
     ],
     [
-     32.78,
-     33.12,
+     39.1,
+     39.24,
      "and"
     ],
     [
-     33.18,
-     33.52,
+     39.24,
+     39.36,
      "a"
     ],
     [
-     33.58,
-     33.92,
+     39.36,
+     39.58,
      "half"
     ],
     [
-     33.98,
-     34.32,
+     39.58,
+     40.0,
      "million"
     ],
     [
-     34.38,
-     34.72,
+     40.0,
+     40.5,
      "people."
     ]
-   ]
+   ],
+   "heard": "Wrong again? Hint 3. 3 million saunas for only five and a half million people."
   },
   {
    "i": 11,
    "who": "tourist",
    "chapter": 4,
    "text": "Sweden!",
-   "start": 34.84,
-   "dur": 0.4,
+   "start": 40.76,
+   "dur": 1.2,
    "words": [
     [
-     34.84,
-     35.18,
-     "Sweden!"
+     40.76,
+     41.6,
+     "Sweden."
     ]
-   ]
+   ],
+   "heard": "Sweden."
   },
   {
    "i": 12,
    "who": "pin",
    "chapter": 5,
    "text": "Maybe... maybe not.",
-   "start": 35.46,
-   "dur": 1.2,
+   "start": 42.18,
+   "dur": 2.64,
    "words": [
     [
-     35.46,
-     35.8,
-     "Maybe..."
+     42.18,
+     43.16,
+     "Maybe,"
     ],
     [
-     35.86,
-     36.2,
+     44.08,
+     44.26,
      "maybe"
     ],
     [
-     36.26,
-     36.6,
+     44.26,
+     44.6,
      "not."
     ]
-   ]
+   ],
+   "heard": "Maybe, maybe not."
   },
   {
    "i": 13,
    "who": "tourist",
    "chapter": 5,
    "text": "Just tell me!",
-   "start": 36.72,
+   "start": 44.88,
    "dur": 1.2,
    "words": [
     [
-     36.72,
-     37.06,
+     44.88,
+     45.44,
      "Just"
     ],
     [
-     37.12,
-     37.46,
+     45.44,
+     45.74,
      "tell"
     ],
     [
-     37.52,
-     37.86,
-     "me!"
+     45.74,
+     45.98,
+     "me."
     ]
-   ]
+   ],
+   "heard": "Just tell me."
   },
   {
    "i": 14,
    "who": "pin",
    "chapter": 5,
    "text": "Nope! Which country is it? Write your guess in the comments!",
-   "start": 37.98,
-   "dur": 4.4,
+   "start": 46.14,
+   "dur": 3.84,
    "words": [
     [
-     37.98,
-     38.32,
-     "Nope!"
+     46.14,
+     46.58,
+     "Nope."
     ],
     [
-     38.38,
-     38.72,
+     46.96,
+     47.18,
      "Which"
     ],
     [
-     38.78,
-     39.12,
+     47.18,
+     47.46,
      "country"
     ],
     [
-     39.18,
-     39.52,
+     47.46,
+     47.86,
      "is"
     ],
     [
-     39.58,
-     39.92,
+     47.86,
+     48.06,
      "it?"
     ],
     [
-     39.98,
-     40.32,
+     48.38,
+     48.48,
      "Write"
     ],
     [
-     40.38,
-     40.72,
+     48.48,
+     48.68,
      "your"
     ],
     [
-     40.78,
-     41.12,
+     48.68,
+     48.88,
      "guess"
     ],
     [
-     41.18,
-     41.52,
+     48.88,
+     49.08,
      "in"
     ],
     [
-     41.58,
-     41.92,
+     49.08,
+     49.22,
      "the"
     ],
     [
-     41.98,
-     42.32,
-     "comments!"
+     49.22,
+     49.58,
+     "comments."
     ]
-   ]
+   ],
+   "heard": "Nope. Which country is it? Write your guess in the comments."
   }
  ]
 }
