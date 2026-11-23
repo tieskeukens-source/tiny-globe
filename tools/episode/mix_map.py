@@ -58,7 +58,7 @@ while t < ask - 0.05:
     if k % 4 == 2: put(mus, t, clap(0.35))
     t += step; k += 1
 sfx = np.zeros(N)
-put(sfx, 0.75, whoosh())
+put(sfx, 0.02, whoosh(1.3, 0.3))
 for c in ev['cuts']: put(sfx, c[0], tick())
 for t0 in ev['kicks']: put(sfx, t0, thump())
 for c in ev['caps']: put(sfx, c[0], pop(0.14, 900))

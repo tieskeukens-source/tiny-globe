@@ -40,8 +40,6 @@ export const buildTown = (root: THREE.Object3D) => {
   // sea: deep blue floor + a lighter shelf ring look from the fog; latitude/longitude grid lines
   const sea = new THREE.PlaneGeometry(2400, 1600); sea.rotateX(-Math.PI / 2);
   b.add(sea, mat("sea", "#3d9be0"), new THREE.Matrix4().makeTranslation(0, D0 - TILE, 0));
-  for (let lon = -180; lon <= 180; lon += 30) b.add(new THREE.BoxGeometry(0.12, 0.01, 300).translate(lon, D0 - TILE + 0.01, -20), mat("grid", "#5aaee8"));
-  for (let lat = -60; lat <= 60; lat += 30) b.add(new THREE.BoxGeometry(360, 0.01, 0.12).translate(0, D0 - TILE + 0.01, -mercY(lat)), mat("grid", "#5aaee8"));
   b.build(root);
   // countries
   const fc = feature(atlas as never, (atlas as never as { objects: { countries: never } }).objects.countries) as unknown as { features: { properties: { name: string }; geometry: { type: string; coordinates: number[][][] | number[][][][] } }[] };
@@ -52,7 +50,9 @@ export const buildTown = (root: THREE.Object3D) => {
     const geos: THREE.BufferGeometry[] = [];
     let best = 0, bl = 0, bt = 0;
     for (const poly of polys) {
-      const ring = (r: number[][]) => r.map(([lon, lat]) => new THREE.Vector2(lon, mercY(lat)));
+      const span = (() => { const xs = poly[0].map((q) => q[0]); return Math.max(...xs) - Math.min(...xs); })();
+      // rings that cross the date line (Chukotka, Fiji...) are unwrapped east of 180 instead of smeared across the map
+      const ring = (r: number[][]) => r.map(([lon, lat]) => new THREE.Vector2(span > 180 && lon < 0 ? lon + 360 : lon, mercY(lat)));
       const outer = ring(poly[0]);
       if (outer.length < 4) continue;
       const area = Math.abs(THREE.ShapeUtils.area(outer));

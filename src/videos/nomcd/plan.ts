@@ -34,7 +34,7 @@ type SetDef = { c: [number, number]; az: number; light: Light; clampX?: number; 
 export const mercY = (lat: number) => (180 / Math.PI) * Math.log(Math.tan(Math.PI / 4 + (Math.max(-75, Math.min(80, lat)) * Math.PI) / 360));
 export const LL = (lon: number, lat: number): [number, number] => [lon, -mercY(lat)];
 export const SETS: Record<number, SetDef> = {
-  1: { c: LL(15, 30), az: 0, light: "day", map: { h: 150, back: 70, look: LL(12, 25), push: 0.35 } },     // hook: Europe + Africa from high above
+  1: { c: LL(15, 30), az: 0, light: "day", map: { h: 330, back: 150, look: LL(10, 22), push: 0.95 } },    // hook: the whole map, zooming in on Europe + Africa
   2: { c: LL(18, 2), az: 0, light: "day", map: { h: 105, back: 55, look: LL(18, 8), push: 0.2 } },       // the map turns gold / grey (Africa grey)
   3: { c: LL(-18.6, 64.9), az: 0.15, light: "day" },                                                     // Iceland
   4: { c: LL(-64.5, -17), az: -0.2, light: "day" },                                                      // Bolivia
@@ -107,12 +107,14 @@ export const PLAN: Plan[] = [];
   PLAN.forEach((q) => { const sp = [...new Set(LINES.filter((l) => F(l.start) >= q.a - 3 && F(l.start) < q.b).map((l) => l.who))];
     if (sp.length > 1 && q.kind !== "wide") { q.kind = WHO[q.ch].length > 2 ? "wide" : "two"; q.who = sp[sp.length - 1]; q.other = sp[0]; } });
   PLAN.forEach((q) => { if (SETS[q.ch].map) q.kind = "map"; else if (q.kind === "wide" && WHO[q.ch].length < 3) q.kind = "two"; });
+  for (let k = 1; k < PLAN.length; ) { const a = PLAN[k - 1], c = PLAN[k]; if (a.kind === "map" && c.kind === "map" && a.ch === c.ch) { a.b = c.b; PLAN.splice(k, 1); } else k++; }   // one continuous zoom per map chapter
+  PLAN.forEach((q, i) => { q.id = i + 1; });
   PLAN[0].a = 0; PLAN[PLAN.length - 1].b = TOTAL;
   for (let k = 1; k < PLAN.length; k++) PLAN[k].a = PLAN[k - 1].b; // gapless
 }
 
 // ---------------- captions ----------------
-export type Icon = "flag" | "bird" | "tea" | "notes" | "mountain" | "sound" | "hourglass" | "phone" | "down" | "shield" | "school" | "party" | "laugh" | "pin" | "thermo" | "snow" | "car" | "toilet" | "record" | "steam" | "sun" | "q" | "speed" | "money" | "no" | "couple" | "beer" | "sauna" | "comment" | "burger" | "empanada" | "museum";
+export type Icon = "flag" | "bird" | "tea" | "notes" | "mountain" | "sound" | "hourglass" | "phone" | "down" | "shield" | "school" | "party" | "laugh" | "pin" | "thermo" | "snow" | "car" | "toilet" | "record" | "steam" | "sun" | "q" | "speed" | "money" | "no" | "couple" | "beer" | "sauna" | "comment" | "burger" | "empanada" | "museum" | "noburger";
 type Cap = { a: number; b: number; text: string; col: string; icon?: Icon };
 const norm = (w: string) => w.toLowerCase().replace(/[^a-z0-9]/g, "");
 /** time of the first spoken word (whisper timing) in the line that contains `line`, matching any of `words` */
@@ -129,10 +131,10 @@ const cap = (line: string, words: string[], text: string, icon: Icon, col = "#ff
 const Y = "#ffd23f", WH = "#ffffff";
 /** punch captions: big word + icon on the exact spoken word */
 export const CAPS: Cap[] = [
-  cap("Almost half", ["zero", "0"], "ZERO McDONALD'S", "burger", Y, 1.6),
+  { a: 0, b: 2.6, text: "ZERO McDONALD'S", col: Y, icon: "noburger" },
   cap("Almost half", ["name"], "CAN YOU NAME ONE?", "q", WH, 1.4),
   cap("Gold means", ["Gold"], "GOLD = BURGERS", "burger", Y, 1.4),
-  cap("Gold means", ["Grey", "Gray"], "GREY = NONE", "no", WH, 1.2),
+  cap("Gold means", ["Grey", "Gray"], "GREY = NONE", "noburger", WH, 1.2),
   cap("Gold means", ["Africa"], "ALMOST ALL OF AFRICA", "pin", WH, 1.5),
   cap("We had three", ["three", "3"], "3 RESTAURANTS", "burger", WH, 1.2),
   cap("We had three", ["crashed"], "2009: MONEY CRASH", "down", "#ff6a5a", 1.6),
