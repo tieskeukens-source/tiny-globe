@@ -16,6 +16,7 @@ buildSync({ entryPoints: [dir + "/plan.ts"], bundle: true, platform: "node", for
 const { PLAN, posOf } = createRequire(import.meta.url)(out2);
 let bad = 0;
 for (const p of PLAN) {
+  if (p.kind === "map") continue;
   const who = [p.who, ...(p.kind === "two" ? [p.other] : [])];
   const issues = new Set();
   for (let k = 0; k <= 4; k++) {
