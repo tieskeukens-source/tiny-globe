@@ -12,6 +12,19 @@ for s in open(f"voices/{EP}/script2.md", encoding="utf8"):
     m = re.match(r"^([A-Z]+): (.+)$", s)
     if m and m.group(1).lower() in CAST: t = m.group(2); [t := t.replace(a, b) for a, b in FIX.items()]; L.append((m.group(1).lower(), t))
 torch.set_num_threads(4)
+import os, shutil, subprocess
+C = CAST[WHO]
+if not os.path.exists(C["ref"]) and "edge" in C:   # new recurring character: make its reference voice from an edge-tts voice (variant B)
+    import asyncio, edge_tts
+    os.makedirs(os.path.dirname(C["ref"]), exist_ok=True)
+    async def mk():
+        for a in range(6):
+            try: await edge_tts.Communicate(C["text"], C["edge"]).save("/tmp/ref.mp3"); return
+            except Exception as e: print("edge retry", a, e, flush=True); await asyncio.sleep(3 + 3 * a)
+        raise SystemExit("edge voice failed")
+    asyncio.run(mk())
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", "/tmp/ref.mp3", "-ar", "24000", "-ac", "1", C["ref"]], check=True)
+    shutil.copy(C["ref"], f"{OUT}/ref_{WHO}.wav")
 b = Qwen3TTSModel.from_pretrained("Qwen/Qwen3-TTS-12Hz-1.7B-Base", device_map="cpu", dtype=torch.float32)
 p = b.create_voice_clone_prompt(ref_audio=CAST[WHO]["ref"], ref_text=CAST[WHO]["text"])
 for i, (who, text) in enumerate(L):
