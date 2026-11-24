@@ -2,18 +2,18 @@
 # DRE = calm leader (punchlines), LOU = tired sceptic, FAST = loud hype guy. South London, full roadman.
 
 ## 1 hook
-FAST: Wagwan! GTA Six is finally out, fam! Thirteen years, bruv!
+FAST: Wagwan! GTA Six is finally out, fam! Firteen years, bruv!
 LOU: Bruv, I was in Year Four when Five dropped. Allow it.
 
 ## 2 flex
-FAST: I been on it all night, you know! Man's got a mansion, a boat, a chopper!
+FAST: I been on it all night, ya know! Man's got a mansion, a boat, a chopper!
 DRE: In real life, though?
 FAST: Two quid and a cold.
 
 ## 3 exposed
-LOU: Man ain't left his yard in five days. His mum rang me, fam.
+LOU: Man ain't left his yard in five days, ya know. His mum rang me, fam.
 FAST: That's cap! It was four!
-DRE: Four days. Same jersey.
+DRE: Four days. Same jersey, ya get me.
 FAST: It's a hard jersey, innit!
 
 ## 4 question
