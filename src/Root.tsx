@@ -16,6 +16,8 @@ import {GuessVideo, SHORT_FRAMES as GUESS1_FRAMES} from './videos/guess1/GuessVi
 import {NoMcdVideo, SHORT_FRAMES as NOMCD_FRAMES} from './videos/nomcd/NoMcdVideo';
 import {BridgeShort, BRIDGE_FRAMES} from './videos/bridge/Bridge';
 import {Oymyakon} from './Oymyakon';
+import {CrewSheet} from './videos/block1/CrewSheet';
+import {BlockVideo, SHORT_FRAMES as BLOCK1_FRAMES} from './videos/block1/BlockVideo';
 import {Video, estimate, frames, Timings} from './Video';
 import {staticFile} from 'remotion';
 import {W, H, FPS} from './brand';
@@ -38,6 +40,8 @@ export const Root: React.FC = () => (
     <Composition id="Guess1" component={GuessVideo} durationInFrames={GUESS1_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="OymyakonShort" component={OymyakonVideo} durationInFrames={OYM_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="Baarle" component={BaarleVideo} durationInFrames={BAARLE_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="Block1" component={BlockVideo} durationInFrames={BLOCK1_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="CrewSheet" component={CrewSheet} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="CastSheet" component={CastSheet} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="MockupV2" component={MockupV2} durationInFrames={1} fps={FPS} width={1920} height={1080} />
     <Composition id="ThumbB" component={Thumb} durationInFrames={1} fps={FPS} width={W} height={H} defaultProps={{variant: 'B'}} />

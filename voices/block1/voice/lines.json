@@ -1,0 +1,475 @@
+{
+ "total": 28.74,
+ "lines": [
+  {
+   "i": 0,
+   "who": "fast",
+   "chapter": 1,
+   "text": "Yo! GTA Six is finally out! Thirteen years, bro!",
+   "start": 0.9,
+   "dur": 4.48,
+   "words": [
+    [
+     0.9,
+     1.26,
+     "Yo,"
+    ],
+    [
+     1.48,
+     1.78,
+     "GTA"
+    ],
+    [
+     1.78,
+     2.26,
+     "6"
+    ],
+    [
+     2.26,
+     2.56,
+     "is"
+    ],
+    [
+     2.56,
+     2.88,
+     "finally"
+    ],
+    [
+     2.88,
+     3.32,
+     "out."
+    ],
+    [
+     3.94,
+     4.26,
+     "13"
+    ],
+    [
+     4.26,
+     4.64,
+     "years,"
+    ],
+    [
+     5.04,
+     5.04,
+     "bro."
+    ]
+   ],
+   "heard": "Yo, GTA 6 is finally out. 13 years, bro."
+  },
+  {
+   "i": 1,
+   "who": "lou",
+   "chapter": 1,
+   "text": "Bro, I was a kid when GTA Five dropped.",
+   "start": 5.44,
+   "dur": 2.48,
+   "words": [
+    [
+     5.44,
+     5.68,
+     "Bro,"
+    ],
+    [
+     5.94,
+     6.04,
+     "I"
+    ],
+    [
+     6.04,
+     6.14,
+     "was"
+    ],
+    [
+     6.14,
+     6.28,
+     "a"
+    ],
+    [
+     6.28,
+     6.44,
+     "kid"
+    ],
+    [
+     6.44,
+     6.66,
+     "when"
+    ],
+    [
+     6.66,
+     6.96,
+     "GTA"
+    ],
+    [
+     6.96,
+     7.32,
+     "5"
+    ],
+    [
+     7.32,
+     7.6,
+     "dropped."
+    ]
+   ],
+   "heard": "Bro, I was a kid when GTA 5 dropped."
+  },
+  {
+   "i": 2,
+   "who": "fast",
+   "chapter": 2,
+   "text": "I played all night. I got a mansion, a boat, a helicopter!",
+   "start": 8.14,
+   "dur": 4.96,
+   "words": [
+    [
+     8.14,
+     8.4,
+     "I"
+    ],
+    [
+     8.4,
+     8.66,
+     "played"
+    ],
+    [
+     8.66,
+     8.92,
+     "all"
+    ],
+    [
+     8.92,
+     9.28,
+     "night."
+    ],
+    [
+     9.88,
+     10.04,
+     "I"
+    ],
+    [
+     10.04,
+     10.2,
+     "got"
+    ],
+    [
+     10.2,
+     10.34,
+     "a"
+    ],
+    [
+     10.34,
+     10.72,
+     "mansion,"
+    ],
+    [
+     11.24,
+     11.26,
+     "a"
+    ],
+    [
+     11.26,
+     11.56,
+     "boat,"
+    ],
+    [
+     12.04,
+     12.08,
+     "a"
+    ],
+    [
+     12.08,
+     12.54,
+     "helicopter."
+    ]
+   ],
+   "heard": "I played all night. I got a mansion, a boat, a helicopter."
+  },
+  {
+   "i": 3,
+   "who": "dre",
+   "chapter": 2,
+   "text": "In real life?",
+   "start": 13.16,
+   "dur": 0.8,
+   "words": [
+    [
+     13.16,
+     13.36,
+     "In"
+    ],
+    [
+     13.36,
+     13.5,
+     "real"
+    ],
+    [
+     13.5,
+     13.82,
+     "life,"
+    ]
+   ],
+   "heard": "In real life,"
+  },
+  {
+   "i": 4,
+   "who": "fast",
+   "chapter": 2,
+   "text": "Two dollars and a cold.",
+   "start": 14.02,
+   "dur": 1.52,
+   "words": [
+    [
+     14.02,
+     14.48,
+     "$2"
+    ],
+    [
+     14.48,
+     14.92,
+     "and"
+    ],
+    [
+     14.92,
+     15.06,
+     "a"
+    ],
+    [
+     15.06,
+     15.36,
+     "cold."
+    ]
+   ],
+   "heard": "$2 and a cold."
+  },
+  {
+   "i": 5,
+   "who": "lou",
+   "chapter": 3,
+   "text": "He hasn't left his room in five days. His mom called me.",
+   "start": 15.76,
+   "dur": 3.2,
+   "words": [
+    [
+     15.76,
+     15.9,
+     "He"
+    ],
+    [
+     15.9,
+     16.16,
+     "hasn't"
+    ],
+    [
+     16.16,
+     16.28,
+     "left"
+    ],
+    [
+     16.28,
+     16.48,
+     "his"
+    ],
+    [
+     16.48,
+     16.64,
+     "room"
+    ],
+    [
+     16.64,
+     16.8,
+     "in"
+    ],
+    [
+     16.8,
+     17.0,
+     "five"
+    ],
+    [
+     17.0,
+     17.32,
+     "days."
+    ],
+    [
+     17.88,
+     18.02,
+     "His"
+    ],
+    [
+     18.02,
+     18.24,
+     "mom"
+    ],
+    [
+     18.24,
+     18.56,
+     "called"
+    ],
+    [
+     18.56,
+     18.76,
+     "me."
+    ]
+   ],
+   "heard": "He hasn't left his room in five days. His mom called me."
+  },
+  {
+   "i": 6,
+   "who": "fast",
+   "chapter": 3,
+   "text": "That's a lie! It was four.",
+   "start": 19.02,
+   "dur": 2.08,
+   "words": [
+    [
+     19.02,
+     19.38,
+     "That's"
+    ],
+    [
+     19.38,
+     19.44,
+     "a"
+    ],
+    [
+     19.44,
+     19.74,
+     "lie."
+    ],
+    [
+     20.28,
+     20.38,
+     "It"
+    ],
+    [
+     20.38,
+     20.52,
+     "was"
+    ],
+    [
+     20.52,
+     20.88,
+     "four."
+    ]
+   ],
+   "heard": "That's a lie. It was four."
+  },
+  {
+   "i": 7,
+   "who": "dre",
+   "chapter": 3,
+   "text": "Four days. Same hoodie.",
+   "start": 21.16,
+   "dur": 2.0,
+   "words": [
+    [
+     21.16,
+     21.48,
+     "4"
+    ],
+    [
+     21.48,
+     21.78,
+     "days."
+    ],
+    [
+     22.36,
+     22.6,
+     "Same"
+    ],
+    [
+     22.6,
+     23.0,
+     "hoodie."
+    ]
+   ],
+   "heard": "4 days. Same hoodie."
+  },
+  {
+   "i": 8,
+   "who": "fast",
+   "chapter": 3,
+   "text": "It's a good hoodie!",
+   "start": 23.22,
+   "dur": 1.2,
+   "words": [
+    [
+     23.22,
+     23.48,
+     "It's"
+    ],
+    [
+     23.48,
+     23.6,
+     "a"
+    ],
+    [
+     23.6,
+     23.78,
+     "good"
+    ],
+    [
+     23.78,
+     24.18,
+     "hoodie."
+    ]
+   ],
+   "heard": "It's a good hoodie."
+  },
+  {
+   "i": 9,
+   "who": "dre",
+   "chapter": 4,
+   "text": "Be honest. How many hours you got already? Comment.",
+   "start": 24.64,
+   "dur": 3.44,
+   "words": [
+    [
+     24.64,
+     24.88,
+     "Be"
+    ],
+    [
+     24.88,
+     25.14,
+     "honest."
+    ],
+    [
+     25.66,
+     25.76,
+     "How"
+    ],
+    [
+     25.76,
+     25.9,
+     "many"
+    ],
+    [
+     25.9,
+     26.16,
+     "hours"
+    ],
+    [
+     26.16,
+     26.36,
+     "you"
+    ],
+    [
+     26.36,
+     26.54,
+     "got"
+    ],
+    [
+     26.54,
+     26.88,
+     "already?"
+    ],
+    [
+     27.48,
+     27.66,
+     "Comment."
+    ]
+   ],
+   "heard": "Be honest. How many hours you got already? Comment."
+  }
+ ]
+}
