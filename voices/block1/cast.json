@@ -1,0 +1,8 @@
+{
+ "dre": {"ref": "voices/common/crew/dre.wav", "edge": "en-US-AndrewNeural",
+  "text": "Relax. I been around this block my whole life. Nothing surprises me no more, you feel me?"},
+ "lou": {"ref": "voices/common/crew/lou.wav", "edge": "en-US-BrianNeural",
+  "text": "Man, I don't believe nothing nobody says. Every week it's a new story. I'm tired, bro."},
+ "fast": {"ref": "voices/common/crew/fast.wav", "edge": "en-US-RogerNeural",
+  "text": "Yo yo yo! You will not believe what just happened, bro! This is crazy! Listen, listen!"}
+}
