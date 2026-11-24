@@ -1,0 +1,20 @@
+{
+ "dre": {
+  "ref_en": "Listen, yeah. I been on this block my whole life, you get me? Nothing shocks me no more. Man just stays calm, innit.",
+  "edge": "en-GB-ThomasNeural",
+  "design": "A young Black British man from South London, about 22, with a strong Multicultural London English roadman accent: glottal stops, 'th' said as 'f' or 'd', dropped h's. Deep, low, relaxed and unbothered, slow cool deadpan delivery, slightly husky.",
+  "test": ["In real life, though?", "Four days. Same jersey."]
+ },
+ "lou": {
+  "ref_en": "Nah, bruv, I don't believe none of it. Every week it's a new story with you lot. Allow it, man, I'm tired, fam.",
+  "edge": "en-GB-RyanNeural",
+  "design": "A young British man from East London, about 20, with a heavy Multicultural London English roadman accent: glottal stops, 'th' as 'f', 'innit', 'bruv'. Slightly nasal, sceptical and tired, drawn-out dismissive tone, unimpressed, mid-pitched.",
+  "test": ["Bruv, I was in Year Four when Five dropped. Allow it.", "Man ain't left his yard in five days. His mum rang me, fam."]
+ },
+ "fast": {
+  "ref_en": "Yo yo yo! Wagwan, fam! You lot will not believe what just happened, bruv! This is mad, listen, listen!",
+  "edge": "en-GB-RyanNeural",
+  "design": "A young Black British teenager from South London, about 18, with a strong Multicultural London English roadman accent. Very loud, fast and hyped, high energy, excited, voice rising and almost cracking, talks quickly, playful.",
+  "test": ["Wagwan! GTA Six is finally out, fam! Thirteen years, bruv!", "That's cap! It was four!"]
+ }
+}

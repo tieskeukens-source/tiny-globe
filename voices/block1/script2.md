@@ -1,23 +1,23 @@
-# The Block #1: "GTA Six is out" (~25 s). Crew hangs at the brick wall and talks.
-# DRE = calm leader (says the punchline), LOU = tired sceptic, FAST = loud hype guy.
+# The Block #1 v2 (UK / roadman): "GTA Six is out" (~27 s). Crew outside the chicken shop, one street, one camera.
+# DRE = calm leader (punchlines), LOU = tired sceptic, FAST = loud hype guy. South London, full roadman.
 
 ## 1 hook
-FAST: Yo! GTA Six is finally out! Thirteen years, bro!
-LOU: Bro, I was a kid when GTA Five dropped.
+FAST: Wagwan! GTA Six is finally out, fam! Thirteen years, bruv!
+LOU: Bruv, I was in Year Four when Five dropped. Allow it.
 
 ## 2 flex
-FAST: I played all night. I got a mansion, a boat, a helicopter!
-DRE: In real life?
-FAST: Two dollars and a cold.
+FAST: I been on it all night, you know! Man's got a mansion, a boat, a chopper!
+DRE: In real life, though?
+FAST: Two quid and a cold.
 
 ## 3 exposed
-LOU: He hasn't left his room in five days. His mom called me.
-FAST: That's a lie! It was four.
+LOU: Man ain't left his yard in five days. His mum rang me, fam.
+FAST: That's cap! It was four!
 DRE: Four days. Same jersey.
-FAST: It's a good jersey!
+FAST: It's a hard jersey, innit!
 
 ## 4 question
-DRE: Be honest. How many hours you got already? Comment.
+DRE: Be real. How many hours you got? Drop it in the comments.
 
 ---
 ## Facts
