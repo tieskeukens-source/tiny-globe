@@ -1,0 +1,29 @@
+{
+ "fast": {
+  "ref": "Yo, wagwan fam! Bruv, you lot will not believe what just happened, ya know! Man's gone mad, innit, listen, listen!",
+  "designs": [
+   "A 17 year old boy from Peckham, South London, with a very thick roadman Multicultural London English accent, like a UK drill rapper talking casually on Snapchat. Fast, loud, hyped, slurred casual street speech, heavy glottal stops, 'th' becomes 'f', flat vowels, Jamaican-influenced rhythm. Messy and natural, slightly raspy, definitely not a narrator.",
+   "A 19 year old from Tottenham, North London, speaking like a grime MC off the mic: thick London roadman accent, excited and shouting, words running together, dropped consonants, sing-song Caribbean-influenced intonation, raw and unpolished, a bit breathless.",
+   "A loud teenage lad from Croydon, South London, very strong street London accent with heavy slang, high-pitched and over-excited, almost laughing while he talks, cutting words short, glottal stops on every t, chaotic natural delivery, sounds like a real voice note."
+  ],
+  "test": ["Wagwan! GTA Six is finally out, fam! Firteen years, bruv!", "That's cap! It was four!"]
+ },
+ "lou": {
+  "ref": "Nah, bruv, allow it. Man don't believe nuffin you lot say, ya get me. Every week it's a new ting. I'm tired, fam.",
+  "designs": [
+   "A 20 year old man from Hackney, East London, with a very thick roadman Multicultural London English accent. Bored and unimpressed, lazy slow drawl, mumbles, low energy, slightly nasal, glottal stops everywhere, sounds like he cannot be bothered. Natural and casual, not clear, not a narrator.",
+   "A young man from Lewisham, South London, deep-ish voice, strong roadman London accent, sarcastic and dismissive, sighs between words, drawn-out vowels, sucks his teeth, very casual unpolished street speech.",
+   "A 21 year old from Brixton, South London, thick London street accent with Jamaican patois influence, sceptical, flat and deadpan, quiet mumbled delivery, lazy consonants, sounds like a real voice note recorded outside."
+  ],
+  "test": ["Bruv, I was in Year Four when Five dropped. Allow it.", "Man ain't left his yard in five days, ya know. His mum rang me, fam."]
+ },
+ "dre": {
+  "ref": "Listen, yeah. Man's been on this block from time, ya get me. Nuffin shocks me no more. I just stay calm, innit.",
+  "designs": [
+   "A 23 year old man from Brixton, South London, deep husky voice, very thick roadman Multicultural London English accent with Jamaican patois influence. Calm, slow, cold and deadpan, few words, low and quiet, chill but intimidating, like a UK drill rapper in an interview. Natural, not polished.",
+   "A young man from Peckham, South London, very low gravelly voice, strong London street accent, unbothered and dry, speaks slowly with long pauses, heavy glottal stops, cool and confident, unpolished real speech.",
+   "A 24 year old from Tottenham, North London, deep smooth voice, thick roadman accent, quietly amused, dry sarcasm, relaxed slow cadence, slightly raspy, sounds like a real person talking on the street at night."
+  ],
+  "test": ["In real life, though?", "Four days. Same jersey, ya get me."]
+ }
+}
