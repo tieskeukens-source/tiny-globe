@@ -6,9 +6,10 @@
 import React from 'react';
 
 export type Who = 'dre' | 'lou' | 'fast';
-export type Arms = 'crossed' | 'pockets' | 'hype' | 'shrug' | 'point' | 'phone' | 'down';
+export type Arms = 'crossed' | 'pockets' | 'hype' | 'shrug' | 'point' | 'phone' | 'down' | 'rig';
 export type Eyes = 'calm' | 'tired' | 'wide' | 'angry' | 'side' | 'closed';
-export type Pose = {open?: number; eyes?: Eyes; arms?: Arms; tilt?: number; blink?: boolean; prop?: string};
+// rig arms: [shoulder, elbow] in degrees; shoulder 0 = hanging down, + = outward/up; elbow + = forearm bends outward/up, - = across the body
+export type Pose = {open?: number; eyes?: Eyes; arms?: Arms; tilt?: number; blink?: boolean; prop?: string; look?: number; aL?: [number, number]; aR?: [number, number]; phone?: boolean};
 
 const INK = '#141210';
 const S = {stroke: INK, strokeWidth: 7, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const};
@@ -146,9 +147,12 @@ const Head: React.FC<{who: Who; pose: Pose}> = ({who, pose}) => {
       {who === 'fast' && [180, 420].map((x) => <circle key={x} cx={x} cy={336} r={8} fill="#f0c23a" stroke={INK} strokeWidth={3} />)}
       <path d="M196,200 C196,150 404,150 404,200 L414,330 C420,430 396,470 300,476 C204,470 180,430 186,330 Z" fill={p.skin} {...S} />
       <path d="M404,200 L414,330 C420,430 396,470 300,476 C356,456 382,420 380,330 L378,206 Z" fill={p.skinD} />
+      <g transform={`translate(${(pose.look ?? 0) * 22} 0)`}>
       {who === 'dre' && <path d="M262,446 C276,470 324,470 338,446 C330,478 312,486 300,486 C288,486 270,478 262,446 Z" fill={p.hair} {...S} strokeWidth={5} />}
       {who === 'lou' && <path d="M250,448 C270,474 330,474 350,448 C346,488 318,498 300,498 C282,498 254,488 250,448 Z" fill={p.hair} {...S} strokeWidth={5} />}
       {who === 'fast' && <path d="M210,420 Q220,470 300,478 Q380,470 390,420" fill="none" stroke={p.hair} strokeWidth={6} strokeDasharray="3 6" />}
+      </g>
+      <g transform={`translate(${(pose.look ?? 0) * 30} 0)`}>
       <path d="M292,262 Q278,300 288,310 Q300,316 312,308" fill="none" {...S} strokeWidth={5} />
       <Eye x={252} e={e} flip={-1} blink={pose.blink} />
       <Eye x={348} e={e} flip={1} blink={pose.blink} />
@@ -156,9 +160,12 @@ const Head: React.FC<{who: Who; pose: Pose}> = ({who, pose}) => {
       <Brow x={348} e={e} flip={1} />
       <Mouth open={pose.open ?? 0} p={p} />
       {who === 'lou' && <path d="M236,312 Q300,292 364,312" fill="none" stroke={p.hair} strokeWidth={10} strokeLinecap="round" />}
+      </g>
+      <g transform={`translate(${(pose.look ?? 0) * 8} 0)`}>
       {who === 'dre' && <Cornrows p={p} />}
       {who === 'lou' && <AfroFront p={p} />}
       {who === 'fast' && <Twists p={p} />}
+      </g>
     </g>
   );
 };
@@ -234,11 +241,11 @@ const Torso: React.FC<{who: Who; arms: Arms}> = ({who, arms}) => {
         <path d="M200,520 C150,530 118,560 106,620 L96,700 L176,712 L190,630 Z" fill={p.top} {...S} />
         <path d="M400,520 C450,530 482,560 494,620 L504,700 L424,712 L410,630 Z" fill={p.topD} {...S} />
       </>}
-      <Arm who={who} arms={arms} />
-      {who !== 'lou' && capL && <path d="M200,520 C150,530 118,560 106,620 L92,730 L176,748 L188,640 Z" fill={p.top} {...S} />}
-      {who !== 'lou' && capR && <path d="M400,520 C450,530 482,560 494,620 L508,730 L424,748 L412,640 Z" fill={p.topD} {...S} />}
-      {who === 'fast' && capL && <path d="M96,712 L178,730" stroke="#fbf8f0" strokeWidth={8} />}
-      {who === 'fast' && capR && <path d="M504,712 L422,730" stroke="#fbf8f0" strokeWidth={8} />}
+      {arms !== 'rig' && <Arm who={who} arms={arms} />}
+      {arms !== 'rig' && who !== 'lou' && capL && <path d="M200,520 C150,530 118,560 106,620 L92,730 L176,748 L188,640 Z" fill={p.top} {...S} />}
+      {arms !== 'rig' && who !== 'lou' && capR && <path d="M400,520 C450,530 482,560 494,620 L508,730 L424,748 L412,640 Z" fill={p.topD} {...S} />}
+      {arms !== 'rig' && who === 'fast' && capL && <path d="M96,712 L178,730" stroke="#fbf8f0" strokeWidth={8} />}
+      {arms !== 'rig' && who === 'fast' && capR && <path d="M504,712 L422,730" stroke="#fbf8f0" strokeWidth={8} />}
     </g>
   );
 };
@@ -306,6 +313,27 @@ const Arm: React.FC<{who: Who; arms: Arms}> = ({who, arms}) => {
   );
 };
 
+// articulated arm: shoulder pivot, upper arm, elbow, forearm, hand. side -1 = his right (screen left), +1 = screen right
+const RigArm: React.FC<{who: Who; side: number; a: [number, number]; phone?: boolean}> = ({who, side, a, phone}) => {
+  const p = PAL[who];
+  const sx = side < 0 ? 162 : 438, sy = 590, L1 = 190, L2 = 175, W = 76;
+  const sh = -side * a[0], el = -side * a[1];
+  const cap = who !== 'lou';
+  return (
+    <g transform={`translate(${sx} ${sy}) rotate(${sh})`}>
+      <rect x={-W / 2} y={-20} width={W} height={L1 + 36} rx={W / 2} fill={p.arm} {...S} />
+      {cap && <path d={`M${-W / 2 - 8},-30 L${W / 2 + 8},-30 L${W / 2 + 10},${L1 * 0.62} L${-W / 2 - 10},${L1 * 0.62} Z`} fill={side < 0 ? p.top : p.topD} {...S} />}
+      {who === 'fast' && <path d={`M${-W / 2 - 10},${L1 * 0.62 - 8} L${W / 2 + 10},${L1 * 0.62 - 8}`} stroke="#fbf8f0" strokeWidth={8} />}
+      <g transform={`translate(0 ${L1}) rotate(${el})`}>
+        <rect x={-W / 2 + 3} y={-22} width={W - 6} height={L2 + 30} rx={W / 2} fill={p.arm} {...S} />
+        {who === 'fast' && side > 0 && <rect x={-W / 2} y={L2 - 30} width={W} height={24} rx={6} fill="#d9dde3" stroke={INK} strokeWidth={5} />}
+        {phone && <rect x={-30} y={L2 - 10} width={56} height={100} rx={10} fill="#1c1c20" {...S} transform={`rotate(${side * 10} 0 ${L2 + 40})`} />}
+        <Hand x={0} y={L2 + 22} p={p} r={0} ring={side > 0} />
+      </g>
+    </g>
+  );
+};
+
 const Kicks: React.FC<{x: number; who: Who}> = ({x, who}) => {
   if (who === 'lou') return ( // tan work boots (no logo)
     <g>
@@ -365,6 +393,10 @@ export const Guy: React.FC<{who: Who; pose?: Pose; legs?: boolean}> = ({who, pos
     <g>
       {legs && <Legs who={who} />}
       <Torso who={who} arms={arms} />
+      {arms === 'rig' && <>
+        <RigArm who={who} side={-1} a={pose.aL ?? [8, -12]} phone={pose.phone} />
+        <RigArm who={who} side={1} a={pose.aR ?? [8, -12]} />
+      </>}
       <g transform={`rotate(${pose.tilt ?? 0} 300 470) translate(300 470) scale(1.16) translate(-300 -470)`}>
         <Head who={who} pose={pose} />
       </g>
