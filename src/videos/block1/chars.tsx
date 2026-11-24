@@ -9,7 +9,7 @@ export type Who = 'dre' | 'lou' | 'fast';
 export type Arms = 'crossed' | 'pockets' | 'hype' | 'shrug' | 'point' | 'phone' | 'down' | 'rig';
 export type Eyes = 'calm' | 'tired' | 'wide' | 'angry' | 'side' | 'closed';
 // rig arms: [shoulder, elbow] in degrees; shoulder 0 = hanging down, + = outward/up; elbow + = forearm bends outward/up, - = across the body
-export type Pose = {open?: number; eyes?: Eyes; arms?: Arms; tilt?: number; blink?: boolean; prop?: string; look?: number; aL?: [number, number]; aR?: [number, number]; phone?: boolean};
+export type Pose = {open?: number; eyes?: Eyes; arms?: Arms; tilt?: number; blink?: boolean; prop?: string; look?: number; aL?: [number, number]; aR?: [number, number]; phone?: boolean; sit?: boolean; step?: number};
 
 const INK = '#141210';
 const S = {stroke: INK, strokeWidth: 7, strokeLinejoin: 'round' as const, strokeLinecap: 'round' as const};
@@ -353,18 +353,25 @@ const Kicks: React.FC<{x: number; who: Who}> = ({x, who}) => {
   );
 };
 
-const Legs: React.FC<{who: Who}> = ({who}) => {
-  if (who === 'fast') return (
-    <g>
-      <path d="M160,1060 L250,1060 L246,1210 L168,1210 Z M350,1060 L440,1060 L432,1210 L354,1210 Z" fill={PAL.fast.skin} {...S} />
-      <path d="M166,1120 L248,1120 L246,1214 L168,1214 Z M352,1120 L434,1120 L432,1214 L354,1214 Z" fill="#fbf8f0" {...S} strokeWidth={6} />
-      <path d="M168,1134 L246,1134 M354,1134 L432,1134" stroke="#d8352c" strokeWidth={6} />
-      <Kicks x={206} who="fast" /><Kicks x={394} who="fast" />
-      <path d="M126,940 L474,940 L486,1100 C430,1112 340,1112 312,1104 L300,1010 L288,1104 C260,1112 170,1112 114,1100 Z" fill="#cfc3a8" {...S} />
-      <path d="M390,946 L474,940 L486,1100 C460,1106 430,1110 404,1110 Z" fill="#b0a385" />
-      <path d="M120,1010 L184,1010 L186,1076 L122,1074 Z M418,1010 L480,1010 L482,1074 L418,1076 Z" fill="#b8ab8e" {...S} strokeWidth={5} />
-    </g>
-  );
+const Legs: React.FC<{who: Who; step?: number}> = ({who, step}) => {
+  if (who === 'fast') {
+    const lift = (k: number) => Math.max(0, Math.sin((step ?? 0) + k * Math.PI)) * 34;
+    return (
+      <g>
+        {[[160, 250, 168, 246, 206], [350, 440, 354, 432, 394]].map(([a, b, c, d, kx], k) => (
+          <g key={k} transform={`translate(0 ${-lift(k)})`}>
+            <path d={`M${a},1060 L${b},1060 L${d},1210 L${c},1210 Z`} fill={PAL.fast.skin} {...S} />
+            <path d={`M${a + 6},1120 L${b - 2},1120 L${d},1214 L${c},1214 Z`} fill="#fbf8f0" {...S} strokeWidth={6} />
+            <path d={`M${c},1134 L${d},1134`} stroke="#d8352c" strokeWidth={6} />
+            <Kicks x={kx} who="fast" />
+          </g>
+        ))}
+        <path d="M126,940 L474,940 L486,1100 C430,1112 340,1112 312,1104 L300,1010 L288,1104 C260,1112 170,1112 114,1100 Z" fill="#cfc3a8" {...S} />
+        <path d="M390,946 L474,940 L486,1100 C460,1106 430,1110 404,1110 Z" fill="#b0a385" />
+        <path d="M120,1010 L184,1010 L186,1076 L122,1074 Z M418,1010 L480,1010 L482,1074 L418,1076 Z" fill="#b8ab8e" {...S} strokeWidth={5} />
+      </g>
+    );
+  }
   const jean = who === 'dre' ? ['#6b6e74', '#55585e'] : ['#c9dbe9', '#a9c0d4'];
   return (
     <g>
@@ -387,11 +394,71 @@ const Legs: React.FC<{who: Who}> = ({who}) => {
   );
 };
 
+const SitLegs: React.FC<{who: Who}> = ({who}) => {
+  const jean = who === 'dre' ? ['#6b6e74', '#55585e'] : who === 'lou' ? ['#c9dbe9', '#a9c0d4'] : ['#cfc3a8', '#b0a385'];
+  return (
+    <g>
+      <g transform="translate(-20 -96)"><Kicks x={196} who={who} /></g>
+      <g transform="translate(20 -96)"><Kicks x={404} who={who} /></g>
+      {/* shins */}
+      <path d="M104,1000 L262,1004 L250,1176 L118,1176 Z" fill={jean[0]} {...S} />
+      <path d="M338,1004 L496,1000 L482,1176 L350,1176 Z" fill={jean[1]} {...S} />
+      <path d="M118,1140 Q180,1128 252,1146 M350,1146 Q420,1128 482,1140" fill="none" {...S} strokeWidth={4} />
+      {/* thighs coming at the camera, knees wide */}
+      <path d="M150,920 L450,920 L500,996 C500,1030 340,1040 314,1010 L300,980 L286,1010 C260,1040 100,1030 100,996 Z" fill={jean[0]} {...S} />
+      <path d="M100,996 C110,960 160,950 200,960 M500,996 C490,960 440,950 400,960" fill="none" {...S} strokeWidth={4} />
+      {who === 'dre' && <path d="M150,1080 Q186,1068 222,1080 Q186,1092 150,1080 Z M378,1110 Q414,1098 450,1110 Q414,1122 378,1110 Z" fill={PAL.dre.skin} stroke="#f1efe8" strokeWidth={5} />}
+    </g>
+  );
+};
+
+// back view (for over-the-shoulder shots): upper body only
+export const BackGuy: React.FC<{who: Who}> = ({who}) => {
+  const p = PAL[who];
+  return (
+    <g>
+      <path d="M262,450 L262,530 L338,530 L338,450 Z" fill={p.skinD} {...S} />
+      {who === 'lou' ? (
+        <g>
+          <path d="M136,600 C142,540 206,516 250,512 L350,512 C394,516 458,540 464,600 L440,960 L160,960 Z" fill={p.skin} {...S} />
+          <path d="M206,530 L236,516 C258,560 342,560 364,516 L394,530 C404,620 420,720 436,960 L164,960 C180,720 196,620 206,530 Z" fill={p.top} {...S} />
+        </g>
+      ) : (
+        <g>
+          <path d="M120,610 C126,540 196,520 244,516 C262,530 338,530 356,516 C404,520 474,540 480,610 L494,990 C420,1006 180,1006 106,990 Z" fill={p.top} {...S} />
+          <path d="M244,516 C262,530 338,530 356,516" fill="none" stroke={who === 'fast' ? '#fbf8f0' : '#c4473b'} strokeWidth={8} />
+          <text x={300} y={860} textAnchor="middle" fontFamily="Bangers" fontSize={260} fill="#fbf8f0" stroke={INK} strokeWidth={4} paintOrder="stroke">{who === 'fast' ? '7' : '23'}</text>
+        </g>
+      )}
+      <Arm who={who} arms="down" />
+      {who !== 'lou' && <>
+        <path d="M200,520 C150,530 118,560 106,620 L92,730 L176,748 L188,640 Z" fill={p.top} {...S} />
+        <path d="M400,520 C450,530 482,560 494,620 L508,730 L424,748 L412,640 Z" fill={p.topD} {...S} />
+      </>}
+      <g transform="translate(300 470) scale(1.16) translate(-300 -470)">
+        {who === 'lou' && <AfroBack p={p} />}
+        <ellipse cx={186} cy={298} rx={24} ry={40} fill={p.skin} {...S} />
+        <ellipse cx={414} cy={298} rx={24} ry={40} fill={p.skin} {...S} />
+        <path d="M196,200 C196,150 404,150 404,200 L414,330 C420,430 396,470 300,476 C204,470 180,430 186,330 Z" fill={p.skin} {...S} />
+        {who === 'dre' && <>
+          <path d="M190,380 C176,110 236,70 300,70 C364,70 424,110 410,380 C380,400 220,400 190,380 Z" fill={p.hair} {...S} />
+          {[-3, -2, -1, 0, 1, 2, 3].map((k) => <path key={k} d={`M${300 + k * 16},80 C${300 + k * 24},180 ${300 + k * 28},300 ${300 + k * 27},385`} fill="none" stroke={p.hairD} strokeWidth={14} strokeLinecap="round" />)}
+        </>}
+        {who === 'fast' && <>
+          <Twists p={p} />
+          <path d="M192,360 C186,160 230,128 300,128 C370,128 414,160 408,360 C380,380 220,380 192,360 Z" fill={p.hair} {...S} />
+        </>}
+        {who === 'lou' && <ellipse cx={300} cy={250} rx={236} ry={200} fill={p.hair} {...S} />}
+      </g>
+    </g>
+  );
+};
+
 export const Guy: React.FC<{who: Who; pose?: Pose; legs?: boolean}> = ({who, pose = {}, legs = true}) => {
   const arms = pose.arms ?? (who === 'dre' ? 'crossed' : who === 'lou' ? 'pockets' : 'hype');
   return (
     <g>
-      {legs && <Legs who={who} />}
+      {legs && (pose.sit ? <SitLegs who={who} /> : <Legs who={who} step={pose.step} />)}
       <Torso who={who} arms={arms} />
       {arms === 'rig' && <>
         <RigArm who={who} side={-1} a={pose.aL ?? [8, -12]} phone={pose.phone} />

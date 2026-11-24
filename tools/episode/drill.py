@@ -1,4 +1,4 @@
-# UK drill beat synth (142 bpm, half-time snare on 3, triplet hat rolls, gliding 808s, dark minor bell + pad).
+# UK drill beat synth (142 bpm, half-time snare on 3, triplet hat rolls, distorted gliding 808s, dark phrygian piano + dissonant strings, no melody).
 # import: beat(total_seconds, seed) -> np.float32 array @48k.  CLI: python3 tools/episode/drill.py out.mp3 [seconds]
 import sys, subprocess, wave, numpy as np
 from scipy.signal import butter, lfilter
@@ -24,28 +24,37 @@ def beat(total, seed=7, bpm=142):
         x = X(d); f = np.where(x < d * glide_at, mf(m0), mf(m0) + (mf(m1) - mf(m0)) * np.clip((x - d * glide_at) / 0.08, 0, 1))
         s = np.sin(2 * np.pi * np.cumsum(f) / SR); s = np.tanh(2.2 * s)   # saturated 808
         return s * np.minimum(1, x / 0.004) * np.exp(-x * 0.9)
-    def bell(m, d=1.2):
-        x = X(d); f = mf(m)
-        return (np.sin(2 * np.pi * f * x) + 0.4 * np.sin(2 * np.pi * f * 2.76 * x) * np.exp(-x * 6)) * np.exp(-x * 2.6) * np.minimum(1, x / 0.003)
-    def pad(ms, d):
-        x = X(d); s = sum(np.sin(2 * np.pi * mf(m) * x + 0.3 * np.sin(2 * np.pi * 5 * x)) for m in ms) / len(ms)
-        return s * np.minimum(1, x / 0.4) * np.minimum(1, (d - x) / 0.4)
+    def piano(ms, d, amp=1.0):   # dark low piano: detuned partials, hard attack, slow decay
+        x = X(d); s = 0
+        for m in ms:
+            f = mf(m)
+            for h, g in ((1, 1), (2, .45), (3, .2), (4.02, .1)):
+                s = s + g * (np.sin(2 * np.pi * f * h * x) + np.sin(2 * np.pi * f * h * 1.003 * x)) / 2 * np.exp(-x * (1.6 + h * .9))
+        return amp * s / len(ms) * np.minimum(1, x / 0.004)
+    def strings(m1, m2, d):      # eerie dissonant string pair with slow vibrato + swell
+        x = X(d); vib = 0.35 * np.sin(2 * np.pi * 5.2 * x)
+        s = sum(np.sign(np.sin(2 * np.pi * (mf(m) * x + vib * x))) * 0.5 + np.sin(2 * np.pi * mf(m) * x) for m in (m1, m2))
+        b, a = butter(2, 1800 / (SR / 2), 'low'); s = lfilter(b, a, s)
+        return s * np.sin(np.pi * np.clip(x / d, 0, 1)) ** 1.5
+    def riser(d):
+        x = X(d); b, a = butter(2, [400 / (SR / 2), 3000 / (SR / 2)], 'band'); return lfilter(b, a, rng.normal(0, 1, len(x))) * (x / d) ** 2
     st = 60 / bpm / 4; bar = st * 16
-    # C minor-ish: 808 roots per bar + bell motif
-    roots = [36, 36, 39, 34]   # C2 C2 Eb2 Bb1
-    motif = [[72, None, 75, None, 79, None, 78, 75], [72, None, 75, None, 80, None, 79, None], [75, None, 79, None, 82, None, 80, 79], [70, None, 74, None, 77, None, 75, None]]
-    pads = [[60, 63, 67], [60, 63, 68], [63, 67, 70], [58, 62, 65]]
+    # C phrygian, dark: C  Db  Ab  G   (808 roots follow)
+    roots = [36, 37, 32, 31]
+    chords = [[48, 51, 55], [49, 52, 56], [44, 48, 51], [43, 46, 50]]
     nb = int(total / bar) + 2
     for b in range(nb):
-        t0 = b * bar; r = roots[b % 4]
-        put(t0, pad(pads[b % 4], bar), 0.10)
-        for k, m in enumerate(motif[b % 4]):
-            if m: put(t0 + k * 2 * st, bell(m), 0.10); put(t0 + k * 2 * st + 3 * st, bell(m, 0.8), 0.035)   # echo
+        t0 = b * bar; r = roots[b % 4]; ch = chords[b % 4]
+        put(t0, piano(ch, bar * 0.95), 0.34)                                   # one dark stab per bar
+        put(t0 + 6 * st, piano([ch[0] - 12], st * 6), 0.26)                    # low answer
+        put(t0 + 11 * st, piano([ch[0] + 1 - 12 if b % 2 else ch[0] - 12], st * 5), 0.2)   # minor-2nd rub
+        if b % 2 == 0: put(t0, strings(67, 68, bar * 2), 0.05)                # G/Ab dissonance
+        if b % 8 == 7: put(t0 + bar * 0.5, riser(bar * 0.5), 0.12)
         put(t0 + 8 * st, snare(), 0.55)                             # half-time snare on 3
         if b % 2: put(t0 + 15 * st, snare(), 0.18)                  # ghost
         if b % 4 == 3: put(t0 + 13 * st, snare(), 0.3)
-        for s0, d, m1 in ((0, 5, r), (6, 4, r + 12 if b % 2 else r + 3), (10, 3, r - 2), (13, 3, r)):   # gliding 808 pattern
-            put(t0 + s0 * st, b808(r if s0 != 13 else r + 3, m1, d * st), 0.42)
+        for s0, d, m1 in ((0, 5, r), (6, 4, r + 12 if b % 2 else r + 1), (10, 3, r - 2), (13, 3, r)):   # gliding 808 pattern
+            put(t0 + s0 * st, b808(r if s0 != 13 else r + 1, m1, d * st), 0.55)
         put(t0, kick(), 0.45); put(t0 + 10 * st, kick(), 0.3)
         k = 0
         while k < 16:   # hats: 8ths, with triplet rolls
