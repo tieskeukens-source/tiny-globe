@@ -1,530 +1,565 @@
 {
- "total": 36.58,
+ "total": 33.83,
  "lines": [
   {
    "i": 0,
    "who": "fast",
    "chapter": 1,
-   "text": "Wagwan! GTA Six is finally out, fam! Thirteen years, bruv!",
-   "start": 0.9,
-   "dur": 4.0,
+   "text": "Wagwan! GTA Six is finally out, fam! Firteen years, bruv!",
+   "start": 0.5,
+   "dur": 4.24,
    "words": [
     [
-     0.9,
-     1.24,
-     "Wagwan!"
+     0.5,
+     1.16,
+     "Wagwan"
     ],
     [
-     1.3,
-     1.64,
+     1.16,
+     1.54,
      "GTA"
     ],
     [
-     1.7,
-     2.04,
-     "Six"
+     1.54,
+     1.9,
+     "6"
     ],
     [
-     2.1,
-     2.44,
+     1.9,
+     2.12,
      "is"
     ],
     [
-     2.5,
-     2.84,
+     2.12,
+     2.46,
      "finally"
     ],
     [
-     2.9,
-     3.24,
+     2.46,
+     2.78,
      "out,"
     ],
     [
-     3.3,
-     3.64,
+     3.02,
+     3.08,
      "fam!"
     ],
     [
-     3.7,
-     4.04,
-     "Thirteen"
+     3.54,
+     3.84,
+     "13"
     ],
     [
-     4.1,
-     4.44,
+     3.84,
+     4.18,
      "years,"
     ],
     [
-     4.5,
-     4.84,
+     4.48,
+     4.66,
      "bruv!"
     ]
-   ]
+   ],
+   "heard": "Wagwan GTA 6 is finally out, fam! 13 years, bruv!"
   },
   {
    "i": 1,
    "who": "lou",
    "chapter": 1,
    "text": "Bruv, I was in Year Four when Five dropped. Allow it.",
-   "start": 4.96,
-   "dur": 4.4,
+   "start": 4.95,
+   "dur": 3.28,
    "words": [
     [
-     4.96,
-     5.3,
+     4.95,
+     5.43,
      "Bruv,"
     ],
     [
-     5.36,
-     5.7,
+     5.55,
+     5.57,
      "I"
     ],
     [
-     5.76,
-     6.1,
+     5.57,
+     5.69,
      "was"
     ],
     [
-     6.16,
-     6.5,
+     5.69,
+     5.87,
      "in"
     ],
     [
-     6.56,
-     6.9,
-     "Year"
+     5.87,
+     6.01,
+     "year"
     ],
     [
-     6.96,
-     7.3,
-     "Four"
+     6.01,
+     6.31,
+     "four"
     ],
     [
-     7.36,
-     7.7,
+     6.31,
+     6.49,
      "when"
     ],
     [
-     7.76,
-     8.1,
-     "Five"
+     6.49,
+     6.85,
+     "five"
     ],
     [
-     8.16,
-     8.5,
+     6.85,
+     7.33,
      "dropped."
     ],
     [
-     8.56,
-     8.9,
+     7.69,
+     7.93,
      "Allow"
     ],
     [
-     8.96,
-     9.3,
+     7.93,
+     8.17,
      "it."
     ]
-   ]
+   ],
+   "heard": "Bruv, I was in year four when five dropped. Allow it."
   },
   {
    "i": 2,
    "who": "fast",
    "chapter": 2,
-   "text": "I been on it all night, you know! Man's got a mansion, a boat, a chopper!",
-   "start": 9.58,
-   "dur": 6.4,
+   "text": "I been on it all night, ya know! Man's got a mansion, a boat, a chopper!",
+   "start": 8.45,
+   "dur": 4.0,
    "words": [
     [
-     9.58,
-     9.92,
-     "I"
+     8.45,
+     9.01,
+     "I've"
     ],
     [
-     9.98,
-     10.32,
+     9.01,
+     9.11,
      "been"
     ],
     [
-     10.38,
-     10.72,
+     9.11,
+     9.29,
      "on"
     ],
     [
-     10.78,
-     11.12,
+     9.29,
+     9.39,
      "it"
     ],
     [
-     11.18,
-     11.52,
+     9.39,
+     9.55,
      "all"
     ],
     [
-     11.58,
-     11.92,
+     9.55,
+     9.81,
      "night,"
     ],
     [
-     11.98,
-     12.32,
-     "you"
+     9.95,
+     9.97,
+     "ya"
     ],
     [
-     12.38,
-     12.72,
-     "know!"
+     9.97,
+     10.19,
+     "know,"
     ],
     [
-     12.78,
-     13.12,
-     "Man's"
+     10.41,
+     10.55,
+     "man's"
     ],
     [
-     13.18,
-     13.52,
+     10.55,
+     10.69,
      "got"
     ],
     [
-     13.58,
-     13.92,
+     10.69,
+     10.83,
      "a"
     ],
     [
-     13.98,
-     14.32,
+     10.83,
+     11.11,
      "mansion,"
     ],
     [
-     14.38,
-     14.72,
+     11.29,
+     11.35,
      "a"
     ],
     [
-     14.78,
-     15.12,
+     11.35,
+     11.55,
      "boat,"
     ],
     [
-     15.18,
-     15.52,
+     11.71,
+     11.75,
      "a"
     ],
     [
-     15.58,
-     15.92,
-     "chopper!"
+     11.75,
+     12.19,
+     "chopper."
     ]
-   ]
+   ],
+   "heard": "I've been on it all night, ya know, man's got a mansion, a boat, a chopper."
   },
   {
    "i": 3,
    "who": "dre",
    "chapter": 2,
    "text": "In real life, though?",
-   "start": 16.04,
-   "dur": 1.6,
+   "start": 13.01,
+   "dur": 1.92,
    "words": [
     [
-     16.04,
-     16.38,
+     13.65,
+     13.99,
      "In"
     ],
     [
-     16.44,
-     16.78,
+     13.99,
+     14.15,
      "real"
     ],
     [
-     16.84,
-     17.18,
+     14.15,
+     14.47,
      "life,"
     ],
     [
-     17.24,
-     17.58,
-     "though?"
+     14.53,
+     14.69,
+     "though."
     ]
-   ]
+   ],
+   "heard": "In real life, though."
   },
   {
    "i": 4,
    "who": "fast",
    "chapter": 2,
    "text": "Two quid and a cold.",
-   "start": 17.7,
-   "dur": 2.0,
+   "start": 15.59,
+   "dur": 1.12,
    "words": [
     [
-     17.7,
-     18.04,
-     "Two"
+     15.59,
+     15.83,
+     "2"
     ],
     [
-     18.1,
-     18.44,
+     15.83,
+     16.11,
      "quid"
     ],
     [
-     18.5,
-     18.84,
-     "and"
+     16.11,
+     16.19,
+     "in"
     ],
     [
-     18.9,
-     19.24,
+     16.19,
+     16.27,
      "a"
     ],
     [
-     19.3,
-     19.64,
-     "cold."
+     16.27,
+     16.55,
+     "cold"
     ]
-   ]
+   ],
+   "heard": "2 quid in a cold"
   },
   {
    "i": 5,
    "who": "lou",
    "chapter": 3,
-   "text": "Man ain't left his yard in five days. His mum rang me, fam.",
-   "start": 19.92,
-   "dur": 5.2,
+   "text": "Man ain't left his yard in five days, ya know. His mum rang me, fam.",
+   "start": 16.93,
+   "dur": 4.24,
    "words": [
     [
-     19.92,
-     20.26,
+     16.93,
+     17.21,
      "Man"
     ],
     [
-     20.32,
-     20.66,
+     17.21,
+     17.45,
      "ain't"
     ],
     [
-     20.72,
-     21.06,
+     17.45,
+     17.57,
      "left"
     ],
     [
-     21.12,
-     21.46,
+     17.57,
+     17.77,
      "his"
     ],
     [
-     21.52,
-     21.86,
+     17.77,
+     17.99,
      "yard"
     ],
     [
-     21.92,
-     22.26,
+     17.99,
+     18.17,
      "in"
     ],
     [
-     22.32,
-     22.66,
+     18.17,
+     18.43,
      "five"
     ],
     [
-     22.72,
-     23.06,
-     "days."
+     18.43,
+     18.77,
+     "days,"
     ],
     [
-     23.12,
-     23.46,
+     18.99,
+     19.01,
+     "ya"
+    ],
+    [
+     19.01,
+     19.35,
+     "know."
+    ],
+    [
+     19.65,
+     19.77,
      "His"
     ],
     [
-     23.52,
-     23.86,
-     "mum"
+     19.77,
+     20.03,
+     "mom"
     ],
     [
-     23.92,
-     24.26,
+     20.03,
+     20.33,
      "rang"
     ],
     [
-     24.32,
-     24.66,
+     20.33,
+     20.53,
      "me,"
     ],
     [
-     24.72,
-     25.06,
+     20.73,
+     20.85,
      "fam."
     ]
-   ]
+   ],
+   "heard": "Man ain't left his yard in five days, ya know. His mom rang me, fam."
   },
   {
    "i": 6,
    "who": "fast",
    "chapter": 3,
    "text": "That's cap! It was four!",
-   "start": 25.18,
-   "dur": 2.0,
+   "start": 21.33,
+   "dur": 1.44,
    "words": [
     [
-     25.18,
-     25.52,
+     21.33,
+     21.59,
      "That's"
     ],
     [
-     25.58,
-     25.92,
+     21.59,
+     21.85,
      "cap!"
     ],
     [
-     25.98,
-     26.32,
+     22.01,
+     22.05,
      "It"
     ],
     [
-     26.38,
-     26.72,
+     22.05,
+     22.15,
      "was"
     ],
     [
-     26.78,
-     27.12,
+     22.15,
+     22.53,
      "four!"
     ]
-   ]
+   ],
+   "heard": "That's cap! It was four!"
   },
   {
    "i": 7,
    "who": "dre",
    "chapter": 3,
-   "text": "Four days. Same jersey.",
-   "start": 27.24,
-   "dur": 1.6,
+   "text": "Four days. Same jersey, ya get me.",
+   "start": 23.28,
+   "dur": 2.72,
    "words": [
     [
-     27.24,
-     27.58,
+     23.28,
+     23.76,
      "Four"
     ],
     [
-     27.64,
-     27.98,
-     "days."
+     23.76,
+     24.16,
+     "days"
     ],
     [
-     28.04,
-     28.38,
-     "Same"
+     24.16,
+     24.84,
+     "same"
     ],
     [
-     28.44,
-     28.78,
-     "jersey."
+     24.84,
+     25.22,
+     "Jersey"
+    ],
+    [
+     25.22,
+     25.44,
+     "you"
+    ],
+    [
+     25.44,
+     25.62,
+     "get"
+    ],
+    [
+     25.62,
+     25.82,
+     "me"
     ]
-   ]
+   ],
+   "heard": "Four days same Jersey you get me"
   },
   {
    "i": 8,
    "who": "fast",
    "chapter": 3,
    "text": "It's a hard jersey, innit!",
-   "start": 28.9,
-   "dur": 2.0,
+   "start": 26.21,
+   "dur": 1.2,
    "words": [
     [
-     28.9,
-     29.24,
+     26.21,
+     26.41,
      "It's"
     ],
     [
-     29.3,
-     29.64,
+     26.41,
+     26.47,
      "a"
     ],
     [
-     29.7,
-     30.04,
+     26.47,
+     26.71,
      "hard"
     ],
     [
-     30.1,
-     30.44,
+     26.71,
+     27.05,
      "jersey,"
     ],
     [
-     30.5,
-     30.84,
-     "innit!"
+     27.17,
+     27.39,
+     "innit?"
     ]
-   ]
+   ],
+   "heard": "It's a hard jersey, innit?"
   },
   {
    "i": 9,
    "who": "dre",
    "chapter": 4,
    "text": "Be real. How many hours you got? Drop it in the comments.",
-   "start": 31.12,
-   "dur": 4.8,
+   "start": 28.33,
+   "dur": 3.44,
    "words": [
     [
-     31.12,
-     31.46,
+     28.33,
+     28.67,
      "Be"
     ],
     [
-     31.52,
-     31.86,
-     "real."
+     28.67,
+     28.99,
+     "real,"
     ],
     [
-     31.92,
-     32.26,
-     "How"
+     29.31,
+     29.41,
+     "how"
     ],
     [
-     32.32,
-     32.66,
+     29.41,
+     29.57,
      "many"
     ],
     [
-     32.72,
-     33.06,
+     29.57,
+     29.81,
      "hours"
     ],
     [
-     33.12,
-     33.46,
+     29.81,
+     30.05,
      "you"
     ],
     [
-     33.52,
-     33.86,
+     30.05,
+     30.33,
      "got?"
     ],
     [
-     33.92,
-     34.26,
+     30.75,
+     30.77,
      "Drop"
     ],
     [
-     34.32,
-     34.66,
+     30.77,
+     30.93,
      "it"
     ],
     [
-     34.72,
-     35.06,
+     30.93,
+     31.03,
      "in"
     ],
     [
-     35.12,
-     35.46,
+     31.03,
+     31.15,
      "the"
     ],
     [
-     35.52,
-     35.86,
+     31.15,
+     31.47,
      "comments."
     ]
-   ]
+   ],
+   "heard": "Be real, how many hours you got? Drop it in the comments."
   }
  ]
 }
