@@ -4,8 +4,8 @@ import {Guy, InkDefs, Who, Pose} from './chars';
 import {BANG, MARK} from './fonts';
 
 const CREW: {who: Who; name: string; tag: string; color: string}[] = [
-  {who: 'lou', name: 'LOU', tag: "doesn't believe nobody", color: '#6f7d43'},
-  {who: 'dre', name: 'DRE', tag: 'says little. always right.', color: '#e9b23c'},
+  {who: 'lou', name: 'LOU', tag: "doesn't believe nobody", color: '#c9dbe9'},
+  {who: 'dre', name: 'DRE', tag: 'says little. always right.', color: '#5b74c4'},
   {who: 'fast', name: 'FAST', tag: 'too loud. too much.', color: '#d8352c'},
 ];
 const FACES: [Who, Pose][] = [
@@ -29,7 +29,7 @@ export const CrewSheet: React.FC = () => (
       <text x={630} y={210} textAnchor="middle" fontFamily={MARK} fontSize={150} fill="none" stroke="#b8392f" strokeWidth={5} opacity={0.75} transform="rotate(-6 630 210)">THE BLOCK</text>
       <g filter="url(#wob)">
         {CREW.map((c, i) => (
-          <g key={c.who} transform={`translate(${70 + i * 380} ${120}) scale(0.7)`}>
+          <g key={c.who} transform={`translate(${70 + i * 380} ${110}) scale(0.7)`}>
             <Guy who={c.who} />
           </g>
         ))}
@@ -42,7 +42,7 @@ export const CrewSheet: React.FC = () => (
       {/* expression column */}
       <rect x={1250} y={40} width={630} height={1000} fill="#fbf8f0" stroke="#141210" strokeWidth={8} />
       {FACES.map(([w, p], i) => (
-        <svg key={i} x={1270 + (i % 2) * 300} y={60 + Math.floor(i / 2) * 325} width={290} height={290} viewBox="100 0 400 420">
+        <svg key={i} x={1270 + (i % 2) * 300} y={60 + Math.floor(i / 2) * 325} width={290} height={290} viewBox="50 -90 500 520">
           <g filter="url(#wob)"><Guy who={w} pose={p} legs={false} /></g>
         </svg>
       ))}

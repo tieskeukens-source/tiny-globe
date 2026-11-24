@@ -13,8 +13,8 @@ FAST: Two dollars and a cold.
 ## 3 exposed
 LOU: He hasn't left his room in five days. His mom called me.
 FAST: That's a lie! It was four.
-DRE: Four days. Same hoodie.
-FAST: It's a good hoodie!
+DRE: Four days. Same jersey.
+FAST: It's a good jersey!
 
 ## 4 question
 DRE: Be honest. How many hours you got already? Comment.

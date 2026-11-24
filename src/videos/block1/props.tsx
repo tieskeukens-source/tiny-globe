@@ -127,11 +127,11 @@ export const Phone: React.FC<{r: R; f: number}> = ({r, f}) => (
 
 export const Stain: React.FC<{r: R; f: number}> = ({r, f}) => (
   <g>
-    {/* close-up of Fast's red windbreaker chest */}
+    {/* close-up of Fast's red jersey: white trim + the big 7 */}
     <rect {...rr(r)} fill="#d8352c" />
-    <rect x={r.x} y={r.y + r.h * 0.55} width={r.w} height={110} fill="#1c1c20" />
-    <rect x={r.x} y={r.y + r.h * 0.55 + 110} width={r.w} height={44} fill="#f4f1ea" />
-    <path d={`M${r.x + r.w / 2},${r.y} L${r.x + r.w / 2},${r.y + r.h * 0.55}`} {...S} strokeWidth={10} />
+    <path d={`M${r.x + 120},${r.y} C${r.x + 170},${r.y + 200} ${r.x + 180},${r.y + 400} ${r.x + 176},${r.y + r.h}`} fill="none" stroke="#fbf8f0" strokeWidth={14} />
+    <circle cx={r.x + r.w * 0.55} cy={r.y + r.h * 0.62} r={170} fill="none" stroke="#fbf8f0" strokeWidth={18} />
+    <text x={r.x + r.w * 0.55} y={r.y + r.h * 0.62 + 100} textAnchor="middle" fontFamily={BANG} fontSize={300} fill="#fbf8f0" stroke={INK} strokeWidth={6} paintOrder="stroke">7</text>
     {/* stains */}
     <path d={`M${r.x + 260},${r.y + 200} c40,-30 90,-10 100,30 c20,50 -40,80 -80,60 c-40,-10 -60,-60 -20,-90 z`} fill="#8a4a1c" {...S} strokeWidth={5} />
     <path d={`M${r.x + 660},${r.y + 300} c30,-20 70,0 70,30 c0,40 -50,50 -70,30 c-20,-20 -20,-40 0,-60 z`} fill="#c9a227" {...S} strokeWidth={5} />
