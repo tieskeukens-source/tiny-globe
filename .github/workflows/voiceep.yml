@@ -34,4 +34,4 @@ jobs:
           mkdir /tmp/v && cp -r voices/${{ inputs.ep }}/voice /tmp/v/
           git checkout --orphan vq && git rm -rq --cached . && git clean -fdq
           mkdir -p voices/${{ inputs.ep }}/voice && cp -r /tmp/v/voice/* voices/${{ inputs.ep }}/voice/
-          git add voices/${{ inputs.ep }}/voice && git commit -qm voice && git push -f origin vq:voices-${{ inputs.ep }}
+          git add -f voices/${{ inputs.ep }}/voice && git commit -qm voice && git push -f origin vq:voices-${{ inputs.ep }}
