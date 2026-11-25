@@ -20,9 +20,9 @@ const Chicken: React.FC<{x: number; y: number; s: number}> = ({x, y, s}) => (
   </g>
 );
 
-const Shop: React.FC<{f: number}> = ({f}) => {
+const Shop: React.FC<{f: number; closed: number}> = ({f, closed}) => {
   const flick = (f % 97 > 90 && f % 97 < 93) || (f % 211 > 150 && f % 211 < 152);
-  const on = !flick;
+  const on = !flick && closed < 0.5;
   return (
     <g transform="translate(452 45) scale(0.92)">
       <rect x={0} y={700} width={1200} height={170} fill="#b51f18" />
@@ -43,7 +43,7 @@ const Shop: React.FC<{f: number}> = ({f}) => {
       ))}
       <rect x={30} y={1150} width={700} height={160} fill="#d79a4a" />
       <path d="M30,1150 H730" {...S} strokeWidth={6} />
-      <g transform={`translate(${520 + Math.sin(f / 40) * 30} 0)`} opacity={0.85}>
+      <g transform={`translate(${520 + Math.sin(f / 40) * 30} 0)`} opacity={0.85 * (1 - closed)}>
         <ellipse cx={0} cy={1060} rx={40} ry={46} fill="#7a4e3a" />
         <path d="M-70,1150 C-60,1100 60,1100 70,1150 Z" fill="#fdfbf5" />
         <path d="M-36,1030 h72 v-16 h-72 z" fill="#c8261e" />
@@ -52,6 +52,8 @@ const Shop: React.FC<{f: number}> = ({f}) => {
         const x = ((f * (2.2 + k) + k * 500) % 1100) - 150;
         return <g key={k} opacity={0.5}><ellipse cx={x} cy={1070} rx={34} ry={40} fill="#3a2c40" /><rect x={x - 50} y={1108} width={100} height={200} rx={30} fill="#3a2c40" /></g>;
       })}
+      <rect x={30} y={890} width={700} height={420} fill="#1a1626" opacity={closed * 0.8} />
+      <rect x={784} y={914} width={212} height={300} fill="#1a1626" opacity={closed * 0.8} />
       <rect x={0} y={890} width={30} height={420} fill="url(#brk)" />
       {[230, 460].map((x) => <path key={x} d={`M${x},890 V1310`} {...S} strokeWidth={8} />)}
       <rect x={760} y={890} width={260} height={420} fill="#3b3a48" {...S} />
@@ -62,7 +64,7 @@ const Shop: React.FC<{f: number}> = ({f}) => {
   );
 };
 
-export const Street: React.FC<{f: number}> = ({f}) => {
+export const Street: React.FC<{f: number; closed?: number}> = ({f, closed = 0}) => {
   const steam = (k: number) => ((f * 1.4 + k * 40) % 120);
   return (
     <g>
@@ -102,7 +104,7 @@ export const Street: React.FC<{f: number}> = ({f}) => {
       {/* graffiti */}
       <text x={-120} y={900} textAnchor="middle" fontFamily={MARK} fontSize={120} fill="none" stroke="#e0412f" strokeWidth={5} opacity={0.85} transform="rotate(-8 -120 900)">BLK</text>
       <text x={-150} y={1080} textAnchor="middle" fontFamily={MARK} fontSize={60} fill="#f2c23a" opacity={0.7} transform="rotate(4 -150 1080)">SE15</text>
-      <Shop f={f} />
+      <Shop f={f} closed={closed} />
       {/* vent + steam */}
       <rect x={1440} y={560} width={90} height={60} fill="#9a9aa2" {...S} strokeWidth={5} />
       {[0, 1, 2].map((k) => <circle key={k} cx={1485 + Math.sin((f + k * 20) / 12) * 14} cy={550 - steam(k)} r={22 + steam(k) * 0.2} fill="#e8e4ee" opacity={0.35 * (1 - steam(k) / 120)} />)}
@@ -147,11 +149,14 @@ export const Street: React.FC<{f: number}> = ({f}) => {
   );
 };
 
-export const Pigeon: React.FC<{f: number; x: number; y: number}> = ({f, x, y}) => {
-  const peck = Math.sin(f / 6) > 0.6 ? 14 : 0, hop = (f % 150) < 10 ? -Math.sin(((f % 150) / 10) * Math.PI) * 26 : 0;
-  const px = x + Math.floor(f / 150) * 30;
+export const Pigeon: React.FC<{f: number; x: number; y: number; fly?: number}> = ({f, x, y, fly = -1}) => {
+  const peck = fly < 0 && Math.sin(f / 6) > 0.6 ? 14 : 0, hop = fly < 0 && (f % 150) < 10 ? -Math.sin(((f % 150) / 10) * Math.PI) * 26 : 0;
+  const px = x + Math.floor(Math.min(f, 400) / 150) * 30 + (fly > 0 ? fly * 700 : 0);
+  const py = y + hop - (fly > 0 ? fly * 520 + fly * fly * 300 : 0);
+  const flap = fly > 0 ? (Math.floor(f / 2) % 2 ? -50 : 30) : 0;
   return (
-    <g transform={`translate(${px} ${y + hop})`}>
+    <g transform={`translate(${px} ${py}) rotate(${fly > 0 ? -18 : 0})`}>
+      {fly > 0 && <path d={`M-10,-10 L-60,${-10 + flap} L10,-4 Z M10,-10 L60,${-10 + flap} L20,-4 Z`} fill="#6f7488" {...S} strokeWidth={4} />}
       <ellipse cx={0} cy={0} rx={44} ry={26} fill="#8a8fa0" {...S} strokeWidth={5} />
       <path d="M-40,-6 L-76,-16 L-70,6 Z" fill="#6f7488" {...S} strokeWidth={4} />
       <g transform={`translate(30 ${-18 + peck}) rotate(${peck * 2})`}>
@@ -159,7 +164,7 @@ export const Pigeon: React.FC<{f: number; x: number; y: number}> = ({f, x, y}) =
         <path d="M14,0 l14,4 l-14,4 z" fill="#d9a85b" stroke={INK} strokeWidth={3} />
         <circle cx={6} cy={-4} r={3.5} fill="#f2772b" />
       </g>
-      <path d="M-6,24 v14 M8,24 v14" stroke="#e0412f" strokeWidth={5} />
+      {fly <= 0 && <path d="M-6,24 v14 M8,24 v14" stroke="#e0412f" strokeWidth={5} />}
     </g>
   );
 };
