@@ -9,9 +9,9 @@ const CREW: {who: Who; name: string; tag: string; color: string}[] = [
   {who: 'fast', name: 'FAST', tag: 'too loud. too much.', color: '#d8352c'},
 ];
 const FACES: [Who, Pose][] = [
-  ['dre', {open: 0, eyes: 'calm'}], ['dre', {open: 0.7, eyes: 'side'}],
-  ['lou', {open: 0, eyes: 'tired'}], ['lou', {open: 0.6, eyes: 'angry'}],
-  ['fast', {open: 1, eyes: 'wide'}], ['fast', {open: 0.2, eyes: 'closed'}],
+  ['dre', {mood: 'closed', eyes: 'calm', look: 0.7}], ['dre', {viseme: 'D', eyes: 'side'}],
+  ['lou', {mood: 'smirk', eyes: 'side', look: -0.7}], ['lou', {mood: 'o', eyes: 'wide'}],
+  ['fast', {mood: 'frown', eyes: 'angry', bags: true}], ['fast', {viseme: 'F', eyes: 'wide', bags: true, look: 0.8}],
 ];
 
 export const CrewSheet: React.FC = () => (
@@ -30,7 +30,7 @@ export const CrewSheet: React.FC = () => (
       <g filter="url(#wob)">
         {CREW.map((c, i) => (
           <g key={c.who} transform={`translate(${70 + i * 380} ${110}) scale(0.7)`}>
-            <Guy who={c.who} />
+            <Guy who={c.who} pose={c.who === 'fast' ? {arms: 'rig', aL: [30, -40], aR: [70, 10], hL: 'pad', hR: 'open', bags: true, mood: 'closed', look: -0.5} : c.who === 'lou' ? {mood: 'smirk', look: 0.5, step: 1.2} : {mood: 'closed'}} />
           </g>
         ))}
       </g>
