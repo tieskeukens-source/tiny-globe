@@ -185,7 +185,7 @@ const Char: React.FC<{who: Who; i: number; t: number; f: number}> = ({who, i, t,
   );
 };
 
-export const StreetVideo: React.FC = () => {
+export const StreetVideo: React.FC<{caps?: boolean}> = ({caps = true}) => {
   const f = useCurrentFrame();
   const t = f / FPS;
   const i = lineAt(t);
@@ -214,7 +214,7 @@ export const StreetVideo: React.FC = () => {
         )}
         <rect width={1080} height={1920} filter="url(#grain)" />
         <rect width={1080} height={1920} fill="url(#vig)" />
-        <Captions t={t} />
+        {caps && <Captions t={t} />}
       </svg>
       <Audio src={staticFile('block1/mix.mp3')} />
     </AbsoluteFill>
