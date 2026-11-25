@@ -17,6 +17,7 @@ import {NoMcdVideo, SHORT_FRAMES as NOMCD_FRAMES} from './videos/nomcd/NoMcdVide
 import {BridgeShort, BRIDGE_FRAMES} from './videos/bridge/Bridge';
 import {Oymyakon} from './Oymyakon';
 import {CrewSheet} from './videos/block1/CrewSheet';
+import {BlockPfp, BlockBanner} from './videos/block1/BrandBlock';
 import {StreetVideo, SHORT_FRAMES as BLOCK1_FRAMES} from './videos/block1/StreetVideo';
 import {Video, estimate, frames, Timings} from './Video';
 import {staticFile} from 'remotion';
@@ -41,6 +42,8 @@ export const Root: React.FC = () => (
     <Composition id="OymyakonShort" component={OymyakonVideo} durationInFrames={OYM_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="Baarle" component={BaarleVideo} durationInFrames={BAARLE_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="Block1" component={StreetVideo} durationInFrames={BLOCK1_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="BlockPfp" component={BlockPfp} durationInFrames={1} fps={30} width={1000} height={1000} />
+    <Composition id="BlockBanner" component={BlockBanner} durationInFrames={1} fps={30} width={2560} height={1440} />
     <Composition id="CrewSheet" component={CrewSheet} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="CastSheet" component={CastSheet} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="MockupV2" component={MockupV2} durationInFrames={1} fps={FPS} width={1920} height={1080} />
