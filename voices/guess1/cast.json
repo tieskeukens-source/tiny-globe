@@ -1,0 +1,18 @@
+{
+ "pin": {
+  "ref": "voices/common/pin.wav",
+  "text": "Did you know there's a village in Turkey where people talk by whistling?"
+ },
+ "tourist": {
+  "ref": "voices/common/tourist.wav",
+  "text": "Wait, what? You people really live out here? Come on, that sounds totally crazy to me."
+ },
+ "aino": {
+  "ref": "voices/guess1/ref/aino.wav",
+  "text": "Good afternoon. You were driving much too fast on this road. Please show me your licence, and stay in the car."
+ },
+ "rich": {
+  "ref": "voices/guess1/ref/rich.wav",
+  "text": "Excuse me, officer, there must be a mistake. I was only driving a little bit fast, and I have a very important meeting."
+ }
+}

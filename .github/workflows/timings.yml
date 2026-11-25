@@ -1,0 +1,23 @@
+name: Timings
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        default: 'oymyakon'
+permissions:
+  contents: write
+jobs:
+  t:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install edge-tts mutagen
+      - run: python scripts/tts.py ${{ inputs.slug }}
+      - run: |
+          mkdir /tmp/t && cp public/audio/${{ inputs.slug }}/timings.json /tmp/t/
+          cd /tmp/t && git init -q -b timings && git config user.name github-actions && git config user.email actions@github.com
+          git add -A && git commit -q -m timings
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" timings

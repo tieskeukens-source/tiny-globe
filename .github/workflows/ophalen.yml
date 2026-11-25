@@ -1,0 +1,28 @@
+name: Render ophalen
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: 'Run-id van de render'
+        required: true
+permissions:
+  contents: write
+  actions: read
+jobs:
+  ophalen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: render
+          path: out
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ github.token }}
+      - name: In stukken op renders-branch
+        run: |
+          mkdir /tmp/r && cd out
+          for f in *.mp4; do split -b 90M -d "$f" "/tmp/r/$f.part"; done
+          cp *.json /tmp/r/ 2>/dev/null || true
+          cd /tmp/r && ls -la && git init -q -b renders && git config user.name github-actions && git config user.email actions@github.com
+          git add -A && git commit -q -m "render in stukken"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" renders

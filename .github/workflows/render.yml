@@ -1,0 +1,58 @@
+name: Render
+on:
+  workflow_dispatch:
+    inputs:
+      composition:
+        description: 'Composition id (Video, Test, Poses)'
+        default: 'Video'
+      slug:
+        description: 'Videonaam (videos/<slug>.json)'
+        default: 'oymyakon'
+permissions:
+  contents: write
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: npm ci
+      - run: pip install edge-tts mutagen
+      - name: Stem
+        if: inputs.composition == 'Video'
+        run: |
+          T0=$(date +%s)
+          python scripts/tts.py ${{ inputs.slug }}
+          echo "Stem: $(( $(date +%s) - T0 )) sec" >> "$GITHUB_STEP_SUMMARY"
+      - name: Render
+        run: |
+          T0=$(date +%s)
+          mkdir -p out
+          if [ "${{ inputs.composition }}" = "Poses" ]; then
+            npx remotion still src/index.ts Poses out/poses.png
+          elif [ "${{ inputs.composition }}" = "Video" ]; then
+            npx remotion render src/index.ts Video out/${{ inputs.slug }}.mp4 --props='{"slug":"${{ inputs.slug }}"}'
+          else
+            npx remotion render src/index.ts ${{ inputs.composition }} out/${{ inputs.composition }}.mp4
+          fi
+          cp public/audio/${{ inputs.slug }}/timings.json out/timings.json 2>/dev/null || true
+          echo "Rendertijd: $(( $(date +%s) - T0 )) sec" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: render
+          path: out/
+      - name: Video op aparte branch zetten
+        run: |
+          mkdir /tmp/renders
+          for f in out/*.mp4; do [ -f "$f" ] && split -b 90M -d "$f" "/tmp/renders/$(basename $f).part"; done
+          cp out/*.png /tmp/renders/ 2>/dev/null || true
+          cp public/audio/${{ inputs.slug }}/timings.json /tmp/renders/ 2>/dev/null || true
+          cd /tmp/renders && git init -q -b renders && git config user.name github-actions && git config user.email actions@github.com
+          git add -A && git commit -q -m "render ${{ inputs.composition }} ${{ inputs.slug }}"
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" renders

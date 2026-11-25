@@ -1,0 +1,26 @@
+{
+ "pin": {
+  "ref": "voices/common/pin.wav",
+  "text": "Did you know there's a village in Turkey where people talk by whistling?"
+ },
+ "iceland": {
+  "ref": "voices/common/countries/iceland.wav",
+  "edge": "is-IS-GudrunNeural",
+  "text": "Hello there! Welcome to Iceland. We have volcanoes, glaciers, hot springs, and a lot of very cold wind."
+ },
+ "bolivia": {
+  "ref": "voices/common/countries/bolivia.wav",
+  "edge": "es-BO-MarceloNeural",
+  "text": "Hello, my friend! Welcome to Bolivia. We have mountains, salt flats, and the best empanadas in the world."
+ },
+ "russia": {
+  "ref": "voices/common/countries/russia.wav",
+  "edge": "ru-RU-SvetlanaNeural",
+  "text": "Hello! Welcome to Russia. We are the biggest country in the world, with eleven time zones and very long winters."
+ },
+ "usa": {
+  "ref": "voices/common/countries/usa.wav",
+  "edge": "en-US-ChristopherNeural",
+  "text": "Hey there, buddy! Welcome to the United States. We have big cities, big cars, and really, really big burgers."
+ }
+}

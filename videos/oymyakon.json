@@ -1,0 +1,2013 @@
+{
+ "title": "What Do People in the Coldest Village on Earth Actually Do All Day?",
+ "voice": "en-US-AndrewNeural",
+ "rate": "-5%",
+ "scenes": [
+  {
+   "type": "closeup",
+   "text": "Imagine stepping outside, and within seconds, your eyelashes start to freeze.",
+   "props": {
+    "pose": "cold",
+    "item": "frost"
+   },
+   "pops": [
+    {
+     "woord": "eyelashes",
+     "tekst": "❄ frozen eyelashes",
+     "kleur": "#2F6FB5",
+     "x": 1350,
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "text": "Your breath hangs in the air like thick smoke.",
+   "props": {
+    "pose": "cold"
+   },
+   "pops": [
+    {
+     "woord": "smoke",
+     "tekst": "breath = smoke",
+     "kleur": "#2F6FB5",
+     "x": 1350,
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "text": "One photographer who visited said his own spit froze into tiny needles that pricked his lips.",
+   "props": {
+    "pose": "shrug",
+    "item": "frost"
+   },
+   "pops": [
+    {
+     "woord": "needles",
+     "tekst": "spit → ice needles",
+     "kleur": "#2F6FB5",
+     "x": 1350,
+     "y": 280
+    }
+   ]
+  },
+  {
+   "type": "dorp",
+   "text": "And the cars on the street? Their engines are running. But nobody is inside.",
+   "props": {
+    "len": 9,
+    "stilstaan": true
+   },
+   "pops": [
+    {
+     "woord": "nobody",
+     "tekst": "nobody inside?!",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ],
+   "cam": {
+    "x": 1100,
+    "y": 720,
+    "z": 1.5
+   }
+  },
+  {
+   "type": "thermo",
+   "text": "This is just a normal winter day in Oymyakon. Minus fifty degrees.",
+   "props": {
+    "stappen": [
+     {
+      "woord": "minus",
+      "waarde": -50,
+      "label": "normal winter day"
+     }
+    ]
+   },
+   "pops": [
+    {
+     "woord": "minus",
+     "tekst": "-50°C",
+     "kleur": "#2F6FB5",
+     "x": 1500,
+     "y": 220,
+     "stijl": "groot"
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "text": "So how do people live here? What do they eat? How do kids get to school? And why would anyone stay?",
+   "props": {
+    "pose": "think"
+   },
+   "pops": [
+    {
+     "woord": "eat",
+     "tekst": "what do they eat?",
+     "kleur": "#4E9A6B",
+     "x": 1350,
+     "y": 200
+    },
+    {
+     "woord": "school",
+     "tekst": "school?",
+     "kleur": "#2F6FB5",
+     "x": 1350,
+     "y": 400
+    },
+    {
+     "woord": "stay",
+     "tekst": "why stay?",
+     "kleur": "#E8622C",
+     "x": 1350,
+     "y": 600
+    }
+   ]
+  },
+  {
+   "type": "reis",
+   "text": "Let's find out. This is Russia, the biggest country in the world.",
+   "props": {
+    "van": [
+     37.62,
+     55.75
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Moscow",
+    "naarNaam": "Oymyakon",
+    "fase": "start"
+   },
+   "pops": [
+    {
+     "woord": "biggest",
+     "tekst": "#1 biggest country",
+     "kleur": "#E8622C",
+     "y": 960
+    }
+   ]
+  },
+  {
+   "type": "reis",
+   "text": "In this video, we'll follow a full day in the coldest village on Earth. From the first step outside, to the last hot meal at night.",
+   "props": {
+    "van": [
+     37.62,
+     55.75
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Moscow",
+    "naarNaam": "Oymyakon",
+    "fase": "start"
+   },
+   "pops": [
+    {
+     "woord": "full day",
+     "tekst": "24 hours in Oymyakon",
+     "kleur": "#2F6FB5",
+     "y": 960
+    }
+   ],
+   "cam": {
+    "x": 960,
+    "y": 540,
+    "z": 1.1
+   }
+  },
+  {
+   "type": "reis",
+   "text": "We start in Moscow, and travel east. Far, far east. More than five thousand kilometres.",
+   "props": {
+    "van": [
+     37.62,
+     55.75
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Moscow",
+    "naarNaam": "Oymyakon",
+    "fase": "reis"
+   },
+   "pops": [
+    {
+     "woord": "far, far",
+     "tekst": "→ EAST",
+     "kleur": "#2F6FB5",
+     "x": 1500,
+     "y": 960
+    },
+    {
+     "woord": "five thousand",
+     "tekst": "5,300 km",
+     "kleur": "#E8622C",
+     "y": 960
+    }
+   ]
+  },
+  {
+   "type": "reis",
+   "text": "That's almost as far as flying from London to New York. And we're still in the same country.",
+   "props": {
+    "van": [
+     37.62,
+     55.75
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Moscow",
+    "naarNaam": "Oymyakon",
+    "fase": "aankomst"
+   },
+   "pops": [
+    {
+     "woord": "london",
+     "tekst": "≈ London → New York",
+     "kleur": "#2F6FB5",
+     "y": 960
+    },
+    {
+     "woord": "same country",
+     "tekst": "same country!",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "reis",
+   "text": "Until we reach a tiny village in eastern Siberia. Oymyakon.",
+   "props": {
+    "van": [
+     37.62,
+     55.75
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Moscow",
+    "naarNaam": "Oymyakon",
+    "fase": "aankomst"
+   },
+   "pops": [
+    {
+     "woord": "tiny",
+     "tekst": "tiny village",
+     "kleur": "#4E9A6B",
+     "y": 930
+    }
+   ],
+   "cam": {
+    "x": 1560,
+    "y": 330,
+    "z": 1.8
+   }
+  },
+  {
+   "type": "reis",
+   "text": "The nearest big city is Yakutsk. From there, the drive can take one or two days.",
+   "props": {
+    "van": [
+     129.73,
+     62.03
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Yakutsk",
+    "naarNaam": "Oymyakon",
+    "fase": "reis"
+   },
+   "pops": [
+    {
+     "woord": "drive",
+     "tekst": "🚗 1–2 days",
+     "kleur": "#E8622C",
+     "y": 930
+    }
+   ],
+   "cam": {
+    "x": 1500,
+    "y": 360,
+    "z": 1.8
+   }
+  },
+  {
+   "type": "reis",
+   "text": "Yakutsk is home to around two hundred and seventy thousand people. It's often called the coldest city on Earth.",
+   "props": {
+    "van": [
+     129.73,
+     62.03
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Yakutsk",
+    "naarNaam": "Oymyakon",
+    "fase": "start"
+   },
+   "pops": [
+    {
+     "woord": "seventy",
+     "tekst": "~270,000 people",
+     "kleur": "#2F6FB5",
+     "y": 930
+    },
+    {
+     "woord": "coldest city",
+     "tekst": "coldest city",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ],
+   "cam": {
+    "x": 1450,
+    "y": 380,
+    "z": 1.6
+   }
+  },
+  {
+   "type": "weg",
+   "text": "And in winter, planes can't land in Oymyakon. So the road is the main way in.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "planes",
+     "tekst": "✈ no winter flights",
+     "kleur": "#C0392B",
+     "y": 150
+    }
+   ],
+   "offset": 3
+  },
+  {
+   "type": "weg",
+   "text": "Part of the trip follows a famous road, the Kolyma Highway.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "kolyma",
+     "tekst": "Kolyma Highway",
+     "kleur": "#4E9A6B",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "weg",
+   "text": "Many people call it the Road of Bones. Prisoners from Soviet labour camps started building it in nineteen thirty-two.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "bones",
+     "tekst": "Road of Bones",
+     "kleur": "#C0392B",
+     "y": 150
+    },
+    {
+     "woord": "thirty-two",
+     "tekst": "1932",
+     "kleur": "#2F6FB5",
+     "x": 1500,
+     "y": 330
+    }
+   ],
+   "offset": 6
+  },
+  {
+   "type": "weg",
+   "text": "The work went on until nineteen fifty-three. Many of the workers died there.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "fifty-three",
+     "tekst": "1932 – 1953",
+     "kleur": "#2F6FB5",
+     "y": 150
+    }
+   ],
+   "offset": 12
+  },
+  {
+   "type": "reis",
+   "text": "Oymyakon itself lies about a hundred kilometres off that road.",
+   "props": {
+    "van": [
+     37.62,
+     55.75
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Moscow",
+    "naarNaam": "Oymyakon",
+    "fase": "aankomst"
+   },
+   "pops": [
+    {
+     "woord": "hundred",
+     "tekst": "~100 km off the road",
+     "kleur": "#E8622C",
+     "y": 930
+    }
+   ],
+   "cam": {
+    "x": 1560,
+    "y": 360,
+    "z": 1.6
+   }
+  },
+  {
+   "type": "dorp",
+   "text": "And about five hundred people call it home.",
+   "props": {
+    "len": 9
+   },
+   "pops": [
+    {
+     "woord": "five hundred",
+     "tekst": "~500 people",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "thermo",
+   "text": "Let's put that cold into numbers. Water freezes at zero degrees.",
+   "props": {
+    "stappen": [
+     {
+      "woord": "zero",
+      "waarde": 0,
+      "label": "water freezes"
+     }
+    ]
+   },
+   "pops": []
+  },
+  {
+   "type": "thermo",
+   "text": "Water freezes at zero. Your freezer at home is about minus eighteen.",
+   "props": {
+    "stappen": [
+     {
+      "woord": "water",
+      "waarde": 0,
+      "label": "water freezes"
+     },
+     {
+      "woord": "freezer",
+      "waarde": -18,
+      "label": "your freezer"
+     }
+    ]
+   },
+   "pops": []
+  },
+  {
+   "type": "thermo",
+   "text": "But in January, an average day in Oymyakon is around minus forty-six.",
+   "props": {
+    "stappen": [
+     {
+      "woord": "but",
+      "waarde": -18,
+      "label": "your freezer"
+     },
+     {
+      "woord": "minus forty",
+      "waarde": -46,
+      "label": "January average"
+     }
+    ]
+   },
+   "pops": []
+  },
+  {
+   "type": "thermo",
+   "text": "And on the sixth of February, nineteen thirty-three, the thermometer showed minus sixty-seven point seven.",
+   "props": {
+    "stappen": [
+     {
+      "woord": "and",
+      "waarde": -46,
+      "label": "January average"
+     },
+     {
+      "woord": "sixty-seven",
+      "waarde": -67.7,
+      "label": "record: -67.7°"
+     }
+    ]
+   },
+   "pops": [
+    {
+     "woord": "february",
+     "tekst": "6 Feb 1933",
+     "kleur": "#2F6FB5",
+     "x": 1500,
+     "y": 200
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "text": "That's the coldest temperature ever officially measured in a place where people live all year.",
+   "props": {
+    "pose": "shrug"
+   },
+   "pops": [
+    {
+     "woord": "coldest",
+     "tekst": "coldest inhabited place",
+     "kleur": "#2F6FB5",
+     "x": 1300,
+     "y": 220
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "text": "Only one other town comes this close. Verkhoyansk, also in Siberia, shares the record.",
+   "props": {
+    "pose": "point"
+   },
+   "pops": [
+    {
+     "woord": "verkhoyansk",
+     "tekst": "Verkhoyansk",
+     "kleur": "#E8622C",
+     "x": 1350,
+     "y": 260
+    }
+   ]
+  },
+  {
+   "type": "thermo",
+   "text": "In twenty eighteen, the village put up a brand new digital thermometer. It broke after showing minus sixty-two.",
+   "props": {
+    "stappen": [
+     {
+      "woord": "thermometer",
+      "waarde": -40,
+      "label": "new thermometer"
+     },
+     {
+      "woord": "minus",
+      "waarde": -62,
+      "label": "-62°... 💥"
+     }
+    ]
+   },
+   "pops": [
+    {
+     "woord": "twenty eighteen",
+     "tekst": "2018",
+     "kleur": "#2F6FB5",
+     "x": 1500,
+     "y": 200
+    },
+    {
+     "woord": "broke",
+     "tekst": "BROKE!",
+     "kleur": "#C0392B",
+     "x": 1500,
+     "y": 380
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "text": "Some locals said their own thermometers showed even lower.",
+   "props": {
+    "pose": "shrug"
+   },
+   "pops": [
+    {
+     "woord": "lower",
+     "tekst": "even lower?",
+     "kleur": "#2F6FB5",
+     "x": 1350,
+     "y": 260
+    }
+   ]
+  },
+  {
+   "type": "dorp",
+   "text": "And here's the crazy part. From late October until the middle of March, it has never been above zero here. Not even once.",
+   "props": {
+    "len": 9,
+    "stilstaan": true
+   },
+   "pops": [
+    {
+     "woord": "october",
+     "tekst": "Oct → Mar",
+     "kleur": "#2F6FB5",
+     "y": 150
+    },
+    {
+     "woord": "never",
+     "tekst": "never above 0°",
+     "kleur": "#C0392B",
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "vallei",
+   "text": "But why is it so cold here? There are a few reasons.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "why",
+     "tekst": "WHY?",
+     "kleur": "#E8622C",
+     "y": 200,
+     "stijl": "groot"
+    }
+   ]
+  },
+  {
+   "type": "reis",
+   "text": "First, it's far to the north, and very far from the sea. Oceans help keep places milder in winter. But Oymyakon is deep inside the biggest landmass on Earth.",
+   "props": {
+    "van": [
+     37.62,
+     55.75
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Moscow",
+    "naarNaam": "Oymyakon",
+    "fase": "aankomst"
+   },
+   "pops": [
+    {
+     "woord": "far from the sea",
+     "tekst": "far from the sea 🌊",
+     "kleur": "#2F6FB5",
+     "y": 150
+    },
+    {
+     "woord": "deep inside",
+     "tekst": "deep inland",
+     "kleur": "#E8622C",
+     "y": 960
+    }
+   ]
+  },
+  {
+   "type": "zon",
+   "text": "Second, the winter days are very short. The sun is only up for about three hours. So the ground hardly gets any heat.",
+   "props": {
+    "uren": 3
+   },
+   "pops": [
+    {
+     "woord": "three hours",
+     "tekst": "~3 hours of daylight",
+     "kleur": "#E8622C",
+     "x": 1500,
+     "y": 200
+    }
+   ]
+  },
+  {
+   "type": "vallei",
+   "text": "Third, look at the shape of the land. Oymyakon sits in a valley, with mountains all around it.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "valley",
+     "tekst": "valley",
+     "kleur": "#4E9A6B",
+     "y": 930
+    }
+   ]
+  },
+  {
+   "type": "vallei",
+   "text": "Cold air is heavy. It slides down the mountains, and gets trapped at the bottom. Right where the village is.",
+   "props": {
+    "lucht": true
+   },
+   "pops": [
+    {
+     "woord": "heavy",
+     "tekst": "cold air sinks ↓",
+     "kleur": "#2F6FB5",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "vallei",
+   "text": "And there's usually very little wind. So the cold air just sits there, getting colder and colder.",
+   "props": {
+    "stil": true
+   },
+   "pops": [
+    {
+     "woord": "wind",
+     "tekst": "no wind",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "text": "A local guide once said that this dry, still cold is easier to handle. With wind, even minus thirty-five would be a disaster.",
+   "props": {
+    "pose": "point"
+   },
+   "pops": [
+    {
+     "woord": "still",
+     "tekst": "still air = OK",
+     "kleur": "#4E9A6B",
+     "x": 1350,
+     "y": 220
+    },
+    {
+     "woord": "wind",
+     "tekst": "wind = disaster",
+     "kleur": "#C0392B",
+     "x": 1350,
+     "y": 420
+    }
+   ]
+  },
+  {
+   "type": "binnen",
+   "text": "So what is a normal day like here? Let's start in the morning. Inside the houses, it's actually warm.",
+   "props": {
+    "pose": "wave"
+   },
+   "pops": [
+    {
+     "woord": "warm",
+     "tekst": "inside: warm 🔥",
+     "kleur": "#E8622C",
+     "x": 1450,
+     "y": 200
+    }
+   ]
+  },
+  {
+   "type": "centrale",
+   "text": "Most of that heat comes from a coal-burning heating plant. It runs day and night, pumping hot water through pipes to the homes.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "coal",
+     "tekst": "coal heating plant",
+     "kleur": "#E8622C",
+     "y": 150
+    },
+    {
+     "woord": "day and night",
+     "tekst": "24/7",
+     "kleur": "#2F6FB5",
+     "x": 1600,
+     "y": 330
+    }
+   ]
+  },
+  {
+   "type": "centrale",
+   "text": "Every morning, a digger brings fresh coal to the plant, and carries away the ash. Without it, the whole village would freeze.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "coal",
+     "tekst": "fresh coal",
+     "kleur": "#E8622C",
+     "y": 150
+    },
+    {
+     "woord": "freeze",
+     "tekst": "no heat = frozen village",
+     "kleur": "#C0392B",
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "binnen",
+   "text": "But going outside takes some work. First, a thick fur hat. Then a scarf over your face. A heavy coat. And warm boots, often made from reindeer fur.",
+   "props": {
+    "items": [
+     {
+      "woord": "hat",
+      "ding": "muts"
+     },
+     {
+      "woord": "scarf",
+      "ding": "sjaal"
+     },
+     {
+      "woord": "coat",
+      "ding": "jas"
+     },
+     {
+      "woord": "boots",
+      "ding": "laarzen"
+     }
+    ]
+   },
+   "pops": [
+    {
+     "woord": "hat",
+     "tekst": "fur hat",
+     "kleur": "#E8622C",
+     "x": 1450,
+     "y": 200
+    },
+    {
+     "woord": "scarf",
+     "tekst": "scarf",
+     "kleur": "#2F6FB5",
+     "x": 1450,
+     "y": 330
+    },
+    {
+     "woord": "coat",
+     "tekst": "heavy coat",
+     "kleur": "#4E9A6B",
+     "x": 1450,
+     "y": 460
+    },
+    {
+     "woord": "boots",
+     "tekst": "reindeer boots",
+     "kleur": "#E8622C",
+     "x": 1450,
+     "y": 590
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "text": "Locals have a rule for the cold. Cover your face, and warm your nose with your hands. But never rub it.",
+   "props": {
+    "pose": "cold",
+    "item": "neus"
+   },
+   "pops": [
+    {
+     "woord": "never",
+     "tekst": "✗ don't rub!",
+     "kleur": "#C0392B",
+     "x": 1350,
+     "y": 280
+    }
+   ]
+  },
+  {
+   "type": "dorp",
+   "text": "Then there's the car. Some people keep their cars in heated garages.",
+   "props": {
+    "len": 9,
+    "stilstaan": true
+   },
+   "pops": [
+    {
+     "woord": "garages",
+     "tekst": "heated garage",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ],
+   "cam": {
+    "x": 1100,
+    "y": 720,
+    "z": 1.5
+   }
+  },
+  {
+   "type": "dorp",
+   "text": "Others simply leave the engine running all day. Because in this cold, a car that stops might not start again.",
+   "props": {
+    "len": 9,
+    "stilstaan": true
+   },
+   "pops": [
+    {
+     "woord": "running",
+     "tekst": "engine ON all day",
+     "kleur": "#E8622C",
+     "y": 150
+    },
+    {
+     "woord": "might not",
+     "tekst": "✗ won't start",
+     "kleur": "#C0392B",
+     "y": 300
+    }
+   ],
+   "cam": {
+    "x": 1150,
+    "y": 740,
+    "z": 1.7
+   }
+  },
+  {
+   "type": "vuur",
+   "text": "And some people even light a small fire under the car, just to warm it up before driving.",
+   "props": {
+    "auto": true
+   },
+   "pops": [
+    {
+     "woord": "fire",
+     "tekst": "🔥 under the car?!",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "wc",
+   "text": "Now, here's something most of us never think about. Where do you go to the toilet?",
+   "props": {},
+   "pops": [
+    {
+     "woord": "toilet",
+     "tekst": "🚽?",
+     "kleur": "#2F6FB5",
+     "x": 960,
+     "y": 200
+    }
+   ]
+  },
+  {
+   "type": "stelten",
+   "text": "The ground here is frozen all year round. It's called permafrost. Water pipes in the ground would freeze and break.",
+   "props": {
+    "fase": "buis"
+   },
+   "pops": [
+    {
+     "woord": "permafrost",
+     "tekst": "PERMAFROST",
+     "kleur": "#2F6FB5",
+     "y": 150
+    },
+    {
+     "woord": "break",
+     "tekst": "pipes break",
+     "kleur": "#C0392B",
+     "x": 1500,
+     "y": 330
+    }
+   ]
+  },
+  {
+   "type": "stelten",
+   "text": "In this region, the frozen ground can go down hundreds of metres. It never thaws.",
+   "props": {
+    "fase": "grond"
+   },
+   "pops": [
+    {
+     "woord": "hundreds",
+     "tekst": "100s of metres deep",
+     "kleur": "#2F6FB5",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "wc",
+   "text": "So most toilets are outside. A small wooden hut, with a hole in the ground. Even at minus fifty.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "outside",
+     "tekst": "outside toilet",
+     "kleur": "#E8622C",
+     "y": 150
+    },
+    {
+     "woord": "minus",
+     "tekst": "-50°C",
+     "kleur": "#2F6FB5",
+     "x": 1500,
+     "y": 330
+    }
+   ]
+  },
+  {
+   "type": "ijs",
+   "text": "And water? In winter, people cut big blocks of ice from the frozen river.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "ice",
+     "tekst": "ice blocks",
+     "kleur": "#2F6FB5",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "ijs",
+   "text": "The blocks are taken back to the village and melted. That's drinking water.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "melted",
+     "tekst": "melt → drink 💧",
+     "kleur": "#2F6FB5",
+     "y": 150
+    }
+   ],
+   "offset": 8
+  },
+  {
+   "type": "markt",
+   "text": "What about food? Almost nothing grows in this frozen ground. So people mostly eat meat and fish.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "nothing",
+     "tekst": "no crops",
+     "kleur": "#C0392B",
+     "y": 150
+    },
+    {
+     "woord": "meat",
+     "tekst": "meat + fish",
+     "kleur": "#E8622C",
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "markt",
+   "text": "At the outdoor market, fish are sold standing straight up in buckets. Frozen solid. No fridge needed.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "frozen",
+     "tekst": "frozen solid",
+     "kleur": "#2F6FB5",
+     "y": 150
+    },
+    {
+     "woord": "fridge",
+     "tekst": "no fridge needed",
+     "kleur": "#4E9A6B",
+     "y": 300
+    }
+   ],
+   "cam": {
+    "x": 960,
+    "y": 620,
+    "z": 1.3
+   }
+  },
+  {
+   "type": "eten",
+   "text": "One local favourite is stroganina. Thin, curly slices of raw frozen fish.",
+   "props": {
+    "items": [
+     {
+      "woord": "stroganina",
+      "ding": "stroganina"
+     }
+    ]
+   },
+   "pops": [
+    {
+     "woord": "stroganina",
+     "tekst": "stroganina",
+     "kleur": "#E8622C",
+     "x": 1300,
+     "y": 200
+    }
+   ]
+  },
+  {
+   "type": "eten",
+   "text": "People also eat a lot of reindeer meat, horse meat, and warm meat soup.",
+   "props": {
+    "items": [
+     {
+      "woord": "stroganina",
+      "ding": "stroganina"
+     },
+     {
+      "woord": "reindeer",
+      "ding": "vlees"
+     },
+     {
+      "woord": "horse",
+      "ding": "paard"
+     },
+     {
+      "woord": "soup",
+      "ding": "soep"
+     }
+    ]
+   },
+   "pops": [
+    {
+     "woord": "reindeer",
+     "tekst": "reindeer",
+     "kleur": "#E8622C",
+     "x": 820,
+     "y": 200
+    },
+    {
+     "woord": "horse",
+     "tekst": "horse",
+     "kleur": "#2F6FB5",
+     "x": 1200,
+     "y": 330
+    },
+    {
+     "woord": "soup",
+     "tekst": "soup",
+     "kleur": "#4E9A6B",
+     "x": 1560,
+     "y": 200
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "text": "As one local put it: the meat is a must.",
+   "props": {
+    "pose": "point"
+   },
+   "pops": [
+    {
+     "woord": "must",
+     "tekst": "\"meat is a must\"",
+     "kleur": "#E8622C",
+     "x": 1350,
+     "y": 260
+    }
+   ]
+  },
+  {
+   "type": "dieren",
+   "text": "The animals here are tough too. Yakutian horses are short and stocky, with very thick, shaggy fur.",
+   "props": {
+    "dier": "paard"
+   },
+   "pops": [
+    {
+     "woord": "yakutian",
+     "tekst": "Yakutian horse",
+     "kleur": "#E8622C",
+     "y": 150
+    },
+    {
+     "woord": "thick",
+     "tekst": "thick fur",
+     "kleur": "#2F6FB5",
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "dieren",
+   "text": "They also have a thick layer of fat. And their hooves help protect their feet from the icy ground.",
+   "props": {
+    "dier": "paard"
+   },
+   "pops": [
+    {
+     "woord": "fat",
+     "tekst": "+ fat layer",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ],
+   "cam": {
+    "x": 900,
+    "y": 700,
+    "z": 1.4
+   }
+  },
+  {
+   "type": "dieren",
+   "text": "And the cows? Farmers put special covers on their udders, so they don't freeze.",
+   "props": {
+    "dier": "koe"
+   },
+   "pops": [
+    {
+     "woord": "covers",
+     "tekst": "udder cover 🧦",
+     "kleur": "#2F6FB5",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "dieren",
+   "text": "And their milk is extra rich. It can have seven or eight percent fat. That's a lot of energy for the long winter.",
+   "props": {
+    "dier": "koe"
+   },
+   "pops": [
+    {
+     "woord": "seven",
+     "tekst": "7–8% fat 🥛",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ],
+   "cam": {
+    "x": 900,
+    "y": 700,
+    "z": 1.3
+   }
+  },
+  {
+   "type": "dieren",
+   "text": "Even the dogs are made for this. The local laika dogs have thick, fluffy coats.",
+   "props": {
+    "dier": "hond"
+   },
+   "pops": [
+    {
+     "woord": "laika",
+     "tekst": "laika dog",
+     "kleur": "#4E9A6B",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "bron",
+   "text": "In winter, farmers bring their cows to drink at a warm spring that doesn't freeze. Then it's straight back to a warm, insulated barn.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "warm spring",
+     "tekst": "warm spring",
+     "kleur": "#4E9A6B",
+     "y": 150
+    },
+    {
+     "woord": "barn",
+     "tekst": "warm barn",
+     "kleur": "#E8622C",
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "bron",
+   "text": "The water is only a few degrees above freezing. But here, that's warm enough to stay liquid all winter.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "few degrees",
+     "tekst": "just above 0°C",
+     "kleur": "#2F6FB5",
+     "y": 150
+    }
+   ],
+   "cam": {
+    "x": 980,
+    "y": 820,
+    "z": 1.3
+   }
+  },
+  {
+   "type": "school",
+   "text": "And the kids? They still go to school. Even when it's minus forty or colder.",
+   "props": {
+    "len": 8
+   },
+   "pops": [
+    {
+     "woord": "minus",
+     "tekst": "-40°C",
+     "kleur": "#2F6FB5",
+     "x": 700,
+     "y": 200,
+     "stijl": "groot"
+    }
+   ],
+   "cam": {
+    "x": 960,
+    "y": 300,
+    "z": 1.3
+   }
+  },
+  {
+   "type": "school",
+   "text": "In winter, it's often still dark when they walk there.",
+   "props": {
+    "len": 7
+   },
+   "pops": [
+    {
+     "woord": "dark",
+     "tekst": "🌙 still dark",
+     "kleur": "#2F6FB5",
+     "x": 560,
+     "y": 150
+    }
+   ],
+   "offset": 2
+  },
+  {
+   "type": "school",
+   "text": "They walk there with their parents. And often, a dog comes along too.",
+   "props": {
+    "len": 7
+   },
+   "pops": [
+    {
+     "woord": "dog",
+     "tekst": "🐕 + parents",
+     "kleur": "#4E9A6B",
+     "x": 560,
+     "y": 150
+    }
+   ],
+   "offset": 1
+  },
+  {
+   "type": "school",
+   "text": "The school only closes when it gets colder than about minus fifty-two.",
+   "props": {
+    "len": 7,
+    "aangekomen": true
+   },
+   "pops": [
+    {
+     "woord": "minus",
+     "tekst": "-52°C",
+     "kleur": "#2F6FB5",
+     "x": 700,
+     "y": 200,
+     "stijl": "groot"
+    }
+   ],
+   "cam": {
+    "x": 1300,
+    "y": 560,
+    "z": 1.4
+   }
+  },
+  {
+   "type": "school",
+   "text": "For older kids, the limit is even lower. They only stay home at around minus fifty-six.",
+   "props": {
+    "len": 7,
+    "aangekomen": true
+   },
+   "pops": [
+    {
+     "woord": "minus",
+     "tekst": "-56°C",
+     "kleur": "#2F6FB5",
+     "x": 700,
+     "y": 200,
+     "stijl": "groot"
+    }
+   ],
+   "cam": {
+    "x": 1300,
+    "y": 560,
+    "z": 1.4
+   }
+  },
+  {
+   "type": "kapot",
+   "text": "The cold also breaks everyday things. Pen ink freezes, so writing outside is almost impossible.",
+   "props": {
+    "ding": "pen"
+   },
+   "pops": [
+    {
+     "woord": "freezes",
+     "tekst": "ink freezes",
+     "kleur": "#2F6FB5",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "text": "Glasses can freeze to your face.",
+   "props": {
+    "pose": "cold",
+    "item": "bril"
+   },
+   "pops": [
+    {
+     "woord": "glasses",
+     "tekst": "frozen glasses",
+     "kleur": "#2F6FB5",
+     "x": 1350,
+     "y": 260
+    }
+   ]
+  },
+  {
+   "type": "kapot",
+   "text": "And phone batteries drain very fast. One moment it's full. The next, it's dead.",
+   "props": {
+    "ding": "telefoon"
+   },
+   "pops": [
+    {
+     "woord": "dead",
+     "tekst": "dead 💀",
+     "kleur": "#C0392B",
+     "x": 1500,
+     "y": 200
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "text": "So people don't stay outside longer than they have to.",
+   "props": {
+    "pose": "shrug"
+   },
+   "pops": [
+    {
+     "woord": "longer",
+     "tekst": "stay inside",
+     "kleur": "#E8622C",
+     "x": 1350,
+     "y": 260
+    }
+   ]
+  },
+  {
+   "type": "ijs",
+   "text": "So what do adults do for work? Jobs are hard to find. Many people breed reindeer, hunt, or go ice fishing.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "jobs",
+     "tekst": "few jobs",
+     "kleur": "#C0392B",
+     "y": 150
+    },
+    {
+     "woord": "ice fishing",
+     "tekst": "reindeer · hunting · ice fishing",
+     "kleur": "#2F6FB5",
+     "y": 300
+    }
+   ],
+   "offset": 4
+  },
+  {
+   "type": "markt",
+   "text": "Trading fur is also an important part of life here. And in this cold, fur isn't about fashion. It's about staying alive.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "fur",
+     "tekst": "fur trade",
+     "kleur": "#E8622C",
+     "y": 150
+    },
+    {
+     "woord": "alive",
+     "tekst": "not fashion → survival",
+     "kleur": "#2F6FB5",
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "stelten",
+   "text": "Even building a house is tricky. In summer, the top layer of ground thaws and turns soft.",
+   "props": {
+    "fase": "dooi"
+   },
+   "pops": [
+    {
+     "woord": "soft",
+     "tekst": "top layer thaws",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "stelten",
+   "text": "So many buildings stand on stilts, drilled deep into the frozen ground. That way, they don't sink or tilt.",
+   "props": {
+    "fase": "palen"
+   },
+   "pops": [
+    {
+     "woord": "stilts",
+     "tekst": "on stilts",
+     "kleur": "#4E9A6B",
+     "y": 150
+    },
+    {
+     "woord": "sink",
+     "tekst": "won't sink",
+     "kleur": "#2F6FB5",
+     "x": 1500,
+     "y": 330
+    }
+   ]
+  },
+  {
+   "type": "vuur",
+   "text": "Digging is hard too. To dig a grave, people light a fire to thaw the ground. They dig a little, then light another fire. It can take days.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "fire",
+     "tekst": "fire → thaw → dig",
+     "kleur": "#E8622C",
+     "y": 150
+    },
+    {
+     "woord": "days",
+     "tekst": "can take days",
+     "kleur": "#C0392B",
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "bron",
+   "text": "So why did anyone settle here in the first place? The answer is in the name.",
+   "props": {
+    "vroeger": true
+   },
+   "pops": [
+    {
+     "woord": "name",
+     "tekst": "Oymyakon = ?",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "bron",
+   "text": "Oymyakon is often said to mean unfrozen water. Because nearby, there's a spring that doesn't freeze, even in winter.",
+   "props": {
+    "vroeger": true
+   },
+   "pops": [
+    {
+     "woord": "unfrozen",
+     "tekst": "\"unfrozen water\"",
+     "kleur": "#2F6FB5",
+     "y": 150
+    }
+   ],
+   "cam": {
+    "x": 980,
+    "y": 800,
+    "z": 1.4
+   }
+  },
+  {
+   "type": "bron",
+   "text": "In the nineteen twenties and thirties, reindeer herders stopped here, so their animals could drink.",
+   "props": {
+    "vroeger": true
+   },
+   "pops": [
+    {
+     "woord": "twenties",
+     "tekst": "1920s–30s",
+     "kleur": "#E8622C",
+     "y": 150
+    },
+    {
+     "woord": "reindeer",
+     "tekst": "reindeer herders",
+     "kleur": "#4E9A6B",
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "dorp",
+   "text": "Then the Soviet government wanted these herders to stop moving around. And Oymyakon became a permanent village.",
+   "props": {
+    "len": 9
+   },
+   "pops": [
+    {
+     "woord": "soviet",
+     "tekst": "Soviet plan",
+     "kleur": "#C0392B",
+     "y": 150
+    },
+    {
+     "woord": "permanent",
+     "tekst": "permanent village",
+     "kleur": "#4E9A6B",
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "reis",
+   "text": "During World War Two, an airfield was built in the area. It was part of a route used to fly American planes to the Soviet Union.",
+   "props": {
+    "van": [
+     37.62,
+     55.75
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Moscow",
+    "naarNaam": "Oymyakon",
+    "fase": "aankomst"
+   },
+   "pops": [
+    {
+     "woord": "world war",
+     "tekst": "WWII",
+     "kleur": "#C0392B",
+     "y": 150
+    },
+    {
+     "woord": "american",
+     "tekst": "✈ USA → USSR",
+     "kleur": "#2F6FB5",
+     "y": 930
+    }
+   ],
+   "cam": {
+    "x": 1500,
+    "y": 360,
+    "z": 1.5
+   }
+  },
+  {
+   "type": "zomer",
+   "text": "But here's the surprise. Oymyakon has summer too. And it can actually get hot.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "summer",
+     "tekst": "SUMMER!",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "thermo",
+   "text": "In July, twenty ten, it reached thirty-four point six degrees.",
+   "props": {
+    "stappen": [
+     {
+      "woord": "thirty-four",
+      "waarde": 34.6,
+      "label": "record: +34.6°"
+     }
+    ]
+   },
+   "pops": [
+    {
+     "woord": "july",
+     "tekst": "July 2010",
+     "kleur": "#E8622C",
+     "x": 1500,
+     "y": 200
+    }
+   ]
+  },
+  {
+   "type": "thermo",
+   "text": "From the coldest day to the hottest, that's a difference of more than one hundred degrees.",
+   "props": {
+    "stappen": [
+     {
+      "woord": "coldest",
+      "waarde": -67.7,
+      "label": "-67.7° (1933)"
+     },
+     {
+      "woord": "hottest",
+      "waarde": 34.6,
+      "label": "+34.6° (2010)"
+     }
+    ]
+   },
+   "pops": [
+    {
+     "woord": "hundred",
+     "tekst": "100°+ difference",
+     "kleur": "#E8622C",
+     "x": 1450,
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "zon",
+   "text": "And the days get long. Up to around twenty-one hours of daylight.",
+   "props": {
+    "uren": 21,
+    "zomer": true
+   },
+   "pops": [
+    {
+     "woord": "twenty-one",
+     "tekst": "~21 hours of light",
+     "kleur": "#E8622C",
+     "x": 1500,
+     "y": 200
+    }
+   ]
+  },
+  {
+   "type": "zomer",
+   "text": "In June and July, the sun barely sets at all. It is the total opposite of winter.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "barely",
+     "tekst": "☀ barely sets",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "zomer",
+   "text": "Summer is the time to fish, hunt, and get ready for the next winter. Meat is stored in cellars that work like natural freezers.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "hunt",
+     "tekst": "fish + hunt",
+     "kleur": "#4E9A6B",
+     "y": 150
+    },
+    {
+     "woord": "natural",
+     "tekst": "natural freezer",
+     "kleur": "#2F6FB5",
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "zomer",
+   "text": "But summer doesn't last long. By late October, it's below zero again, and it stays that way for months.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "october",
+     "tekst": "late Oct: back below 0°",
+     "kleur": "#2F6FB5",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "dorp",
+   "text": "So, why do people stay? For many, the answer is simple. This is home. Their family, their animals, their whole life is here.",
+   "props": {
+    "len": 9,
+    "stilstaan": true
+   },
+   "pops": [
+    {
+     "woord": "home",
+     "tekst": "home ❤",
+     "kleur": "#E8622C",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "closeup",
+   "text": "And some visitors travel all the way here on purpose, just to feel the cold for themselves.",
+   "props": {
+    "pose": "wave"
+   },
+   "pops": [
+    {
+     "woord": "visitors",
+     "tekst": "tourists!",
+     "kleur": "#4E9A6B",
+     "x": 1350,
+     "y": 260
+    }
+   ]
+  },
+  {
+   "type": "bron",
+   "text": "They can ride Yakutian horses, try ice fishing, or even take a dip in the warm spring.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "horses",
+     "tekst": "ride horses",
+     "kleur": "#E8622C",
+     "y": 150
+    },
+    {
+     "woord": "dip",
+     "tekst": "dip in the spring?!",
+     "kleur": "#2F6FB5",
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "dorp",
+   "text": "There's even a sign in the village that proudly calls it the Pole of Cold.",
+   "props": {
+    "len": 9
+   },
+   "pops": [
+    {
+     "woord": "pole",
+     "tekst": "POLE OF COLD",
+     "kleur": "#2F6FB5",
+     "y": 200,
+     "stijl": "groot"
+    }
+   ]
+  },
+  {
+   "type": "dorp",
+   "text": "So, what do people in Oymyakon actually do all day? They keep warm. They keep their cars running. They look after their animals.",
+   "props": {
+    "len": 9,
+    "stilstaan": true
+   },
+   "pops": [
+    {
+     "woord": "warm",
+     "tekst": "keep warm",
+     "kleur": "#E8622C",
+     "y": 150
+    },
+    {
+     "woord": "running",
+     "tekst": "cars running",
+     "kleur": "#2F6FB5",
+     "y": 290
+    },
+    {
+     "woord": "animals",
+     "tekst": "animals",
+     "kleur": "#4E9A6B",
+     "y": 430
+    }
+   ],
+   "cam": {
+    "x": 1100,
+    "y": 720,
+    "z": 1.4
+   }
+  },
+  {
+   "type": "ijs",
+   "text": "They cut ice for water. They fish, they hunt, and they stock up for winter.",
+   "props": {},
+   "pops": [
+    {
+     "woord": "ice",
+     "tekst": "ice → water",
+     "kleur": "#2F6FB5",
+     "y": 150
+    },
+    {
+     "woord": "stock",
+     "tekst": "stock up",
+     "kleur": "#E8622C",
+     "y": 300
+    }
+   ]
+  },
+  {
+   "type": "school",
+   "text": "Kids go to school, and adults go to work. Just like anywhere else. Only much, much colder.",
+   "props": {
+    "len": 7,
+    "aangekomen": true
+   },
+   "pops": [
+    {
+     "woord": "anywhere",
+     "tekst": "just like anywhere",
+     "kleur": "#4E9A6B",
+     "y": 900
+    },
+    {
+     "woord": "colder",
+     "tekst": "...but colder",
+     "kleur": "#2F6FB5",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "binnen",
+   "text": "And when the day is done, it's back inside. A hot meal, a warm house, and another long night at minus fifty outside.",
+   "props": {
+    "pose": "stand"
+   },
+   "pops": [
+    {
+     "woord": "hot meal",
+     "tekst": "hot meal 🍲",
+     "kleur": "#E8622C",
+     "x": 1450,
+     "y": 200
+    },
+    {
+     "woord": "minus",
+     "tekst": "outside: -50°C",
+     "kleur": "#2F6FB5",
+     "x": 1450,
+     "y": 360
+    }
+   ]
+  },
+  {
+   "type": "dorp",
+   "text": "Life in Oymyakon is hard. But it goes on, one frozen day at a time.",
+   "props": {
+    "len": 9
+   },
+   "pops": [
+    {
+     "woord": "frozen",
+     "tekst": "one frozen day at a time",
+     "kleur": "#2F6FB5",
+     "y": 150
+    }
+   ]
+  },
+  {
+   "type": "reis",
+   "text": "Where should we go next? Tell us in the comments. And see you on the next stop of Tiny Globe.",
+   "props": {
+    "van": [
+     37.62,
+     55.75
+    ],
+    "naar": [
+     142.79,
+     63.46
+    ],
+    "vanNaam": "Moscow",
+    "naarNaam": "Oymyakon",
+    "fase": "aankomst"
+   },
+   "pops": [
+    {
+     "woord": "comments",
+     "tekst": "next stop? 💬",
+     "kleur": "#E8622C",
+     "y": 930
+    },
+    {
+     "woord": "tiny",
+     "tekst": "TINY GLOBE",
+     "kleur": "#E8622C",
+     "y": 150,
+     "stijl": "groot"
+    }
+   ]
+  }
+ ]
+}
