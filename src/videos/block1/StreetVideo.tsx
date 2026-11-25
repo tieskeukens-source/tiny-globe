@@ -204,8 +204,8 @@ export const StreetVideo: React.FC = () => {
         </defs>
         <g transform={`translate(${540 + drift[0]} ${960 + drift[1]}) rotate(${c.rot}) scale(${c.z}) translate(${-c.cx} ${-c.cy})`}>
           <Street f={f} closed={closed} />
-          <Pigeon f={f} x={500} y={1900} fly={fly > 0 ? fly : -1} />
           {order.map((w) => <Char key={w} who={w} i={i} t={t} f={f} />)}
+          <Pigeon f={f} x={700} y={1910} fly={fly > 0 ? fly : -1} />
         </g>
         {c.ots && (
           <g transform={`translate(${c.ots === 'fast' ? -250 : -230} ${1010 + Math.sin(t * 1.3) * 6}) scale(1.55)`} filter="url(#fg)">
