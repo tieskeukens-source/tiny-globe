@@ -53,10 +53,10 @@ export const AiTest: React.FC = () => {
   const squash = 1 - (1 - sw) * 0.08;
   const beat = p === 'hype' ? Math.abs(Math.sin(t * Math.PI * 142 / 60)) * 14 : 0;
   const bob = Math.sin(t * 2.2) * 6 + (v !== 'X' ? Math.sin(f / 2.2) * 3 : 0) - beat;
-  const sway = Math.sin(t * 1.3) * 1.2 + (p === 'point' ? Math.sin(f * 1.9) * 0.8 : 0);
+  const sway = Math.sin(t * 1.3) * 1.2;
   // camera: hook close-up on the face, then wide, then a dutch medium for the comeback
   const cam = p === 'hype' ? {cx: 540, cy: 860, z: 1.75 + t * 0.06, rot: -3} : p === 'talk' ? {cx: 560, cy: 1080, z: 1.16 + (t - switchT(t)) * 0.02, rot: 0} : {cx: 560, cy: 1050, z: 1.4 + (t - switchT(t)) * 0.05, rot: -4};
-  const shake = p === 'point' ? [Math.sin(f * 2.3) * 4, Math.cos(f * 2.9) * 3] : [0, 0];
+  const shake = [0, 0];
   const camT = `translate(${540 + shake[0]}px, ${960 + shake[1]}px) rotate(${cam.rot}deg) scale(${cam.z}) translate(${-cam.cx}px, ${-cam.cy}px)`;
   const bgT = `translate(${540}px, ${960}px) rotate(${cam.rot}deg) scale(${cam.z * 0.97 + 0.03}) translate(${-cam.cx}px, ${-cam.cy}px)`;
   const W = 1024 * PS, H = 1536 * PS;
