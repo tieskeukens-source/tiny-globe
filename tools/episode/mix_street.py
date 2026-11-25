@@ -62,14 +62,15 @@ def whoosh(d=0.35):
 put(sfx, 0.0, impact(), 0.7); put(sfx, TL['total'] - 1.3, impact(), 0.55)
 put(sfx, wt(0, "i've") - 0.15, whoosh(0.4), 0.35)
 put(sfx, E(2) + 0.08, cough(), 0.55)
+STEPS = not os.environ.get('NOSTEPS')
 t = L[4]['start']
-while t < L[5]['start']: put(sfx, t, step(), 0.22); t += np.pi / 12
+while STEPS and t < L[5]['start']: put(sfx, t, step(), 0.22); t += np.pi / 12
 t = L[10]['start']
-while t < L[10]['start'] + 1.6: put(sfx, t, step(1.1), 0.25); t += np.pi / 11
+while STEPS and t < L[10]['start'] + 1.6: put(sfx, t, step(1.1), 0.25); t += np.pi / 11
 t = E(10)
-while t < E(10) + 0.8: put(sfx, t, step(), 0.22); t += np.pi / 12
+while STEPS and t < E(10) + 0.8: put(sfx, t, step(), 0.22); t += np.pi / 12
 put(sfx, L[9]['start'] - 0.15, bp(rng.normal(0, 1, int(0.3 * SR)), 300, 3000) * np.exp(-X(0.3) * 9), 0.12)   # stands up
-put(sfx, wt(11, 'pigeon'), flutter(), 0.3)
+if STEPS: put(sfx, wt(11, 'pigeon'), flutter(), 0.3)
 put(sfx, L[7]['start'] - 0.35, buzz(), 0.18)
 put(sfx, L[13]['start'] + 0.45, clunk(), 0.6); put(sfx, L[13]['start'] + 0.45, hum_off(), 0.3)
 for i in (6, 9, 11, 13): put(sfx, E(i) + 0.05, sting(), 0.45)

@@ -18,6 +18,7 @@ import {BridgeShort, BRIDGE_FRAMES} from './videos/bridge/Bridge';
 import {Oymyakon} from './Oymyakon';
 import {CrewSheet} from './videos/block1/CrewSheet';
 import {AiTest, AITEST_FRAMES} from './videos/aitest/AiTest';
+import {AiEpisode, AIEP_FRAMES} from './videos/aiep/AiEpisode';
 import {BlockPfp, BlockBanner} from './videos/block1/BrandBlock';
 import {StreetVideo, SHORT_FRAMES as BLOCK1_FRAMES} from './videos/block1/StreetVideo';
 import {Video, estimate, frames, Timings} from './Video';
@@ -45,6 +46,7 @@ export const Root: React.FC = () => (
     <Composition id="Block1" component={StreetVideo} durationInFrames={BLOCK1_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="BlockPfp" component={BlockPfp} durationInFrames={1} fps={30} width={1000} height={1000} />
     <Composition id="BlockBanner" component={BlockBanner} durationInFrames={1} fps={30} width={2560} height={1440} />
+    <Composition id="Block1AI" component={AiEpisode} durationInFrames={AIEP_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="AiTest" component={AiTest} durationInFrames={AITEST_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="CrewSheet" component={CrewSheet} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="CastSheet" component={CastSheet} durationInFrames={1} fps={30} width={1920} height={1080} />
