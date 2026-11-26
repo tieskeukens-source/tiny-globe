@@ -139,7 +139,7 @@ const Captions: React.FC<{t: number}> = ({t}) => {
   );
 };
 
-export const AiEpisode: React.FC<{caps?: boolean}> = ({caps = true}) => {
+export const AiEpisode: React.FC<{caps?: boolean; logo?: boolean}> = ({caps = true, logo = true}) => {
   const f = useCurrentFrame();
   const t = f / FPS;
   const c = camAt(t);
@@ -161,7 +161,7 @@ export const AiEpisode: React.FC<{caps?: boolean}> = ({caps = true}) => {
       </div>
       <div style={{position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.5) 100%)'}} />
       {caps && <Captions t={t} />}
-      {(logoIn || logoEnd) && (
+      {logo && (logoIn || logoEnd) && (
         <div style={{position: 'absolute', top: logoIn ? 110 : 1600, width: 1080, textAlign: 'center', opacity: logoIn ? 1 - clamp01((f - 24) / 8) : 1, transform: `rotate(-4deg) scale(${0.4 + 0.6 * lg})`}}>
           <span style={{background: '#141210', padding: '6px 40px', borderRadius: 14, fontFamily: MARK, fontSize: 96, color: '#ffd24a'}}>THE BLOCK</span>
         </div>
