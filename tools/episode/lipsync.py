@@ -5,7 +5,9 @@ vd, tlp, outp = sys.argv[1:4]
 RH = os.path.join(os.path.dirname(__file__), '..', 'bin', 'rhubarb', 'rhubarb')
 T = json.load(open(tlp)); out = {}
 for l in T['lines']:
-    wav = f"{vd}/{l['i']:03d}.wav"; tmp = tempfile.mkdtemp()
+    wav = f"{vd}/{l['i']:03d}.wav"
+    if l['who'] in ('sfx', 'whistle') or not os.path.exists(wav): out[str(l['i'])] = []; continue
+    tmp = tempfile.mkdtemp()
     subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-ac', '1', '-ar', '16000', f'{tmp}/a.wav'], check=True)
     open(f'{tmp}/d.txt', 'w').write(' '.join(str(w[2]) for w in l['words']))
     r = subprocess.run([RH, '-f', 'json', '-d', f'{tmp}/d.txt', '--extendedShapes', 'GHX', '-q', f'{tmp}/a.wav'], capture_output=True, text=True, check=True)

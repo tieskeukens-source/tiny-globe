@@ -6,17 +6,26 @@ from PIL import Image, ImageFilter, ImageDraw
 from scipy import ndimage
 A = 'assets/ai'; O = 'public/ai'
 VIS = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
-# mouth sheets: column starts, row starts, cell size, closed-mouth centre/width/angle inside a cell
+# mouth sheets: column starts, row starts, cell size, closed-mouth centre/width/angle inside a cell,
+# and (optional) the patch window around that centre: up, down, left, right, ellipse rx, ry, dy
 SHEETS = {
   'fast': ([85, 477, 868], [21, 439, 858], (296, 382), (126, 258), 187.0, 0.0),
   'dre': ([117, 491, 870], [13, 426, 842], (292, 392), (173, 253), 154.0, -7.0),
   'lou': ([67, 452, 838], [4, 425, 843], (356, 406), (161, 283), 134.0, -2.6),
+  # Boss Man has a moustache right on top of the mouth: the patch carries it, and the scale
+  # reference (SRC_W) is the moustache width, not the small closed mouth.
+  'boss': ([51, 443, 861], [6, 424, 842], (346, 405), (178, 266), 135.0, 0.0, (84, 104, 118, 118, 112, 104, 18)),
 }
+PATCH = (62, 94, 122, 126, 120, 74, 22)   # default window: up, down, left, right, ellipse rx, ry, dy
 # poses: character, mouth centre, mouth width, angle (deg), mirror the mouths
 POSES = {
   'fast_hype': ('fast', (487, 338), 240, -11.8, True), 'fast_talk': ('fast', (517, 309), 200, 8.6, False), 'fast_point': ('fast', (461, 370), 225, -8.5, False),
   'dre_sit': ('dre', (544, 377), 211, -9.8, False), 'dre_cross': ('dre', (544, 294), 175, -11.8, False), 'dre_ask': ('dre', (524, 312), 212, -3.0, False),
   'lou_lean': ('lou', (426, 397), 161, -7.8, False), 'lou_phone': ('lou', (458, 450), 202, -4.8, False), 'lou_smell': ('lou', (510, 458), 151, 7.5, False),
+  # episode 2
+  'lou_wide': ('lou', (517, 368), 150, -8.8, False), 'lou_sweat': ('lou', (528, 399), 146, -4.6, False),
+  'fast_menu': ('fast', (567, 348), 209, 6.9, False),
+  'boss_talk': ('boss', (518, 590), 248, 0.0, False), 'boss_cross': ('boss', (517, 518), 238, 0.0, False),
 }
 CELLS = {}
 for who, (cs, rs, (cw, ch), *_r) in SHEETS.items():
@@ -31,10 +40,11 @@ def skin_median(img, box):
 def patch(who, k):
     c = np.array(CELLS[who][k]).astype(float)
     (cx0, cy0), H, W = SHEETS[who][3], c.shape[0], c.shape[1]
-    y0, y1, x0, x1 = max(0, cy0 - 62), min(H, cy0 + 94), max(0, cx0 - 122), min(W, cx0 + 126)
+    up, dn, lf, rt, erx, ery, edy = SHEETS[who][6] if len(SHEETS[who]) > 6 else PATCH
+    y0, y1, x0, x1 = max(0, cy0 - up), min(H, cy0 + dn), max(0, cx0 - lf), min(W, cx0 + rt)
     p = c[y0:y1, x0:x1].copy()
     yy, xx = np.mgrid[y0:y1, x0:x1]
-    e = ((xx - cx0) / 120) ** 2 + ((yy - (cy0 + 22)) / 74) ** 2
+    e = ((xx - cx0) / erx) ** 2 + ((yy - (cy0 + edy)) / ery) ** 2
     p[:, :, 3] = p[:, :, 3] * np.clip((1.0 - e) / 0.18, 0, 1)
     return p, (cx0 - x0, cy0 - y0)
 

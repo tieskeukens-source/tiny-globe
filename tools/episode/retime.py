@@ -9,6 +9,7 @@ env = {}
 for l in T['lines']:
     shift += P.get(l['i'], 0)
     l['start'] = round(l['start'] + shift, 3); l['words'] = [[round(a + shift, 3), round(b + shift, 3), w] for a, b, w in l['words']]
+    if l['who'] in ('sfx', 'whistle'): env[str(l['i'])] = []; continue
     a = np.frombuffer(subprocess.run(['ffmpeg', '-v', 'error', '-i', f"{vd}/{l['i']:03d}.wav", '-f', 'f32le', '-ac', '1', '-ar', '24000', '-'], capture_output=True).stdout, dtype=np.float32)
     hop = 800; rms = np.array([np.sqrt(np.mean(a[k:k + hop] ** 2)) for k in range(0, len(a), hop)])
     v = np.clip((rms - 0.01) / (np.percentile(rms, 90) + 1e-6), 0, 1)
