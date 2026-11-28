@@ -1,475 +1,715 @@
 {
- "total": 28.74,
+ "total": 40.32,
  "lines": [
   {
    "i": 0,
    "who": "fast",
    "chapter": 1,
-   "text": "Yo! GTA Six is finally out! Thirteen years, bro!",
+   "text": "Yo! GTA Six is finally out! I've played it all week, bruv!",
    "start": 0.9,
-   "dur": 4.48,
+   "dur": 3.84,
    "words": [
     [
      0.9,
-     1.26,
+     1.28,
      "Yo,"
     ],
     [
-     1.48,
-     1.78,
+     1.52,
+     1.8,
      "GTA"
     ],
     [
-     1.78,
-     2.26,
+     1.8,
+     2.24,
      "6"
     ],
     [
-     2.26,
-     2.56,
+     2.24,
+     2.52,
      "is"
     ],
     [
-     2.56,
-     2.88,
+     2.52,
+     2.78,
      "finally"
     ],
     [
-     2.88,
-     3.32,
+     2.78,
+     3.14,
      "out."
     ],
     [
-     3.94,
-     4.26,
-     "13"
+     3.36,
+     3.52,
+     "I've"
     ],
     [
-     4.26,
-     4.64,
-     "years,"
+     3.52,
+     3.7,
+     "played"
     ],
     [
-     5.04,
-     5.04,
-     "bro."
+     3.7,
+     3.84,
+     "it"
+    ],
+    [
+     3.84,
+     3.96,
+     "all"
+    ],
+    [
+     3.96,
+     4.2,
+     "week,"
+    ],
+    [
+     4.38,
+     4.6,
+     "bruv."
     ]
    ],
-   "heard": "Yo, GTA 6 is finally out. 13 years, bro."
+   "heard": "Yo, GTA 6 is finally out. I've played it all week, bruv."
   },
   {
    "i": 1,
-   "who": "lou",
+   "who": "dre",
    "chapter": 1,
-   "text": "Bro, I was a kid when GTA Five dropped.",
-   "start": 5.44,
-   "dur": 2.48,
+   "text": "All week? You've got work.",
+   "start": 4.8,
+   "dur": 2.64,
    "words": [
     [
-     5.44,
-     5.68,
-     "Bro,"
+     4.8,
+     5.56,
+     "All"
     ],
     [
-     5.94,
-     6.04,
-     "I"
+     5.56,
+     5.82,
+     "week."
     ],
     [
-     6.04,
-     6.14,
-     "was"
+     6.56,
+     6.72,
+     "You've"
     ],
     [
-     6.14,
-     6.28,
-     "a"
+     6.72,
+     6.86,
+     "got"
     ],
     [
-     6.28,
-     6.44,
-     "kid"
-    ],
-    [
-     6.44,
-     6.66,
-     "when"
-    ],
-    [
-     6.66,
-     6.96,
-     "GTA"
-    ],
-    [
-     6.96,
-     7.32,
-     "5"
-    ],
-    [
-     7.32,
-     7.6,
-     "dropped."
+     6.86,
+     7.12,
+     "work."
     ]
    ],
-   "heard": "Bro, I was a kid when GTA 5 dropped."
+   "heard": "All week. You've got work."
   },
   {
    "i": 2,
    "who": "fast",
-   "chapter": 2,
-   "text": "I played all night. I got a mansion, a boat, a helicopter!",
-   "start": 8.14,
-   "dur": 4.96,
+   "chapter": 1,
+   "text": "Called in sick. Told my boss I've got a cold.",
+   "start": 7.5,
+   "dur": 2.72,
    "words": [
     [
-     8.14,
-     8.4,
-     "I"
+     7.5,
+     7.84,
+     "Called"
     ],
     [
-     8.4,
-     8.66,
-     "played"
+     7.84,
+     8.0,
+     "in"
     ],
     [
-     8.66,
-     8.92,
-     "all"
+     8.0,
+     8.34,
+     "sick."
     ],
     [
-     8.92,
-     9.28,
-     "night."
+     8.78,
+     8.88,
+     "Told"
     ],
     [
-     9.88,
-     10.04,
-     "I"
+     8.88,
+     9.06,
+     "my"
     ],
     [
-     10.04,
-     10.2,
+     9.06,
+     9.32,
+     "boss"
+    ],
+    [
+     9.32,
+     9.58,
+     "I've"
+    ],
+    [
+     9.58,
+     9.7,
      "got"
     ],
     [
-     10.2,
-     10.34,
+     9.7,
+     9.82,
      "a"
     ],
     [
-     10.34,
-     10.72,
-     "mansion,"
-    ],
-    [
-     11.24,
-     11.26,
-     "a"
-    ],
-    [
-     11.26,
-     11.56,
-     "boat,"
-    ],
-    [
-     12.04,
-     12.08,
-     "a"
-    ],
-    [
-     12.08,
-     12.54,
-     "helicopter."
+     9.82,
+     10.08,
+     "cold."
     ]
    ],
-   "heard": "I played all night. I got a mansion, a boat, a helicopter."
+   "heard": "Called in sick. Told my boss I've got a cold."
   },
   {
    "i": 3,
-   "who": "dre",
+   "who": "lou",
    "chapter": 2,
-   "text": "In real life?",
-   "start": 13.16,
-   "dur": 0.8,
+   "text": "He's rich in the game, though. Go on, tell him.",
+   "start": 10.44,
+   "dur": 3.12,
    "words": [
     [
-     13.16,
-     13.36,
-     "In"
+     10.44,
+     10.88,
+     "He's"
     ],
     [
-     13.36,
-     13.5,
-     "real"
+     10.88,
+     11.0,
+     "rich"
     ],
     [
-     13.5,
-     13.82,
-     "life,"
+     11.0,
+     11.22,
+     "in"
+    ],
+    [
+     11.22,
+     11.32,
+     "the"
+    ],
+    [
+     11.32,
+     11.56,
+     "game,"
+    ],
+    [
+     11.82,
+     11.82,
+     "though."
+    ],
+    [
+     12.22,
+     12.32,
+     "Go"
+    ],
+    [
+     12.32,
+     12.54,
+     "on,"
+    ],
+    [
+     12.76,
+     12.92,
+     "tell"
+    ],
+    [
+     12.92,
+     13.12,
+     "him!"
     ]
    ],
-   "heard": "In real life,"
+   "heard": "He's rich in the game, though. Go on, tell him!"
   },
   {
    "i": 4,
    "who": "fast",
    "chapter": 2,
-   "text": "Two dollars and a cold.",
-   "start": 14.02,
-   "dur": 1.52,
+   "text": "Mansion, boat, helicopter, three cars! I'm rich, fam!",
+   "start": 13.62,
+   "dur": 4.24,
    "words": [
     [
-     14.02,
-     14.48,
-     "$2"
+     13.62,
+     14.12,
+     "Mansion"
     ],
     [
-     14.48,
-     14.92,
-     "and"
+     14.12,
+     14.66,
+     "boat"
     ],
     [
-     14.92,
-     15.06,
-     "a"
+     14.66,
+     15.28,
+     "helicopter"
     ],
     [
-     15.06,
-     15.36,
-     "cold."
+     15.28,
+     15.88,
+     "three"
+    ],
+    [
+     15.88,
+     16.3,
+     "cars."
+    ],
+    [
+     16.34,
+     16.8,
+     "I'm"
+    ],
+    [
+     16.8,
+     17.0,
+     "rich"
+    ],
+    [
+     17.0,
+     17.6,
+     "fam"
     ]
    ],
-   "heard": "$2 and a cold."
+   "heard": "Mansion boat helicopter three cars. I'm rich fam"
   },
   {
    "i": 5,
-   "who": "lou",
-   "chapter": 3,
-   "text": "He hasn't left his room in five days. His mom called me.",
-   "start": 15.76,
-   "dur": 3.2,
+   "who": "dre",
+   "chapter": 2,
+   "text": "And in real life?",
+   "start": 17.92,
+   "dur": 1.84,
    "words": [
     [
-     15.76,
-     15.9,
-     "He"
+     17.92,
+     18.86,
+     "and"
     ],
     [
-     15.9,
-     16.16,
-     "hasn't"
-    ],
-    [
-     16.16,
-     16.28,
-     "left"
-    ],
-    [
-     16.28,
-     16.48,
-     "his"
-    ],
-    [
-     16.48,
-     16.64,
-     "room"
-    ],
-    [
-     16.64,
-     16.8,
+     18.86,
+     18.98,
      "in"
     ],
     [
-     16.8,
-     17.0,
-     "five"
+     18.98,
+     19.16,
+     "real"
     ],
     [
-     17.0,
-     17.32,
-     "days."
-    ],
-    [
-     17.88,
-     18.02,
-     "His"
-    ],
-    [
-     18.02,
-     18.24,
-     "mom"
-    ],
-    [
-     18.24,
-     18.56,
-     "called"
-    ],
-    [
-     18.56,
-     18.76,
-     "me."
+     19.16,
+     19.5,
+     "life"
     ]
    ],
-   "heard": "He hasn't left his room in five days. His mom called me."
+   "heard": "and in real life"
   },
   {
    "i": 6,
    "who": "fast",
-   "chapter": 3,
-   "text": "That's a lie! It was four.",
-   "start": 19.02,
-   "dur": 2.08,
+   "chapter": 2,
+   "text": "Two pounds and a bus pass.",
+   "start": 19.82,
+   "dur": 1.6,
    "words": [
     [
-     19.02,
-     19.38,
-     "That's"
+     19.82,
+     20.04,
+     "Two"
     ],
     [
-     19.38,
-     19.44,
+     20.04,
+     20.34,
+     "pounds"
+    ],
+    [
+     20.34,
+     20.54,
+     "and"
+    ],
+    [
+     20.54,
+     20.66,
      "a"
     ],
     [
-     19.44,
-     19.74,
-     "lie."
-    ],
-    [
-     20.28,
-     20.38,
-     "It"
-    ],
-    [
-     20.38,
-     20.52,
-     "was"
-    ],
-    [
-     20.52,
+     20.66,
      20.88,
-     "four."
+     "bus"
+    ],
+    [
+     20.88,
+     21.2,
+     "pass."
     ]
    ],
-   "heard": "That's a lie. It was four."
+   "heard": "Two pounds and a bus pass."
   },
   {
    "i": 7,
-   "who": "dre",
+   "who": "lou",
    "chapter": 3,
-   "text": "Four days. Same hoodie.",
-   "start": 21.16,
-   "dur": 2.0,
+   "text": "His mum rang me. She finks he's been kidnapped.",
+   "start": 21.64,
+   "dur": 2.64,
    "words": [
     [
-     21.16,
-     21.48,
-     "4"
+     21.64,
+     21.96,
+     "His"
     ],
     [
-     21.48,
-     21.78,
-     "days."
+     21.96,
+     22.14,
+     "mum"
     ],
     [
-     22.36,
-     22.6,
-     "Same"
+     22.14,
+     22.38,
+     "rang"
     ],
     [
-     22.6,
-     23.0,
-     "hoodie."
+     22.38,
+     22.64,
+     "me."
+    ],
+    [
+     23.02,
+     23.12,
+     "She"
+    ],
+    [
+     23.12,
+     23.34,
+     "thinks"
+    ],
+    [
+     23.34,
+     23.6,
+     "he's"
+    ],
+    [
+     23.6,
+     23.74,
+     "been"
+    ],
+    [
+     23.74,
+     24.04,
+     "kidnapped."
     ]
    ],
-   "heard": "4 days. Same hoodie."
+   "heard": "His mum rang me. She thinks he's been kidnapped."
   },
   {
    "i": 8,
    "who": "fast",
    "chapter": 3,
-   "text": "It's a good hoodie!",
-   "start": 23.22,
-   "dur": 1.2,
+   "text": "That's a lie! She knows I'm in my room!",
+   "start": 24.34,
+   "dur": 1.92,
    "words": [
     [
-     23.22,
-     23.48,
-     "It's"
+     24.34,
+     24.62,
+     "That's"
     ],
     [
-     23.48,
-     23.6,
+     24.62,
+     24.66,
      "a"
     ],
     [
-     23.6,
-     23.78,
-     "good"
+     24.66,
+     24.88,
+     "lie!"
     ],
     [
-     23.78,
-     24.18,
-     "hoodie."
+     25.06,
+     25.16,
+     "She"
+    ],
+    [
+     25.16,
+     25.3,
+     "knows"
+    ],
+    [
+     25.3,
+     25.56,
+     "I'm"
+    ],
+    [
+     25.56,
+     25.66,
+     "in"
+    ],
+    [
+     25.66,
+     25.8,
+     "my"
+    ],
+    [
+     25.8,
+     26.06,
+     "room!"
     ]
    ],
-   "heard": "It's a good hoodie."
+   "heard": "That's a lie! She knows I'm in my room!"
   },
   {
    "i": 9,
    "who": "dre",
-   "chapter": 4,
-   "text": "Be honest. How many hours you got already? Comment.",
-   "start": 24.64,
+   "chapter": 3,
+   "text": "Five days. Same jersey.",
+   "start": 26.32,
+   "dur": 2.24,
+   "words": [
+    [
+     26.32,
+     26.8,
+     "Five"
+    ],
+    [
+     26.8,
+     27.14,
+     "days,"
+    ],
+    [
+     27.76,
+     27.84,
+     "same"
+    ],
+    [
+     27.84,
+     28.18,
+     "Jersey."
+    ]
+   ],
+   "heard": "Five days, same Jersey."
+  },
+  {
+   "i": 10,
+   "who": "fast",
+   "chapter": 3,
+   "text": "It's my lucky jersey!",
+   "start": 28.62,
+   "dur": 1.28,
+   "words": [
+    [
+     28.62,
+     28.82,
+     "It's"
+    ],
+    [
+     28.82,
+     28.94,
+     "my"
+    ],
+    [
+     28.94,
+     29.18,
+     "lucky"
+    ],
+    [
+     29.18,
+     29.54,
+     "jersey!"
+    ]
+   ],
+   "heard": "It's my lucky jersey!"
+  },
+  {
+   "i": 11,
+   "who": "lou",
+   "chapter": 3,
+   "text": "Bruv, the jersey smells so bad, even the pigeon left.",
+   "start": 29.96,
    "dur": 3.44,
    "words": [
     [
-     24.64,
-     24.88,
+     29.96,
+     30.42,
+     "Bruv,"
+    ],
+    [
+     30.54,
+     30.58,
+     "the"
+    ],
+    [
+     30.58,
+     30.9,
+     "jersey"
+    ],
+    [
+     30.9,
+     31.24,
+     "smells"
+    ],
+    [
+     31.24,
+     31.6,
+     "so"
+    ],
+    [
+     31.6,
+     31.98,
+     "bad,"
+    ],
+    [
+     32.3,
+     32.52,
+     "even"
+    ],
+    [
+     32.52,
+     32.7,
+     "the"
+    ],
+    [
+     32.7,
+     33.02,
+     "pigeon"
+    ],
+    [
+     33.02,
+     33.32,
+     "left."
+    ]
+   ],
+   "heard": "Bruv, the jersey smells so bad, even the pigeon left."
+  },
+  {
+   "i": 12,
+   "who": "fast",
+   "chapter": 3,
+   "text": "That's the chicken shop!",
+   "start": 33.46,
+   "dur": 1.12,
+   "words": [
+    [
+     33.46,
+     33.72,
+     "That's"
+    ],
+    [
+     33.72,
+     33.82,
+     "the"
+    ],
+    [
+     33.82,
+     34.02,
+     "chicken"
+    ],
+    [
+     34.02,
+     34.38,
+     "shop!"
+    ]
+   ],
+   "heard": "That's the chicken shop!"
+  },
+  {
+   "i": 13,
+   "who": "dre",
+   "chapter": 3,
+   "text": "The chicken shop just closed, fam.",
+   "start": 34.64,
+   "dur": 1.92,
+   "words": [
+    [
+     34.64,
+     34.9,
+     "The"
+    ],
+    [
+     34.9,
+     35.1,
+     "chicken"
+    ],
+    [
+     35.1,
+     35.44,
+     "shop"
+    ],
+    [
+     35.44,
+     35.66,
+     "just"
+    ],
+    [
+     35.66,
+     36.1,
+     "closed,"
+    ],
+    [
+     36.36,
+     36.44,
+     "fam."
+    ]
+   ],
+   "heard": "The chicken shop just closed, fam."
+  },
+  {
+   "i": 14,
+   "who": "dre",
+   "chapter": 4,
+   "text": "Be honest. How many hours you got? Comment.",
+   "start": 36.78,
+   "dur": 2.88,
+   "words": [
+    [
+     36.78,
+     37.08,
      "Be"
     ],
     [
-     24.88,
-     25.14,
-     "honest."
+     37.08,
+     37.4,
+     "honest,"
     ],
     [
-     25.66,
-     25.76,
-     "How"
+     37.76,
+     37.86,
+     "how"
     ],
     [
-     25.76,
-     25.9,
+     37.86,
+     38.0,
      "many"
     ],
     [
-     25.9,
-     26.16,
+     38.0,
+     38.24,
      "hours"
     ],
     [
-     26.16,
-     26.36,
+     38.24,
+     38.44,
      "you"
     ],
     [
-     26.36,
-     26.54,
-     "got"
+     38.44,
+     38.68,
+     "got?"
     ],
     [
-     26.54,
-     26.88,
-     "already?"
-    ],
-    [
-     27.48,
-     27.66,
+     38.92,
+     39.24,
      "Comment."
     ]
    ],
-   "heard": "Be honest. How many hours you got already? Comment."
+   "heard": "Be honest, how many hours you got? Comment."
   }
  ]
 }
