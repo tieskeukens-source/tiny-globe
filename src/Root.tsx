@@ -20,6 +20,7 @@ import {CrewSheet} from './videos/block1/CrewSheet';
 import {AiTest, AITEST_FRAMES} from './videos/aitest/AiTest';
 import {AiEpisode, AIEP_FRAMES} from './videos/aiep/AiEpisode';
 import {AiEpisode2, AIEP2_FRAMES} from './videos/aiep2/AiEpisode2';
+import {Episode2B, EP2B_FRAMES} from './videos/aiep2/Episode2B';
 import {BlockPfp, BlockBanner} from './videos/block1/BrandBlock';
 import {StreetVideo, SHORT_FRAMES as BLOCK1_FRAMES} from './videos/block1/StreetVideo';
 import {Video, estimate, frames, Timings} from './Video';
@@ -49,6 +50,7 @@ export const Root: React.FC = () => (
     <Composition id="BlockBanner" component={BlockBanner} durationInFrames={1} fps={30} width={2560} height={1440} />
     <Composition id="Block1AI" component={AiEpisode} durationInFrames={AIEP_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="Block2AI" component={AiEpisode2} durationInFrames={AIEP2_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="Block2B" component={Episode2B} durationInFrames={EP2B_FRAMES} fps={60} width={1080} height={1920} />
     <Composition id="AiTest" component={AiTest} durationInFrames={AITEST_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="CrewSheet" component={CrewSheet} durationInFrames={1} fps={30} width={1920} height={1080} />
     <Composition id="CastSheet" component={CastSheet} durationInFrames={1} fps={30} width={1920} height={1080} />

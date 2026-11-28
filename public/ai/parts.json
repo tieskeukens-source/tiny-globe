@@ -1,0 +1,82 @@
+{
+ "lou_wide": {
+  "neck": 506,
+  "waist": 976,
+  "top": 10,
+  "bottom": 1507,
+  "neckx": 527,
+  "waistx": 534
+ },
+ "lou_sweat": {
+  "neck": 430,
+  "waist": 936,
+  "top": 8,
+  "bottom": 1508,
+  "neckx": 516,
+  "waistx": 529
+ },
+ "fast_menu": {
+  "neck": 516,
+  "waist": 986,
+  "top": 17,
+  "bottom": 1516,
+  "neckx": 452,
+  "waistx": 531
+ },
+ "fast_talk": {
+  "neck": 384,
+  "waist": 922,
+  "top": 13,
+  "bottom": 1530,
+  "neckx": 519,
+  "waistx": 561
+ },
+ "fast_hype": {
+  "neck": 430,
+  "waist": 1010,
+  "top": 10,
+  "bottom": 1535,
+  "neckx": 464,
+  "waistx": 602
+ },
+ "dre_cross": {
+  "neck": 418,
+  "waist": 940,
+  "top": 9,
+  "bottom": 1529,
+  "neckx": 482,
+  "waistx": 533
+ },
+ "dre_ask": {
+  "neck": 433,
+  "waist": 949,
+  "top": 7,
+  "bottom": 1532,
+  "neckx": 526,
+  "waistx": 513
+ },
+ "boss_talk": {
+  "neck": 608,
+  "waist": 988,
+  "top": 95,
+  "bottom": 1418,
+  "neckx": 509,
+  "waistx": 511
+ },
+ "boss_cross": {
+  "neck": 585,
+  "waist": 1060,
+  "top": 50,
+  "bottom": 1515,
+  "neckx": 513,
+  "waistx": 512
+ },
+ "lou_lean": {
+  "neck": 522,
+  "waist": 995,
+  "top": 5,
+  "bottom": 1529,
+  "neckx": 428,
+  "waistx": 515
+ }
+}
