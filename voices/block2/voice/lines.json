@@ -1,0 +1,637 @@
+{
+ "total": 40.04,
+ "lines": [
+  {
+   "i": 0,
+   "who": "lou",
+   "chapter": 1,
+   "text": "Order whatever you want, boys. Tonight, it's on me!",
+   "start": 0.9,
+   "dur": 3.36,
+   "words": [
+    [
+     0.9,
+     1.38,
+     "Order"
+    ],
+    [
+     1.38,
+     1.64,
+     "whatever"
+    ],
+    [
+     1.64,
+     1.88,
+     "you"
+    ],
+    [
+     1.88,
+     2.08,
+     "want"
+    ],
+    [
+     2.08,
+     2.4,
+     "boys"
+    ],
+    [
+     2.4,
+     3.04,
+     "tonight."
+    ],
+    [
+     3.2,
+     3.72,
+     "It's"
+    ],
+    [
+     3.72,
+     3.86,
+     "on"
+    ],
+    [
+     3.86,
+     4.12,
+     "me"
+    ]
+   ],
+   "heard": "Order whatever you want boys tonight. It's on me"
+  },
+  {
+   "i": 1,
+   "who": "fast",
+   "chapter": 1,
+   "text": "Say less! Boss man, twenty wings, three box meals and a large chips!",
+   "start": 4.32,
+   "dur": 4.72,
+   "words": [
+    [
+     4.32,
+     4.96,
+     "Say"
+    ],
+    [
+     4.96,
+     5.24,
+     "Less,"
+    ],
+    [
+     5.7,
+     5.78,
+     "Boss"
+    ],
+    [
+     5.78,
+     6.16,
+     "Man,"
+    ],
+    [
+     6.56,
+     6.76,
+     "20"
+    ],
+    [
+     6.76,
+     7.06,
+     "Wings,"
+    ],
+    [
+     7.3,
+     7.42,
+     "3"
+    ],
+    [
+     7.42,
+     7.68,
+     "Box"
+    ],
+    [
+     7.68,
+     8.08,
+     "Meals"
+    ],
+    [
+     8.08,
+     8.22,
+     "and"
+    ],
+    [
+     8.22,
+     8.32,
+     "a"
+    ],
+    [
+     8.32,
+     8.56,
+     "Large"
+    ],
+    [
+     8.56,
+     8.86,
+     "Chips"
+    ]
+   ],
+   "heard": "Say Less, Boss Man, 20 Wings, 3 Box Meals and a Large Chips"
+  },
+  {
+   "i": 2,
+   "who": "dre",
+   "chapter": 1,
+   "text": "You sure about this, Lou?",
+   "start": 9.1,
+   "dur": 2.32,
+   "words": [
+    [
+     9.68,
+     10.14,
+     "You"
+    ],
+    [
+     10.14,
+     10.36,
+     "sure"
+    ],
+    [
+     10.36,
+     10.58,
+     "about"
+    ],
+    [
+     10.58,
+     10.82,
+     "this,"
+    ],
+    [
+     10.98,
+     10.98,
+     "Lou?"
+    ]
+   ],
+   "heard": "You sure about this, Lou?"
+  },
+  {
+   "i": 3,
+   "who": "lou",
+   "chapter": 1,
+   "text": "Relax, fam. I just got paid.",
+   "start": 11.48,
+   "dur": 1.84,
+   "words": [
+    [
+     11.48,
+     11.88,
+     "Relax"
+    ],
+    [
+     11.88,
+     12.18,
+     "fam,"
+    ],
+    [
+     12.44,
+     12.52,
+     "I"
+    ],
+    [
+     12.52,
+     12.64,
+     "just"
+    ],
+    [
+     12.64,
+     12.82,
+     "got"
+    ],
+    [
+     12.82,
+     13.08,
+     "paid!"
+    ]
+   ],
+   "heard": "Relax fam, I just got paid!"
+  },
+  {
+   "i": 4,
+   "who": "boss",
+   "chapter": 2,
+   "text": "Forty-two pounds fifty, my friend.",
+   "start": 13.54,
+   "dur": 2.32,
+   "words": [
+    [
+     13.54,
+     14.18,
+     "£42"
+    ],
+    [
+     14.18,
+     14.84,
+     ".50,"
+    ],
+    [
+     15.14,
+     15.3,
+     "my"
+    ],
+    [
+     15.3,
+     15.6,
+     "friend."
+    ]
+   ],
+   "heard": "£42 .50, my friend."
+  },
+  {
+   "i": 5,
+   "who": "sfx",
+   "chapter": 2,
+   "text": "(sfx)",
+   "start": 15.92,
+   "dur": 0.9,
+   "words": []
+  },
+  {
+   "i": 6,
+   "who": "boss",
+   "chapter": 2,
+   "text": "Declined.",
+   "start": 16.92,
+   "dur": 0.8,
+   "words": [
+    [
+     16.92,
+     17.52,
+     "Declined"
+    ]
+   ],
+   "heard": "Declined"
+  },
+  {
+   "i": 7,
+   "who": "lou",
+   "chapter": 2,
+   "text": "Try it again. It's a strong card.",
+   "start": 17.78,
+   "dur": 2.32,
+   "words": [
+    [
+     17.78,
+     18.04,
+     "Try"
+    ],
+    [
+     18.04,
+     18.16,
+     "it"
+    ],
+    [
+     18.16,
+     18.46,
+     "again,"
+    ],
+    [
+     18.82,
+     18.98,
+     "it's"
+    ],
+    [
+     18.98,
+     19.16,
+     "a"
+    ],
+    [
+     19.16,
+     19.38,
+     "strong"
+    ],
+    [
+     19.38,
+     19.88,
+     "card!"
+    ]
+   ],
+   "heard": "Try it again, it's a strong card!"
+  },
+  {
+   "i": 8,
+   "who": "sfx",
+   "chapter": 2,
+   "text": "(sfx)",
+   "start": 20.16,
+   "dur": 0.9,
+   "words": []
+  },
+  {
+   "i": 9,
+   "who": "boss",
+   "chapter": 2,
+   "text": "Declined. Again.",
+   "start": 21.16,
+   "dur": 0.88,
+   "words": [
+    [
+     21.16,
+     21.54,
+     "declined"
+    ],
+    [
+     21.54,
+     21.88,
+     "again."
+    ]
+   ],
+   "heard": "declined again."
+  },
+  {
+   "i": 10,
+   "who": "fast",
+   "chapter": 2,
+   "text": "Bruv, your card is weaker than the wifi in here!",
+   "start": 22.1,
+   "dur": 2.8,
+   "words": [
+    [
+     22.1,
+     22.62,
+     "Bruv,"
+    ],
+    [
+     22.78,
+     22.96,
+     "your"
+    ],
+    [
+     22.96,
+     23.24,
+     "card"
+    ],
+    [
+     23.24,
+     23.38,
+     "is"
+    ],
+    [
+     23.38,
+     23.6,
+     "weaker"
+    ],
+    [
+     23.6,
+     23.82,
+     "than"
+    ],
+    [
+     23.82,
+     23.94,
+     "the"
+    ],
+    [
+     23.94,
+     24.12,
+     "Wi"
+    ],
+    [
+     24.12,
+     24.36,
+     "-Fi"
+    ],
+    [
+     24.36,
+     24.54,
+     "in"
+    ],
+    [
+     24.54,
+     24.74,
+     "here!"
+    ]
+   ],
+   "heard": "Bruv, your card is weaker than the Wi -Fi in here!"
+  },
+  {
+   "i": 11,
+   "who": "lou",
+   "chapter": 3,
+   "text": "Okay. Who's got cash?",
+   "start": 25.12,
+   "dur": 2.0,
+   "words": [
+    [
+     25.12,
+     25.68,
+     "Okay,"
+    ],
+    [
+     25.84,
+     26.26,
+     "who's"
+    ],
+    [
+     26.26,
+     26.44,
+     "got"
+    ],
+    [
+     26.44,
+     26.74,
+     "cash?"
+    ]
+   ],
+   "heard": "Okay, who's got cash?"
+  },
+  {
+   "i": 12,
+   "who": "dre",
+   "chapter": 3,
+   "text": "I've got a bus pass.",
+   "start": 27.18,
+   "dur": 1.84,
+   "words": [
+    [
+     27.56,
+     27.92,
+     "I've"
+    ],
+    [
+     27.92,
+     28.04,
+     "got"
+    ],
+    [
+     28.04,
+     28.16,
+     "a"
+    ],
+    [
+     28.16,
+     28.34,
+     "bus"
+    ],
+    [
+     28.34,
+     28.7,
+     "pass"
+    ]
+   ],
+   "heard": "I've got a bus pass"
+  },
+  {
+   "i": 13,
+   "who": "fast",
+   "chapter": 3,
+   "text": "I've got a controller.",
+   "start": 29.08,
+   "dur": 1.44,
+   "words": [
+    [
+     29.08,
+     29.48,
+     "I've"
+    ],
+    [
+     29.48,
+     29.6,
+     "got"
+    ],
+    [
+     29.6,
+     29.76,
+     "a"
+    ],
+    [
+     29.76,
+     30.16,
+     "controller!"
+    ]
+   ],
+   "heard": "I've got a controller!"
+  },
+  {
+   "i": 14,
+   "who": "boss",
+   "chapter": 3,
+   "text": "So. Who is paying?",
+   "start": 30.58,
+   "dur": 1.6,
+   "words": [
+    [
+     30.58,
+     30.94,
+     "So,"
+    ],
+    [
+     31.3,
+     31.5,
+     "who"
+    ],
+    [
+     31.5,
+     31.66,
+     "is"
+    ],
+    [
+     31.66,
+     31.92,
+     "paying?"
+    ]
+   ],
+   "heard": "So, who is paying?"
+  },
+  {
+   "i": 15,
+   "who": "sfx",
+   "chapter": 3,
+   "text": "(sfx)",
+   "start": 32.24,
+   "dur": 1.1,
+   "words": []
+  },
+  {
+   "i": 16,
+   "who": "dre",
+   "chapter": 4,
+   "text": "Run.",
+   "start": 33.44,
+   "dur": 0.56,
+   "words": [
+    [
+     33.44,
+     33.8,
+     "Run."
+    ]
+   ],
+   "heard": "Run."
+  },
+  {
+   "i": 17,
+   "who": "sfx",
+   "chapter": 4,
+   "text": "(sfx)",
+   "start": 34.06,
+   "dur": 1.8,
+   "words": []
+  },
+  {
+   "i": 18,
+   "who": "cop",
+   "chapter": 4,
+   "text": "Oi! Come back here!",
+   "start": 35.96,
+   "dur": 2.32,
+   "words": [
+    [
+     35.96,
+     36.42,
+     "Oi,"
+    ],
+    [
+     37.04,
+     37.66,
+     "come"
+    ],
+    [
+     37.66,
+     37.88,
+     "back"
+    ],
+    [
+     37.88,
+     38.22,
+     "here."
+    ]
+   ],
+   "heard": "Oi, come back here."
+  },
+  {
+   "i": 19,
+   "who": "fast",
+   "chapter": 4,
+   "text": "It was Lou's card!",
+   "start": 38.34,
+   "dur": 1.04,
+   "words": [
+    [
+     38.34,
+     38.48,
+     "It"
+    ],
+    [
+     38.48,
+     38.58,
+     "was"
+    ],
+    [
+     38.58,
+     38.94,
+     "Lou's"
+    ],
+    [
+     38.94,
+     39.2,
+     "card!"
+    ]
+   ],
+   "heard": "It was Lou's card!"
+  }
+ ]
+}
